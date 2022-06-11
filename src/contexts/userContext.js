@@ -12,6 +12,8 @@ const userList = [
 ];
 
 // Client
+export const UserContext = createContext();
+
 const initialState = { user: null, isLogged: false };
 
 function reducer(state, action) {
@@ -53,11 +55,11 @@ function reducer(state, action) {
 export function userLogin(dispatch, email, password) {
   let userData = userList.find((element) => element.email === email);
 
-  if (!user) {
+  if (!userData) {
     return alert("Incorrect Email or Password");
   }
 
-  if (user.password !== password) {
+  if (userData.password !== password) {
     return alert("Incorrect Email or Password");
   }
 
@@ -86,7 +88,7 @@ export function userCreate(dispatch, email, password) {
     password: `${password}`,
   };
 
-  userList.push(user);
+  userList.push(userData);
 
   return dispatch({
     type: "create",
@@ -106,8 +108,6 @@ export function userUpdate(dispatch) {
     payload: { user: null },
   });
 }
-
-export const UserContext = createContext();
 
 export default function UserProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);

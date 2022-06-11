@@ -1,6 +1,6 @@
 // https://ui.dev/react-router-tutorial
 
-import { useState, useEffect, createContext, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 
 import { ProductContext, productGet } from "./../contexts/productContext";
@@ -17,18 +17,20 @@ import "./Product.scss";
 
 export default function Product() {
   const { productLink } = useParams();
-  const productId = useState(Number(productLink));
+  const [productId] = useState(Number(productLink));
   const dispatch = useContext(ProductContext);
+  const { quantity } = useContext(ProductContext);
 
   useEffect(() => {
     productGet(dispatch, productId);
-  }, productId);
+    console.log(quantity);
+  }, []);
 
   return (
     <>
       <Header />
       <div className="product">
-        <div className="product__content">
+        {/* <div className="product__content">
           <Gallery />
           <Checkout>
             <Name />
@@ -51,7 +53,7 @@ export default function Product() {
           <Specs />
           <Divider />
           <Reviews></Reviews>
-        </div>
+        </div> */}
       </div>
       <Footer />
     </>
@@ -64,23 +66,19 @@ function Checkout(props) {
 }
 
 function Name() {
-  const { productData } = useContext(ProductContext);
+  const { product } = useContext(ProductContext);
 
   return (
-    <h2 className="product__checkout__name">
-      {productData ? productData.title : ""}
-    </h2>
+    <h2 className="product__checkout__name">{product ? product.title : ""}</h2>
   );
 }
 
 function Ranking() {
-  const { productRanking } = useContext(ProductContext);
-
   return (
     <div className="product__checkout__ranking">
       <div>
         <img src="./assets/star.svg" alt="" />
-        {productRanking ? productRanking : ""}
+        {/* {productRanking ? productRanking : ""} */}
       </div>
       <a href="#reviews">See 8 reviews</a>
     </div>
@@ -88,38 +86,38 @@ function Ranking() {
 }
 
 function Price() {
-  const { productData } = useContext(ProductContext);
+  const { product } = useContext(ProductContext);
 
   return (
     <div className="product__checkout__pricing">
       <h2 className="product__checkout__pricing__current">
-        {productData ? productData.price : ""}
+        {product ? product.price : ""}
       </h2>
     </div>
   );
 }
 
 function Description() {
-  const { productData } = useContext(ProductContext);
+  const { product } = useContext(ProductContext);
 
   return (
     <p className="product__checkout__desc">
-      {productData ? productData.description : ""}
+      {product ? product.description : ""}
     </p>
   );
 }
 
 function Colors() {
-  const { productData, productColor } = useContext(ProductContext);
+  const { product, color } = useContext(ProductContext);
 
-  if (productData && productData.colors.length > 1) {
+  if (product && product.colors.length > 1) {
     return (
       <div className="product__checkout__colors">
         <h4 className="product__checkout__title">
-          Color: <span>{productColor}</span>
+          Color: <span>{color}</span>
         </h4>
         <ul>
-          {productData.colors.map((item, index) => (
+          {product.colors.map((item, index) => (
             <Color item={item} index={index} key={index} />
           ))}
         </ul>
@@ -129,8 +127,7 @@ function Colors() {
 }
 
 function Color(props) {
-  const { productData, productColor, setProductColor } =
-    useContext(ProductContext);
+  const { product, color, setProductColor } = useContext(ProductContext);
 
   return (
     <li>
@@ -139,9 +136,9 @@ function Color(props) {
         id="color"
         name="color"
         onChange={(e) => {
-          setProductColor(productData.colors[props.index]);
+          setProductColor(product.colors[props.index]);
         }}
-        checked={productColor === productData.colors[props.index]}
+        checked={color === product.colors[props.index]}
       />
       <span style={{ backgroundColor: "#000000" }} />
     </li>
@@ -149,14 +146,14 @@ function Color(props) {
 }
 
 function Sizes() {
-  const { productData } = useContext(ProductContext);
+  const { product } = useContext(ProductContext);
 
-  if (productData && productData.colors.length > 1) {
+  if (product && product.colors.length > 1) {
     return (
       <div className="product__checkout__sizes">
         <h4 className="product__checkout__title">Size</h4>
         <ul>
-          {productData.sizes.map((item, index) => (
+          {product.sizes.map((item, index) => (
             <Size item={item} index={index} key={index} />
           ))}
         </ul>
@@ -166,8 +163,7 @@ function Sizes() {
 }
 
 function Size(props) {
-  const { productData, productSize, setProductSize } =
-    useContext(ProductContext);
+  const { product, productSize, setProductSize } = useContext(ProductContext);
 
   return (
     <li>
@@ -175,17 +171,17 @@ function Size(props) {
         type="radio"
         name="size"
         onChange={(e) => {
-          setProductSize(productData.sizes[props.index]);
+          setProductSize(product.sizes[props.index]);
         }}
-        checked={productSize === productData.sizes[props.index]}
+        checked={productSize === product.sizes[props.index]}
       />
-      <span>{productData.sizes[props.index]}</span>
+      <span>{product.sizes[props.index]}</span>
     </li>
   );
 }
 
 function Quantity() {
-  const { productData, productQuantity, setProductQuantity } =
+  const { product, productQuantity, setProductQuantity } =
     useContext(ProductContext);
 
   return (
@@ -198,7 +194,7 @@ function Quantity() {
           type="number"
           name="quantity"
           min="1"
-          max={productData ? productData.quantity : ""}
+          max={product ? product.quantity : ""}
           value={productQuantity}
           onChange={(e) => {
             setProductQuantity(e.target.value);
@@ -222,14 +218,14 @@ function Overview(props) {
 
 // Specification
 function Specs() {
-  const { productData } = useContext(ProductContext);
+  const { product } = useContext(ProductContext);
 
   return (
     <div id="specification" className="product__specs">
       <h2 className="product__heading">Specification:</h2>
       <ul className="product__specs__list">
-        {productData && productData.colors
-          ? productData.colors.map((item, index) => <SpecsItem key={index} />)
+        {product && product.colors
+          ? product.colors.map((item, index) => <SpecsItem key={index} />)
           : ""}
       </ul>
     </div>

@@ -15,20 +15,20 @@ import "./styles.scss";
 export default function App() {
   return (
     <div className="App">
-      <UserProvider>
-        <CartProvider>
-          <ProductProvider>
-            <BrowserRouter>
+      <BrowserRouter>
+        <UserProvider>
+          <CartProvider>
+            <ProductProvider>
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route exact path="/:productLink" element={<Product />} />
+                <Route path="/:productLink" element={<Product />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="*" element={<NoPage />} />
               </Routes>
-            </BrowserRouter>
-          </ProductProvider>
-        </CartProvider>
-      </UserProvider>
+            </ProductProvider>
+          </CartProvider>
+        </UserProvider>
+      </BrowserRouter>
     </div>
   );
 }

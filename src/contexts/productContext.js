@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext } from "react";
+import { useReducer, createContext } from "react";
 
 // Server
 const productList = [
@@ -70,6 +70,8 @@ const productList = [
 ];
 
 // Client
+export const ProductContext = createContext();
+
 const initialState = {
   product: null,
   quantity: 1,
@@ -92,7 +94,7 @@ function reducer(state, action) {
 }
 
 export function productGet(dispatch, productId) {
-  let productData = productList.find((element) => element.id === productId);
+  const productData = productList.find((element) => element.id === productId);
 
   return dispatch({
     type: "get",
@@ -109,8 +111,6 @@ export function productAdd() {}
 export function productRemove() {}
 
 export function productUpdate() {}
-
-export const ProductContext = createContext();
 
 export default function ProductProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
