@@ -1,0 +1,132 @@
+@import "./../styles.scss";
+
+.footer {
+  color: $clr__white;
+}
+
+.footer__nav {
+  display: flex;
+  justify-content: center;
+  background: $clr__dirt;
+  width: 100%;
+  padding: 8px 0 0;
+  transition: padding 0.2s;
+}
+
+.footer__nav__content {
+  display: flex;
+  flex-direction: column-reverse;
+  max-width: $lyt-large;
+  width: 100%;
+}
+
+.footer__nav__content > hr {
+  margin: 0 $lyt-padding;
+  border-color: $clr__darkgray;
+}
+
+.footer__nav__contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px $lyt-padding 24px;
+  gap: 16px;
+}
+
+.footer__nav__contact__item {
+  display: flex;
+  line-height: 1.5rem;
+  gap: 16px;
+}
+
+.footer__nav__accordion {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__nav__accordion__button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px $lyt-padding;
+  color: $clr__white;
+}
+
+.footer__nav__accordion__list {
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
+  padding: 0 $lyt-padding 24px;
+  gap: 12px;
+}
+
+.footer__nav__accordion__list_open {
+  display: flex;
+}
+
+.footer__nav__accordion__list__item {
+  color: $clr__gray;
+}
+
+.footer__nav__accordion__list__item:hover {
+  color: $clr__white;
+}
+
+.footer__info {
+  display: flex;
+  justify-content: center;
+  background: $clr__green;
+  width: 100%;
+  padding: 0 $lyt-padding;
+  color: $clr__gray;
+  transition: padding 0.2s;
+}
+
+.footer__info__content {
+  display: flex;
+  max-width: $lyt-large;
+  width: 100%;
+  padding: 16px 0;
+}
+
+@media (min-width: $lyt-medium) {
+  $lyt-padding: 40px;
+
+  .footer__nav,
+  .footer__info {
+    padding: 0 $lyt-padding;
+  }
+
+  .footer__nav__content {
+    flex-direction: row;
+    padding: 24px 0 32px;
+    gap: 32px;
+  }
+
+  .footer__nav__content > hr {
+    margin: 0;
+  }
+
+  .footer__nav__contact {
+    padding: 0;
+  }
+
+  .footer__nav__accordion {
+    padding: 0;
+  }
+
+  .footer__nav__accordion__button {
+    padding: 0 0 16px;
+    cursor: default;
+  }
+
+  .footer__nav__accordion__button__icon {
+    display: none;
+  }
+
+  .footer__nav__accordion__list {
+    display: flex;
+    padding: 0;
+  }
+}

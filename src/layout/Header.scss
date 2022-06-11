@@ -1,0 +1,120 @@
+@import "./../styles.scss";
+
+.header {
+  z-index: 100;
+  position: sticky;
+  top: 0;
+  // height: 100%;
+  // width: 100%;
+}
+
+.header__topbar {
+  display: flex;
+  justify-content: center;
+  background: $clr__green;
+  height: 56px;
+  width: 100%;
+  padding: 0 0 0 $lyt-padding;
+  color: $clr__white;
+  transition: background-color 0.2s ease-out, padding 0.2s;
+}
+
+.header__topbar_clear {
+  background: unset;
+}
+
+.header__topbar__content {
+  display: grid;
+  align-items: center;
+  grid-auto-flow: column;
+  max-width: $lyt-large;
+  width: 100%;
+}
+
+.header__topbar__hamburger {
+  display: flex;
+  padding: 16px $lyt-padding 16px 16px;
+  justify-self: flex-end;
+}
+
+.header__topbar__hamburger:hover,
+.header__topbar__hamburger:active {
+  background-color: $clr__lightgreen;
+}
+
+.header__topbar__hamburger__icon {
+  height: 24px;
+  width: 24px;
+}
+
+.header__topbar__menu {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+
+.header__topbar__profile {
+  display: none;
+  justify-content: flex-end;
+  align-self: center;
+  gap: 24px;
+}
+
+.header__sidebar {
+  position: fixed;
+  top: 56px;
+  bottom: 0;
+  right: -256px;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid $clr__gray;
+  background-color: $clr__lightgray;
+  max-width: 256px;
+  width: 100%;
+  padding: 16px 0 24px;
+  color: $clr__black;
+  transition: right 0.2s ease-out;
+}
+
+.header__sidebar_open {
+  right: 0;
+}
+
+.header__sidebar__menu {
+  height: 100%;
+}
+
+.header__sidebar__item {
+  display: flex;
+  align-items: center;
+  padding: 16px 40px 16px 32px;
+  gap: 12px;
+}
+
+.header__sidebar__item:hover,
+.header__sidebar__item:active {
+  background-color: $clr__hover;
+}
+
+.header__sidebar__item > img {
+  filter: brightness(0);
+}
+
+@media (min-width: $lyt-medium) {
+  $lyt-padding: 40px;
+
+  .header__topbar__menu,
+  .header__topbar__profile {
+    display: flex;
+  }
+
+  .header__topbar__hamburger,
+  .header__sidebar {
+    display: none;
+  }
+
+  .header__topbar {
+    padding: 0 $lyt-padding;
+  }
+}

@@ -1,0 +1,77 @@
+@import "./../styles.scss";
+
+.gallery {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 100%;
+  overflow: hidden;
+  gap: 8px;
+  grid-area: gallery;
+  touch-action: pan-y;
+}
+
+.gallery__preview {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+}
+
+.gallery__preview__content {
+  position: absolute;
+  left: 0;
+  display: inline-flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  transition: left 0.4s ease-out;
+}
+
+.gallery__preview__image {
+  flex-shrink: 0;
+  background-color: $clr__gray;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.gallery__list {
+  position: relative;
+  display: none;
+  height: 64px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.gallery__list__content {
+  position: absolute;
+  left: 0;
+  display: inline-flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  transition: left 0.4s ease-out;
+  gap: 8px;
+}
+
+.gallery__list__image {
+  flex-shrink: 0;
+  background-color: $clr__gray;
+  height: 100%;
+  width: 64px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.gallery__list__image_selected {
+  border: solid 1px $clr__darkgray;
+  padding: 3px;
+}
+
+@media (min-width: $lyt-medium) {
+  .gallery__list {
+    display: block;
+  }
+}

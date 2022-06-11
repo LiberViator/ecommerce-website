@@ -1,0 +1,30 @@
+@import "./../styles.scss";
+
+.cart {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 16px $lyt-padding 24px;
+  transition: padding 0.2s;
+}
+
+.cart__content {
+  display: grid;
+  flex-direction: column;
+  max-width: $lyt-large;
+  width: 100%;
+  transition: gap 0.2s;
+  gap: 0;
+}
+
+@media (min-width: $lyt-medium) {
+  $lyt-padding: 40px;
+
+  .cart {
+    padding: 0 $lyt-padding;
+  }
+
+  .cart__content {
+    padding: 24px 0 32px;
+  }
+}

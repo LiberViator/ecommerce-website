@@ -1,0 +1,38 @@
+@import "./../styles.scss";
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+.button {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+  width: 100%;
+  padding: 8px 8px;
+  font-style: normal;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+.button_like {
+  border: solid 1px $clr__gray;
+  background-color: $clr__white;
+  width: fit-content;
+  color: $clr__black;
+}
+
+.button_like:hover {
+  border: solid 1px $clr__lightgreen;
+  animation: hoverAnimation 0.4s infinite alternate;
+}
+
+.button_cart {
+  background-color: $clr__green;
+  color: $clr__white;
+}

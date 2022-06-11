@@ -1,0 +1,99 @@
+$clr__white: hsla(0, 0%, 100%, 1);
+$clr__black: hsla(0, 0%, 0%, 1);
+$clr__lightgray: hsla(0, 0%, 93%, 1);
+$clr__gray: hsla(0, 0%, 87%, 1);
+$clr__lightgreen: hsla(112, 8%, 40%, 1);
+$clr__green: hsla(140, 12%, 24%, 1);
+$clr__darkgray: hsla(0, 0%, 40%, 1);
+$clr__dirt: hsla(214, 9%, 15%, 1);
+$clr__error: hsla(2, 71%, 55%, 1);
+
+$clr__hover: hsla(0, 0%, 0%, 0.16);
+
+$lyt-small: 320px;
+$lyt-medium: 765px;
+$lyt-large: 1080px;
+$lyt-padding: 20px;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  text-decoration: none;
+  font-family: "Montserrat";
+}
+
+html,
+body,
+.App {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: $clr__lightgray;
+  font-family: "Montserrat", sans-serif;
+  font-smooth: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  font-style: normal;
+  font-size: 1.75rem;
+  line-height: 2rem;
+  font-weight: 400;
+}
+
+h2 {
+  font-style: normal;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+}
+
+h3 {
+  font-style: normal;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+}
+
+h4 {
+  font-style: normal;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+}
+
+p {
+  font-style: normal;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+}
+
+a {
+  all: unset;
+  font-style: normal;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+
+@media (min-width: $lyt-medium) {
+  $lyt-padding: 40px;
+}
+
+@media (min-width: $lyt-large) {
+}
