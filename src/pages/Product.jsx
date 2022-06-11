@@ -2,7 +2,8 @@
 
 import { useState, useEffect, createContext, useContext } from "react";
 import { useParams } from "react-router-dom";
-import useProductData from "./../contexts/productContext";
+
+import { ProductContext, productGet } from "./../contexts/productContext";
 
 import Header from "./../layout/Header";
 import Footer from "./../layout/Footer";
@@ -14,78 +15,44 @@ import Rating from "./../components/Rating";
 
 import "./Product.scss";
 
-const ProductContext = createContext();
-
 export default function Product() {
   const { productLink } = useParams();
-  const [productId, setProductId] = useState(Number(productLink));
-  const productData = useProductData([productId]);
-  // productData ? console.log(productData[0]) : null;
-
-  const [productQuantity, setProductQuantity] = useState(1);
-  const [productColor, setProductColor] = useState(null);
-  const [productSize, setProductSize] = useState(null);
-  const [productRanking, setProductRanking] = useState(null);
+  const productId = useState(Number(productLink));
+  const dispatch = useContext(ProductContext);
 
   useEffect(() => {
-    if (productData) {
-      console.log(productData);
-      setProductColor(productData.colors[0]);
-      setProductSize(productData.sizes[0]);
-      setProductRanking(
-        Math.round(
-          (productData.reviews.map((i) => i.rate).reduce((a, b) => a + b, 0) /
-            productData.reviews.length +
-            Number.EPSILON) *
-            10
-        ) / 10
-      );
-    }
-  }, productData);
+    productGet(dispatch, productId);
+  }, productId);
 
   return (
     <>
       <Header />
-      <ProductContext.Provider
-        value={{
-          productData,
-          productQuantity,
-          setProductQuantity,
-          productColor,
-          setProductColor,
-          productSize,
-          setProductSize,
-          productRanking,
-          setProductRanking,
-        }}
-      >
-        <div className="product">
-          <div className="product__content">
-            <Gallery />
-            <Checkout>
-              <Name />
-              <Ranking />
-              <Price />
-              <Description />
-              <Divider />
-              <Colors />
-              <Sizes />
-              <Divider />
-              <Quantity />
-              <nav className="product__checkout__nav">
-                <Button type="cart" text="Add to Cart" />
-                <Button type="like" />
-              </nav>
-            </Checkout>
+      <div className="product">
+        <div className="product__content">
+          <Gallery />
+          <Checkout>
+            <Name />
+            <Ranking />
+            <Price />
+            <Description />
             <Divider />
-            <Overview></Overview>
+            <Colors />
+            <Sizes />
             <Divider />
-            <Specs />
-            <Divider />
-            <Reviews></Reviews>
-          </div>
+            <Quantity />
+            <nav className="product__checkout__nav">
+              <Button type="cart" text="Add to Cart" />
+              <Button type="like" />
+            </nav>
+          </Checkout>
+          <Divider />
+          <Overview></Overview>
+          <Divider />
+          <Specs />
+          <Divider />
+          <Reviews></Reviews>
         </div>
-      </ProductContext.Provider>
+      </div>
       <Footer />
     </>
   );

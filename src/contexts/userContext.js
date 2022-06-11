@@ -12,38 +12,38 @@ const userList = [
 ];
 
 // Client
-const initialState = { userData: null, isLogged: false };
+const initialState = { user: null, isLogged: false };
 
 function reducer(state, action) {
   switch (action.type) {
     case "login":
       return {
         ...state,
-        userData: action.payload.userData,
+        user: action.payload.user,
         isLogged: true,
       };
     case "logout":
       return {
         ...state,
-        userData: null,
+        user: null,
         isLogged: false,
       };
     case "create":
       return {
         ...state,
-        userData: action.payload.userData,
+        user: action.payload.user,
         isLogged: true,
       };
     case "remove":
       return {
         ...state,
-        userData: null,
+        user: null,
         isLogged: false,
       };
     case "update":
       return {
         ...state,
-        userData: action.payload.userData,
+        user: action.payload.user,
       };
     default:
       throw new Error();
@@ -51,7 +51,7 @@ function reducer(state, action) {
 }
 
 export function userLogin(dispatch, email, password) {
-  let user = userList.find((element) => element.email === email);
+  let userData = userList.find((element) => element.email === email);
 
   if (!user) {
     return alert("Incorrect Email or Password");
@@ -63,7 +63,7 @@ export function userLogin(dispatch, email, password) {
 
   return dispatch({
     type: "login",
-    payload: { userData: user },
+    payload: { user: userData },
   });
 }
 
@@ -78,7 +78,7 @@ export function userCreate(dispatch, email, password) {
     return alert("Account is already exist");
   }
 
-  let user = {
+  let userData = {
     id: 0,
     name: "",
     surname: "",
@@ -90,7 +90,7 @@ export function userCreate(dispatch, email, password) {
 
   return dispatch({
     type: "create",
-    payload: { userData: user },
+    payload: { user: userData },
   });
 }
 
@@ -103,7 +103,7 @@ export function userRemove(dispatch, email, password) {
 export function userUpdate(dispatch) {
   return dispatch({
     type: "update",
-    payload: { userData: null },
+    payload: { user: null },
   });
 }
 

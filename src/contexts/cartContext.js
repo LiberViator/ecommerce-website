@@ -20,15 +20,6 @@ export function cartCheckout() {
   console.log("Checkout");
 }
 
-// useEffect(() => {
-//   userData &&
-//     fetch("./data/users.json")
-//       .then((res) => res.json())
-//       .then((json) => {
-//         setCartData(json.find((element) => element.id === userData.id).cart);
-//       });
-// }, [userData]);
-
 export const CartContext = createContext();
 
 export default function CartProvider({ children }) {

@@ -8,7 +8,7 @@ import {
   userLogout,
   userCreate,
   userRemove,
-  userUpdate
+  userUpdate,
 } from "./../contexts/userContext";
 
 import Header from "./../layout/Header";
