@@ -2,22 +2,22 @@ import { useEffect, useState } from "react";
 
 import "./Gallery.scss";
 
-export default function Gallery({ productData }) {
+export default function Gallery({ product }) {
   const [imageIndex, setImageIndex] = useState(0);
 
-  if (productData && productData.images) {
-    const imageQuantity = productData.images.length - 1;
+  if (product && product.images) {
+    const imageQuantity = product.images.length - 1;
 
     return (
       <div className="gallery">
         <Preview
-          productData={productData}
+          product={product}
           imageIndex={imageIndex}
           setImageIndex={setImageIndex}
           imageQuantity={imageQuantity}
         />
         <List
-          productData={productData}
+          product={product}
           imageIndex={imageIndex}
           setImageIndex={setImageIndex}
           imageQuantity={imageQuantity}
@@ -27,7 +27,7 @@ export default function Gallery({ productData }) {
   }
 }
 
-function Preview({ productData, imageIndex, setImageIndex, imageQuantity }) {
+function Preview({ product, imageIndex, setImageIndex, imageQuantity }) {
   const [style, setStyle] = useState({});
   const [isDragging, setIsDragging] = useState(false);
   const [startPos, setStartPos] = useState(undefined);
@@ -43,7 +43,7 @@ function Preview({ productData, imageIndex, setImageIndex, imageQuantity }) {
     if (isDragging) {
       setStyle({
         left: `calc(${e.clientX - startPos}px + -100% * ${imageIndex})`,
-        transition: "none"
+        transition: "none",
       });
       setFinishPos(e.clientX);
     }
@@ -86,7 +86,7 @@ function Preview({ productData, imageIndex, setImageIndex, imageQuantity }) {
         onPointerUp={touchEnd}
         onPointerLeave={touchEnd}
       >
-        {productData.images.map((image, index) => (
+        {product.images.map((image, index) => (
           <PreviewImage src={image} key={index} />
         ))}
       </div>
@@ -105,7 +105,7 @@ function PreviewImage({ src }) {
   );
 }
 
-function List({ productData, imageIndex, setImageIndex, imageQuantity }) {
+function List({ product, imageIndex, setImageIndex, imageQuantity }) {
   const [style, setStyle] = useState({});
 
   return (
@@ -116,7 +116,7 @@ function List({ productData, imageIndex, setImageIndex, imageQuantity }) {
         }
         className="gallery__list__content"
       >
-        {productData.images.map((image, index) => {
+        {product.images.map((image, index) => {
           if (index === imageIndex) {
             return (
               <ListImage

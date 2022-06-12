@@ -3,7 +3,14 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 
-import { ProductContext, productGet } from "./../contexts/productContext";
+import {
+  ProductDispatchContext,
+  ProductStateContext,
+  productGet,
+  productSetColor,
+  productSetSize,
+  productSetQuantity,
+} from "./../contexts/productContext";
 
 import Header from "./../layout/Header";
 import Footer from "./../layout/Footer";
@@ -18,20 +25,19 @@ import "./Product.scss";
 export default function Product() {
   const { productLink } = useParams();
   const [productId] = useState(Number(productLink));
-  const dispatch = useContext(ProductContext);
-  const { quantity } = useContext(ProductContext);
+  const dispatch = useContext(ProductDispatchContext);
+  const { product, quantity, color, size } = useContext(ProductStateContext);
 
   useEffect(() => {
     productGet(dispatch, productId);
-    console.log(quantity);
   }, []);
 
   return (
     <>
       <Header />
       <div className="product">
-        {/* <div className="product__content">
-          <Gallery />
+        <div className="product__content">
+          <Gallery product={product && product} />
           <Checkout>
             <Name />
             <Ranking />
@@ -53,7 +59,7 @@ export default function Product() {
           <Specs />
           <Divider />
           <Reviews></Reviews>
-        </div> */}
+        </div>
       </div>
       <Footer />
     </>
@@ -66,7 +72,7 @@ function Checkout(props) {
 }
 
 function Name() {
-  const { product } = useContext(ProductContext);
+  const { product } = useContext(ProductStateContext);
 
   return (
     <h2 className="product__checkout__name">{product ? product.title : ""}</h2>
@@ -86,7 +92,7 @@ function Ranking() {
 }
 
 function Price() {
-  const { product } = useContext(ProductContext);
+  const { product } = useContext(ProductStateContext);
 
   return (
     <div className="product__checkout__pricing">
@@ -98,7 +104,7 @@ function Price() {
 }
 
 function Description() {
-  const { product } = useContext(ProductContext);
+  const { product } = useContext(ProductStateContext);
 
   return (
     <p className="product__checkout__desc">
@@ -108,7 +114,7 @@ function Description() {
 }
 
 function Colors() {
-  const { product, color } = useContext(ProductContext);
+  const { product, color } = useContext(ProductStateContext);
 
   if (product && product.colors.length > 1) {
     return (
@@ -127,16 +133,16 @@ function Colors() {
 }
 
 function Color(props) {
-  const { product, color, setProductColor } = useContext(ProductContext);
+  const dispatch = useContext(ProductDispatchContext);
+  const { product, color } = useContext(ProductStateContext);
 
   return (
     <li>
       <input
         type="radio"
-        id="color"
         name="color"
         onChange={(e) => {
-          setProductColor(product.colors[props.index]);
+          productSetColor(dispatch, product.colors[props.index]);
         }}
         checked={color === product.colors[props.index]}
       />
@@ -146,9 +152,9 @@ function Color(props) {
 }
 
 function Sizes() {
-  const { product } = useContext(ProductContext);
+  const { product } = useContext(ProductStateContext);
 
-  if (product && product.colors.length > 1) {
+  if (product && product.sizes.length > 1) {
     return (
       <div className="product__checkout__sizes">
         <h4 className="product__checkout__title">Size</h4>
@@ -163,7 +169,8 @@ function Sizes() {
 }
 
 function Size(props) {
-  const { product, productSize, setProductSize } = useContext(ProductContext);
+  const dispatch = useContext(ProductDispatchContext);
+  const { product, size } = useContext(ProductStateContext);
 
   return (
     <li>
@@ -171,9 +178,9 @@ function Size(props) {
         type="radio"
         name="size"
         onChange={(e) => {
-          setProductSize(product.sizes[props.index]);
+          productSetSize(dispatch, product.sizes[props.index]);
         }}
-        checked={productSize === product.sizes[props.index]}
+        checked={size === product.sizes[props.index]}
       />
       <span>{product.sizes[props.index]}</span>
     </li>
@@ -181,8 +188,8 @@ function Size(props) {
 }
 
 function Quantity() {
-  const { product, productQuantity, setProductQuantity } =
-    useContext(ProductContext);
+  const dispatch = useContext(ProductDispatchContext);
+  const { product, quantity } = useContext(ProductStateContext);
 
   return (
     <div className="product__checkout__quantity">
@@ -195,9 +202,9 @@ function Quantity() {
           name="quantity"
           min="1"
           max={product ? product.quantity : ""}
-          value={productQuantity}
+          value={quantity}
           onChange={(e) => {
-            setProductQuantity(e.target.value);
+            productSetQuantity(dispatch, e.target.value);
           }}
         />
       </div>
@@ -218,7 +225,7 @@ function Overview(props) {
 
 // Specification
 function Specs() {
-  const { product } = useContext(ProductContext);
+  const { product } = useContext(ProductStateContext);
 
   return (
     <div id="specification" className="product__specs">

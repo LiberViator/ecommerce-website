@@ -179,6 +179,7 @@ input[name="color"] + span {
 }
 
 input[name="size"] {
+  all: unset;
   position: relative;
   display: flex;
   justify-content: center;
