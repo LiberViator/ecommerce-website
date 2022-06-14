@@ -1,12 +1,28 @@
 import { useState, useEffect, createContext } from "react";
 
+
 // const { userData } = useUserData(0);
 // const userData = useContext(UserContext);
 // const [cartData, setCartData] = useState(null);
+
+// Server
+const cartList = [{ userId: 0, productId: 0, quantity: 1 }];
+
+// Client
 export const CartContext = createContext();
 
-export function cartAdd() {
-  console.log("Add");
+const initialState = {};
+
+export function cartAdd(productId, quantity) {
+  let cartData = cartList.find((element) => element.){
+    id: 0,
+    name: "",
+    surname: "",
+    email: `${email}`,
+    password: `${password}`,
+  };
+
+  cartList.push(userData);
 }
 
 export function cartRemove() {
