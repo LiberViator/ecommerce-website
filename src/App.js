@@ -1,7 +1,7 @@
-import { useState, useEffect, createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import UserProvider from "./contexts/userContext";
+import CatalogProvider from "./contexts/catalogContext";
 import CartProvider from "./contexts/cartContext";
 import ProductProvider from "./contexts/productContext";
 
@@ -17,16 +17,23 @@ export default function App() {
     <div className="App">
       <BrowserRouter>
         <UserProvider>
-          <CartProvider>
-            <ProductProvider>
+          <CatalogProvider>
+            <CartProvider>
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/:productLink" element={<Product />} />
+                <Route
+                  path="/:productLink"
+                  element={
+                    <ProductProvider>
+                      <Product />
+                    </ProductProvider>
+                  }
+                />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="*" element={<NoPage />} />
               </Routes>
-            </ProductProvider>
-          </CartProvider>
+            </CartProvider>
+          </CatalogProvider>
         </UserProvider>
       </BrowserRouter>
     </div>

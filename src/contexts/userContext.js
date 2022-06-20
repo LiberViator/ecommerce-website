@@ -1,17 +1,6 @@
-import { useState, useEffect, useReducer, createContext } from "react";
+import { useReducer, createContext } from "react";
+import userList from "../db/users";
 
-// Server
-const userList = [
-  {
-    id: 0,
-    name: "",
-    surname: "",
-    email: "asd",
-    password: "",
-  },
-];
-
-// Client
 export const UserContext = createContext();
 
 const initialState = { user: null, isLogged: false };
@@ -113,7 +102,7 @@ export default function UserProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <UserContext.Provider value={(state, dispatch)}>
+    <UserContext.Provider value={[state, dispatch]}>
       {children}
     </UserContext.Provider>
   );

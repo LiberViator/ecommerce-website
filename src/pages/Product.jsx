@@ -1,11 +1,8 @@
-// https://ui.dev/react-router-tutorial
-
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 
 import {
-  ProductDispatchContext,
-  ProductStateContext,
+  ProductContext,
   productGet,
   productSetColor,
   productSetSize,
@@ -25,8 +22,7 @@ import "./Product.scss";
 export default function Product() {
   const { productLink } = useParams();
   const [productId] = useState(Number(productLink));
-  const dispatch = useContext(ProductDispatchContext);
-  const { product, quantity, color, size } = useContext(ProductStateContext);
+  const [{ product, quantity }, dispatch] = useContext(ProductContext);
 
   useEffect(() => {
     productGet(dispatch, productId);
@@ -37,7 +33,7 @@ export default function Product() {
       <Header />
       <div className="product">
         <div className="product__content">
-          <Gallery product={product && product} />
+          <Gallery product={product} />
           <Checkout>
             <Name />
             <Ranking />
@@ -72,7 +68,7 @@ function Checkout(props) {
 }
 
 function Name() {
-  const { product } = useContext(ProductStateContext);
+  const [{ product, quantity }] = useContext(ProductContext);
 
   return (
     <h2 className="product__checkout__name">{product ? product.title : ""}</h2>
@@ -92,7 +88,7 @@ function Ranking() {
 }
 
 function Price() {
-  const { product } = useContext(ProductStateContext);
+  const [{ product }] = useContext(ProductContext);
 
   return (
     <div className="product__checkout__pricing">
@@ -104,7 +100,7 @@ function Price() {
 }
 
 function Description() {
-  const { product } = useContext(ProductStateContext);
+  const [{ product }] = useContext(ProductContext);
 
   return (
     <p className="product__checkout__desc">
@@ -114,7 +110,7 @@ function Description() {
 }
 
 function Colors() {
-  const { product, color } = useContext(ProductStateContext);
+  const [{ product, color }] = useContext(ProductContext);
 
   if (product && product.colors.length > 1) {
     return (
@@ -133,13 +129,13 @@ function Colors() {
 }
 
 function Color(props) {
-  const dispatch = useContext(ProductDispatchContext);
-  const { product, color } = useContext(ProductStateContext);
+  const [{ product, color }, dispatch] = useContext(ProductContext);
 
   return (
     <li>
       <input
         type="radio"
+        id="color"
         name="color"
         onChange={(e) => {
           productSetColor(dispatch, product.colors[props.index]);
@@ -152,9 +148,9 @@ function Color(props) {
 }
 
 function Sizes() {
-  const { product } = useContext(ProductStateContext);
+  const [{ product }] = useContext(ProductContext);
 
-  if (product && product.sizes.length > 1) {
+  if (product && product.colors.length > 1) {
     return (
       <div className="product__checkout__sizes">
         <h4 className="product__checkout__title">Size</h4>
@@ -169,8 +165,7 @@ function Sizes() {
 }
 
 function Size(props) {
-  const dispatch = useContext(ProductDispatchContext);
-  const { product, size } = useContext(ProductStateContext);
+  const [{ product, size }, dispatch] = useContext(ProductContext);
 
   return (
     <li>
@@ -188,8 +183,7 @@ function Size(props) {
 }
 
 function Quantity() {
-  const dispatch = useContext(ProductDispatchContext);
-  const { product, quantity } = useContext(ProductStateContext);
+  const [{ product, quantity }, dispatch] = useContext(ProductContext);
 
   return (
     <div className="product__checkout__quantity">
@@ -225,7 +219,7 @@ function Overview(props) {
 
 // Specification
 function Specs() {
-  const { product } = useContext(ProductStateContext);
+  const [{ product }] = useContext(ProductContext);
 
   return (
     <div id="specification" className="product__specs">

@@ -1,28 +1,42 @@
-import { useState, useEffect, createContext } from "react";
+import { useReducer, createContext } from "react";
+import cartList from "../db/carts";
 
-
-// const { userData } = useUserData(0);
-// const userData = useContext(UserContext);
-// const [cartData, setCartData] = useState(null);
-
-// Server
-const cartList = [{ userId: 0, productId: 0, quantity: 1 }];
-
-// Client
 export const CartContext = createContext();
 
-const initialState = {};
+const initialState = [];
 
-export function cartAdd(productId, quantity) {
-  let cartData = cartList.find((element) => element.){
-    id: 0,
-    name: "",
-    surname: "",
-    email: `${email}`,
-    password: `${password}`,
-  };
+function reducer(state, action) {
+  switch (action.type) {
+    case "get":
+      return action.payload;
+    default:
+      throw new Error();
+  }
+}
 
-  cartList.push(userData);
+export function cartGet(dispatch) {
+  return dispatch({
+    type: "get",
+    payload: cartList,
+  });
+}
+
+export function cartAdd(dispatch, productId, quantity) {
+  let cartProduct = cartList.find((element) => element.productId === productId);
+
+  if (cartProduct) {
+    cartProduct.quantity += quantity;
+  } else {
+    cartProduct = { productId: productId, quantity: 1 };
+    cartList.push(cartProduct);
+  }
+
+  console.log(cartProduct.quantity);
+
+  return dispatch({
+    type: "get",
+    payload: cartList,
+  });
 }
 
 export function cartRemove() {
@@ -38,5 +52,11 @@ export function cartCheckout() {
 }
 
 export default function CartProvider({ children }) {
-  return <CartContext.Provider value="">{children}</CartContext.Provider>;
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return (
+    <CartContext.Provider value={[state, dispatch]}>
+      {children}
+    </CartContext.Provider>
+  );
 }
