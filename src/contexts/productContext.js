@@ -10,32 +10,32 @@ const initialState = {
   size: undefined,
 };
 
-function reducer(state, action) {
-  switch (action.type) {
+function reducer(state, { type, value }) {
+  switch (type) {
     case "get":
       return {
         ...state,
-        product: action.payload.product,
-        color: action.payload.color,
-        size: action.payload.size,
+        product: value.product,
+        color: value.color,
+        size: value.size,
       };
     case "color":
       return {
         ...state,
-        color: action.payload.color,
+        color: value.color,
       };
     case "size":
       return {
         ...state,
-        size: action.payload.size,
+        size: value.size,
       };
     case "quantity":
       return {
         ...state,
-        quantity: action.payload.quantity,
+        quantity: value.quantity,
       };
     default:
-      throw new Error();
+      return state;
   }
 }
 
@@ -44,7 +44,7 @@ export function productGet(dispatch, productId) {
 
   return dispatch({
     type: "get",
-    payload: {
+    value: {
       product: productData,
       color: productData.colors[0],
       size: productData.sizes[0],
@@ -55,7 +55,7 @@ export function productGet(dispatch, productId) {
 export function productSetColor(dispatch, color) {
   return dispatch({
     type: "color",
-    payload: {
+    value: {
       color: color,
     },
   });
@@ -64,7 +64,7 @@ export function productSetColor(dispatch, color) {
 export function productSetSize(dispatch, size) {
   return dispatch({
     type: "size",
-    payload: {
+    value: {
       size: size,
     },
   });
@@ -73,8 +73,8 @@ export function productSetSize(dispatch, size) {
 export function productSetQuantity(dispatch, quantity) {
   return dispatch({
     type: "quantity",
-    payload: {
-      quantity: quantity,
+    value: {
+      quantity: Number(quantity),
     },
   });
 }

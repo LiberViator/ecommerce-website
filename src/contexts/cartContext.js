@@ -3,14 +3,45 @@ import cartList from "../db/carts";
 
 export const CartContext = createContext();
 
-const initialState = [];
+const initialState = [{ productId: 0, quantity: 1 }];
 
-function reducer(state, action) {
-  switch (action.type) {
+function reducer(state, { type, value }) {
+  switch (type) {
     case "get":
-      return action.payload;
+      return JSON.parse(localStorage.getItem("cart"));
+    case "add":
+      let sameObj = state.find(
+        (object) => object.productId === value.productId
+      );
+      let newAddState = state.filter((object) =>
+        object === sameObj
+          ? { ...object, quantity: (object.quantity += value.quantity) }
+          : object
+      );
+
+      if (sameObj) {
+        localStorage.setItem("cart", JSON.stringify(newAddState));
+        return newAddState;
+      } else {
+        localStorage.setItem("cart", JSON.stringify([...state, value]));
+        return [...state, value];
+      }
+    case "remove":
+      let newRemoveState = state.filter((object) =>
+        object.productId !== value.productId
+          ? object
+          : object.quantity > 1
+          ? {
+              ...object,
+              quantity: (object.quantity -= 1),
+            }
+          : null
+      );
+
+      localStorage.setItem("cart", JSON.stringify(newRemoveState));
+      return newRemoveState;
     default:
-      throw new Error();
+      return state;
   }
 }
 
@@ -22,25 +53,19 @@ export function cartGet(dispatch) {
 }
 
 export function cartAdd(dispatch, productId, quantity) {
-  let cartProduct = cartList.find((element) => element.productId === productId);
-
-  if (cartProduct) {
-    cartProduct.quantity += quantity;
-  } else {
-    cartProduct = { productId: productId, quantity: 1 };
-    cartList.push(cartProduct);
-  }
-
-  console.log(cartProduct.quantity);
+  localStorage.setItem("cart", "Tom");
 
   return dispatch({
-    type: "get",
-    payload: cartList,
+    type: "add",
+    value: { productId: productId, quantity: quantity },
   });
 }
 
-export function cartRemove() {
-  console.log("Remove");
+export function cartRemove(dispatch, productId) {
+  return dispatch({
+    type: "remove",
+    value: { productId: productId },
+  });
 }
 
 export function cartUpdate() {
@@ -53,6 +78,8 @@ export function cartCheckout() {
 
 export default function CartProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  // useEffect(() => )
 
   return (
     <CartContext.Provider value={[state, dispatch]}>

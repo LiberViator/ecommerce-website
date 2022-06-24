@@ -9,6 +9,13 @@ import {
   productSetQuantity,
 } from "./../contexts/productContext";
 
+import {
+  CartContext,
+  cartGet,
+  cartAdd,
+  cartRemove,
+} from "./../contexts/cartContext";
+
 import Header from "./../layout/Header";
 import Footer from "./../layout/Footer";
 
@@ -22,10 +29,12 @@ import "./Product.scss";
 export default function Product() {
   const { productLink } = useParams();
   const [productId] = useState(Number(productLink));
-  const [{ product, quantity }, dispatch] = useContext(ProductContext);
+  const [{ product, quantity }, productDispatch] = useContext(ProductContext);
+  const [cartData, cartDispatch] = useContext(CartContext);
 
   useEffect(() => {
-    productGet(dispatch, productId);
+    cartGet(cartDispatch);
+    productGet(productDispatch, productId);
   }, []);
 
   return (
@@ -45,7 +54,12 @@ export default function Product() {
             <Divider />
             <Quantity />
             <nav className="product__checkout__nav">
-              <Button type="cart" text="Add to Cart" />
+              <button
+                className="button button_cart"
+                onClick={(e) => cartAdd(cartDispatch, product.id, quantity)}
+              >
+                Add to Cart
+              </button>
               <Button type="like" />
             </nav>
           </Checkout>
@@ -68,7 +82,7 @@ function Checkout(props) {
 }
 
 function Name() {
-  const [{ product, quantity }] = useContext(ProductContext);
+  const [{ product }] = useContext(ProductContext);
 
   return (
     <h2 className="product__checkout__name">{product ? product.title : ""}</h2>
@@ -195,7 +209,7 @@ function Quantity() {
           type="number"
           name="quantity"
           min="1"
-          max={product ? product.quantity : ""}
+          max={product ? product.quantity : 1}
           value={quantity}
           onChange={(e) => {
             productSetQuantity(dispatch, e.target.value);

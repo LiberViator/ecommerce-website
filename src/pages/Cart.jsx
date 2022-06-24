@@ -1,7 +1,12 @@
 import { useEffect, useContext } from "react";
 
 import { CatalogContext, catalogGet } from "./../contexts/catalogContext";
-import { CartContext, cartGet, cartAdd } from "./../contexts/cartContext";
+import {
+  CartContext,
+  cartGet,
+  cartAdd,
+  cartRemove,
+} from "./../contexts/cartContext";
 
 import Header from "./../layout/Header";
 import Footer from "./../layout/Footer";
@@ -12,9 +17,13 @@ export default function Cart() {
   const [productList, catalogDispatch] = useContext(CatalogContext);
   const [cartData, cartDispatch] = useContext(CartContext);
 
+  useEffect(() => cartGet(cartDispatch), []);
+
   useEffect(() => {
-    cartGet(cartDispatch);
-    catalogGet(catalogDispatch, [0, 1]);
+    catalogGet(
+      catalogDispatch,
+      cartData.map((element) => element.productId)
+    );
   }, [cartData]);
 
   return (
@@ -22,7 +31,6 @@ export default function Cart() {
       <Header />
       <div className="cart">
         <div className="cart__content">
-          <h1></h1>
           {cartData &&
             productList &&
             cartData.map((cartProduct, index) => {
@@ -30,15 +38,17 @@ export default function Cart() {
                 (i) => i.id === cartProduct.productId
               );
 
-              if (productData) {
-                return (
-                  <Item
-                    productData={productData}
-                    quantity={cartProduct.quantity}
-                    key={index}
-                  />
-                );
+              if (!productData) {
+                return null;
               }
+
+              return (
+                <Item
+                  productData={productData}
+                  quantity={cartProduct.quantity}
+                  key={index}
+                />
+              );
             })}
         </div>
       </div>
@@ -48,7 +58,7 @@ export default function Cart() {
 }
 
 function Item({ productData, quantity }) {
-  const [cartData, cartDispatch] = useContext(CartContext);
+  const [, cartDispatch] = useContext(CartContext);
 
   return (
     <div>
@@ -59,7 +69,9 @@ function Item({ productData, quantity }) {
       <button onClick={(e) => cartAdd(cartDispatch, productData.id, 1)}>
         Add
       </button>
-      <button>Delete</button>
+      <button onClick={(e) => cartRemove(cartDispatch, productData.id)}>
+        Delete
+      </button>
     </div>
   );
 }

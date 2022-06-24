@@ -5,12 +5,12 @@ export const UserContext = createContext();
 
 const initialState = { user: null, isLogged: false };
 
-function reducer(state, action) {
-  switch (action.type) {
+function reducer(state, { type, value }) {
+  switch (type) {
     case "login":
       return {
         ...state,
-        user: action.payload.user,
+        user: value.user,
         isLogged: true,
       };
     case "logout":
@@ -22,7 +22,7 @@ function reducer(state, action) {
     case "create":
       return {
         ...state,
-        user: action.payload.user,
+        user: value.user,
         isLogged: true,
       };
     case "remove":
@@ -34,10 +34,10 @@ function reducer(state, action) {
     case "update":
       return {
         ...state,
-        user: action.payload.user,
+        user: value.user,
       };
     default:
-      throw new Error();
+      return state;
   }
 }
 
@@ -54,7 +54,7 @@ export function userLogin(dispatch, email, password) {
 
   return dispatch({
     type: "login",
-    payload: { user: userData },
+    value: { user: userData },
   });
 }
 
@@ -81,7 +81,7 @@ export function userCreate(dispatch, email, password) {
 
   return dispatch({
     type: "create",
-    payload: { user: userData },
+    value: { user: userData },
   });
 }
 
@@ -94,7 +94,7 @@ export function userRemove(dispatch, email, password) {
 export function userUpdate(dispatch) {
   return dispatch({
     type: "update",
-    payload: { user: null },
+    value: { user: null },
   });
 }
 

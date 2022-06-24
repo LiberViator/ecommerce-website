@@ -5,12 +5,12 @@ export const CatalogContext = createContext();
 
 const initialState = [];
 
-function reducer(state, action) {
-  switch (action.type) {
+function reducer(state, { type, value }) {
+  switch (type) {
     case "get":
-      return action.payload;
+      return value;
     default:
-      throw new Error();
+      return state;
   }
 }
 
@@ -21,7 +21,7 @@ export function catalogGet(dispatch, productId) {
 
   return dispatch({
     type: "get",
-    payload: products,
+    value: products,
   });
 }
 
