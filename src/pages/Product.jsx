@@ -9,12 +9,7 @@ import {
   productSetQuantity,
 } from "./../contexts/productContext";
 
-import {
-  CartContext,
-  cartGet,
-  cartAdd,
-  cartRemove,
-} from "./../contexts/cartContext";
+import { CartContext, cartAdd } from "./../contexts/cartContext";
 
 import Header from "./../layout/Header";
 import Footer from "./../layout/Footer";
@@ -30,10 +25,9 @@ export default function Product() {
   const { productLink } = useParams();
   const [productId] = useState(Number(productLink));
   const [{ product, quantity }, productDispatch] = useContext(ProductContext);
-  const [cartData, cartDispatch] = useContext(CartContext);
+  const [, cartDispatch] = useContext(CartContext);
 
   useEffect(() => {
-    cartGet(cartDispatch);
     productGet(productDispatch, productId);
   }, []);
 

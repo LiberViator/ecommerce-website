@@ -1,12 +1,7 @@
 import { useEffect, useContext } from "react";
 
 import { CatalogContext, catalogGet } from "./../contexts/catalogContext";
-import {
-  CartContext,
-  cartGet,
-  cartAdd,
-  cartRemove,
-} from "./../contexts/cartContext";
+import { CartContext, cartAdd, cartRemove } from "./../contexts/cartContext";
 
 import Header from "./../layout/Header";
 import Footer from "./../layout/Footer";
@@ -15,26 +10,24 @@ import "./Cart.scss";
 
 export default function Cart() {
   const [productList, catalogDispatch] = useContext(CatalogContext);
-  const [cartData, cartDispatch] = useContext(CartContext);
-
-  useEffect(() => cartGet(cartDispatch), []);
+  const [{ cart }] = useContext(CartContext);
 
   useEffect(() => {
     catalogGet(
       catalogDispatch,
-      cartData.map((element) => element.productId)
+      cart.map((element) => element.productId)
     );
-  }, [cartData]);
+  }, [cart]);
 
   return (
     <>
       <Header />
       <div className="cart">
         <div className="cart__content">
-          {cartData &&
+          {cart &&
             productList &&
-            cartData.map((cartProduct, index) => {
-              let productData = productList.find(
+            cart.map((cartProduct, index) => {
+              const productData = productList.find(
                 (i) => i.id === cartProduct.productId
               );
 

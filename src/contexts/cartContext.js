@@ -1,33 +1,39 @@
-import { useReducer, createContext } from "react";
+import { useEffect, useReducer, createContext } from "react";
 import cartList from "../db/carts";
 
 export const CartContext = createContext();
 
-const initialState = [{ productId: 0, quantity: 1 }];
+const initialState = { cart: [], doUpload: false };
 
 function reducer(state, { type, value }) {
   switch (type) {
     case "get":
-      return JSON.parse(localStorage.getItem("cart"));
+      const getItem = JSON.parse(localStorage.getItem("cart"));
+
+      if (!getItem) {
+        localStorage.setItem("cart", []);
+      } else {
+        return { ...state, cart: getItem };
+      }
+
     case "add":
-      let sameObj = state.find(
+      const sameObj = state.cart.find(
         (object) => object.productId === value.productId
       );
-      let newAddState = state.filter((object) =>
+      const newAddState = state.cart.filter((object) =>
         object === sameObj
           ? { ...object, quantity: (object.quantity += value.quantity) }
           : object
       );
 
       if (sameObj) {
-        localStorage.setItem("cart", JSON.stringify(newAddState));
-        return newAddState;
+        return { ...state, cart: newAddState, doUpload: true };
       } else {
-        localStorage.setItem("cart", JSON.stringify([...state, value]));
-        return [...state, value];
+        return { ...state, cart: [...state.cart, value], doUpload: true };
       }
+
     case "remove":
-      let newRemoveState = state.filter((object) =>
+      const newRemoveState = state.cart.filter((object) =>
         object.productId !== value.productId
           ? object
           : object.quantity > 1
@@ -37,9 +43,14 @@ function reducer(state, { type, value }) {
             }
           : null
       );
+      return { ...state, cart: newRemoveState, doUpload: true };
 
-      localStorage.setItem("cart", JSON.stringify(newRemoveState));
-      return newRemoveState;
+    case "upload":
+      if (state.doUpload) {
+        localStorage.setItem("cart", JSON.stringify(state.cart));
+        return { ...state, cart: state.cart, doUpload: false };
+      }
+
     default:
       return state;
   }
@@ -48,13 +59,10 @@ function reducer(state, { type, value }) {
 export function cartGet(dispatch) {
   return dispatch({
     type: "get",
-    payload: cartList,
   });
 }
 
 export function cartAdd(dispatch, productId, quantity) {
-  localStorage.setItem("cart", "Tom");
-
   return dispatch({
     type: "add",
     value: { productId: productId, quantity: quantity },
@@ -68,18 +76,31 @@ export function cartRemove(dispatch, productId) {
   });
 }
 
-export function cartUpdate() {
-  console.log("Update");
+export function cartUpdate(dispatch, productId) {
+  return dispatch({
+    type: "remove",
+    value: { productId: productId },
+  });
 }
 
 export function cartCheckout() {
   console.log("Checkout");
 }
 
+export function cartUpload(dispatch) {
+  return dispatch({
+    type: "upload",
+  });
+}
+
 export default function CartProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // useEffect(() => )
+  window.addEventListener("beforeunload", () => cartUpload(dispatch));
+
+  useEffect(() => {
+    cartGet(dispatch);
+  }, []);
 
   return (
     <CartContext.Provider value={[state, dispatch]}>
