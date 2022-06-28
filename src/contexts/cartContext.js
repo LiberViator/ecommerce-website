@@ -15,6 +15,7 @@ function reducer(state, { type, value }) {
       } else {
         return { ...state, cart: getItem };
       }
+      return;
 
     case "add":
       const sameObj = state.cart.find(
@@ -50,6 +51,7 @@ function reducer(state, { type, value }) {
         localStorage.setItem("cart", JSON.stringify(state.cart));
         return { ...state, cart: state.cart, doUpload: false };
       }
+      return;
 
     default:
       return state;

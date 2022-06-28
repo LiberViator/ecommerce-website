@@ -15,8 +15,8 @@ function reducer(state, { type, value }) {
 }
 
 export function catalogGet(dispatch, productId) {
-  const products = productId.map((id) =>
-    productList.find((product) => product.id === id)
+  const products = productId.map((_id) =>
+    productList.find((_product) => _product.id === _id)
   );
 
   return dispatch({

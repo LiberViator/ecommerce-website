@@ -9,13 +9,13 @@ import Footer from "./../layout/Footer";
 import "./Cart.scss";
 
 export default function Cart() {
-  const [productList, catalogDispatch] = useContext(CatalogContext);
+  const [catalog, catalogDispatch] = useContext(CatalogContext);
   const [{ cart }] = useContext(CartContext);
 
   useEffect(() => {
     catalogGet(
       catalogDispatch,
-      cart.map((element) => element.productId)
+      cart.map((_cartItem) => _cartItem.productId)
     );
   }, [cart]);
 
@@ -25,20 +25,20 @@ export default function Cart() {
       <div className="cart">
         <div className="cart__content">
           {cart &&
-            productList &&
-            cart.map((cartProduct, index) => {
-              const productData = productList.find(
-                (i) => i.id === cartProduct.productId
+            catalog &&
+            cart.map((_cartItem, index) => {
+              const productData = catalog.find((_product) =>
+                _product.id === _cartItem.productId ? _product : false
               );
 
               if (!productData) {
-                return null;
+                return <h1></h1>;
               }
 
               return (
                 <Item
                   productData={productData}
-                  quantity={cartProduct.quantity}
+                  quantity={_cartItem.quantity}
                   key={index}
                 />
               );
