@@ -7,7 +7,7 @@ const initialState = [];
 
 function reducer(state, { type, value }) {
   switch (type) {
-    case "get":
+    case "GET":
       return value;
     default:
       return state;
@@ -20,7 +20,7 @@ export function catalogGet(dispatch, productId) {
   );
 
   return dispatch({
-    type: "get",
+    type: "GET",
     value: products,
   });
 }

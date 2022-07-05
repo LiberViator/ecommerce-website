@@ -12,24 +12,24 @@ const initialState = {
 
 function reducer(state, { type, value }) {
   switch (type) {
-    case "get":
+    case "GET":
       return {
         ...state,
         product: value.product,
         color: value.color,
         size: value.size,
       };
-    case "color":
+    case "COLOR":
       return {
         ...state,
         color: value.color,
       };
-    case "size":
+    case "SIZE":
       return {
         ...state,
         size: value.size,
       };
-    case "quantity":
+    case "QUANTITY":
       return {
         ...state,
         quantity: value.quantity,
@@ -43,7 +43,7 @@ export function productGet(dispatch, productId) {
   const productData = productList.find((element) => element.id === productId);
 
   return dispatch({
-    type: "get",
+    type: "GET",
     value: {
       product: productData,
       color: productData.colors[0],
@@ -54,7 +54,7 @@ export function productGet(dispatch, productId) {
 
 export function productSetColor(dispatch, color) {
   return dispatch({
-    type: "color",
+    type: "COLOR",
     value: {
       color: color,
     },
@@ -63,7 +63,7 @@ export function productSetColor(dispatch, color) {
 
 export function productSetSize(dispatch, size) {
   return dispatch({
-    type: "size",
+    type: "SIZE",
     value: {
       size: size,
     },
@@ -72,7 +72,7 @@ export function productSetSize(dispatch, size) {
 
 export function productSetQuantity(dispatch, quantity) {
   return dispatch({
-    type: "quantity",
+    type: "QUANTITY",
     value: {
       quantity: Number(quantity),
     },

@@ -70,7 +70,6 @@ export default function Product() {
   );
 }
 
-// Checkout
 function Checkout(props) {
   return <div className="product__checkout">{props.children}</div>;
 }

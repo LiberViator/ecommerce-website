@@ -7,31 +7,31 @@ const initialState = { user: null, isLogged: false };
 
 function reducer(state, { type, value }) {
   switch (type) {
-    case "login":
+    case "LOGIN":
       return {
         ...state,
         user: value.user,
         isLogged: true,
       };
-    case "logout":
+    case "LOGOUT":
       return {
         ...state,
         user: null,
         isLogged: false,
       };
-    case "create":
+    case "CREATE":
       return {
         ...state,
         user: value.user,
         isLogged: true,
       };
-    case "remove":
+    case "REMOVE":
       return {
         ...state,
         user: null,
         isLogged: false,
       };
-    case "update":
+    case "UPDATE":
       return {
         ...state,
         user: value.user,
@@ -53,14 +53,14 @@ export function userLogin(dispatch, email, password) {
   }
 
   return dispatch({
-    type: "login",
+    type: "LOGIN",
     value: { user: userData },
   });
 }
 
 export function userLogout(dispatch) {
   return dispatch({
-    type: "logout",
+    type: "LOGOUT",
   });
 }
 
@@ -80,20 +80,20 @@ export function userCreate(dispatch, email, password) {
   userList.push(userData);
 
   return dispatch({
-    type: "create",
+    type: "CREATE",
     value: { user: userData },
   });
 }
 
 export function userRemove(dispatch, email, password) {
   return dispatch({
-    type: "remove",
+    type: "REMOVE",
   });
 }
 
 export function userUpdate(dispatch) {
   return dispatch({
-    type: "update",
+    type: "UPDATE",
     value: { user: null },
   });
 }
