@@ -32,7 +32,7 @@ export default function Cart() {
               );
 
               if (!productData) {
-                return;
+                return null;
               }
 
               return (

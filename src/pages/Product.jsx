@@ -202,6 +202,16 @@ function Quantity() {
           Quantity:
         </label>
         <div>
+          <div
+            onClick={(e) => {
+              if (quantity > 1) {
+                productSetQuantity(dispatch, quantity - 1);
+              } else {
+              }
+            }}
+          >
+            -
+          </div>
           <input
             type="number"
             name="quantity"
@@ -212,6 +222,13 @@ function Quantity() {
               productSetQuantity(dispatch, e.target.value);
             }}
           />
+          <div
+            onClick={(e) => {
+              productSetQuantity(dispatch, quantity + 1);
+            }}
+          >
+            +
+          </div>
         </div>
       </div>
       <h4 className="product__checkout__title">In Stock</h4>
