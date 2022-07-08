@@ -32,12 +32,14 @@ export default function Cart() {
               );
 
               if (!productData) {
-                return <h1></h1>;
+                return;
               }
 
               return (
                 <Item
                   productData={productData}
+                  color={_cartItem.color}
+                  size={_cartItem.size}
                   quantity={_cartItem.quantity}
                   key={index}
                 />
@@ -50,7 +52,7 @@ export default function Cart() {
   );
 }
 
-function Item({ productData, quantity }) {
+function Item({ productData, color, size, quantity }) {
   const [, cartDispatch] = useContext(CartContext);
 
   return (
@@ -58,11 +60,17 @@ function Item({ productData, quantity }) {
       <h3>Product Photo</h3>
       <h3>{productData.title}</h3>
       <h4>{productData.price}</h4>
+      <h4>Color: {color}</h4>
+      <h4>Size: {size}</h4>
       <h4>{quantity}</h4>
-      <button onClick={(e) => cartAdd(cartDispatch, productData.id, 1)}>
+      <button
+        onClick={(e) => cartAdd(cartDispatch, productData.id, color, size, 1)}
+      >
         Add
       </button>
-      <button onClick={(e) => cartRemove(cartDispatch, productData.id)}>
+      <button
+        onClick={(e) => cartRemove(cartDispatch, productData.id, color, size)}
+      >
         Delete
       </button>
     </div>

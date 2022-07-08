@@ -24,7 +24,8 @@ import "./Product.scss";
 export default function Product() {
   const { productLink } = useParams();
   const [productId] = useState(Number(productLink));
-  const [{ product, quantity }, productDispatch] = useContext(ProductContext);
+  const [{ product, color, size, quantity }, productDispatch] =
+    useContext(ProductContext);
   const [, cartDispatch] = useContext(CartContext);
 
   useEffect(() => {
@@ -50,7 +51,9 @@ export default function Product() {
             <nav className="product__checkout__nav">
               <button
                 className="button button_cart"
-                onClick={(e) => cartAdd(cartDispatch, product.id, quantity)}
+                onClick={(e) =>
+                  cartAdd(cartDispatch, product.id, color, size, quantity)
+                }
               >
                 Add to Cart
               </button>
@@ -198,16 +201,18 @@ function Quantity() {
         <label className="product__checkout__title" htmlFor="quantity">
           Quantity:
         </label>
-        <input
-          type="number"
-          name="quantity"
-          min="1"
-          max={product ? product.quantity : 1}
-          value={quantity}
-          onChange={(e) => {
-            productSetQuantity(dispatch, e.target.value);
-          }}
-        />
+        <div>
+          <input
+            type="number"
+            name="quantity"
+            min="1"
+            max={product ? product.quantity : 1}
+            value={quantity}
+            onChange={(e) => {
+              productSetQuantity(dispatch, e.target.value);
+            }}
+          />
+        </div>
       </div>
       <h4 className="product__checkout__title">In Stock</h4>
     </div>

@@ -15,27 +15,38 @@ function reducer(state, { type, value }) {
       } else {
         return { ...state, cart: getItem };
       }
-      return;
+      break;
 
     case "ADD":
-      const sameObj = state.cart.find(
-        (object) => object.productId === value.productId
+      const sameAddObj = state.cart.find(
+        (object) =>
+          object.productId === value.productId &&
+          object.color === value.color &&
+          object.size === value.size
       );
+
       const newAddState = state.cart.filter((object) =>
-        object === sameObj
+        object === sameAddObj
           ? { ...object, quantity: (object.quantity += value.quantity) }
           : object
       );
 
-      if (sameObj) {
+      if (sameAddObj) {
         return { ...state, cart: newAddState, doUpload: true };
       } else {
         return { ...state, cart: [...state.cart, value], doUpload: true };
       }
 
     case "REMOVE":
+      const sameRemoveObj = state.cart.find(
+        (object) =>
+          object.productId === value.productId &&
+          object.color === value.color &&
+          object.size === value.size
+      );
+
       const newRemoveState = state.cart.filter((object) =>
-        object.productId !== value.productId
+        object !== sameRemoveObj
           ? object
           : object.quantity > 1
           ? {
@@ -44,6 +55,7 @@ function reducer(state, { type, value }) {
             }
           : null
       );
+
       return { ...state, cart: newRemoveState, doUpload: true };
 
     case "UPLOAD":
@@ -51,8 +63,7 @@ function reducer(state, { type, value }) {
         localStorage.setItem("cart", JSON.stringify(state.cart));
         return { ...state, cart: state.cart, doUpload: false };
       }
-      return;
-
+      break;
     default:
       return state;
   }
@@ -70,17 +81,22 @@ export function cartUpload(dispatch) {
   });
 }
 
-export function cartAdd(dispatch, productId, quantity) {
+export function cartAdd(dispatch, productId, color, size, quantity) {
   return dispatch({
     type: "ADD",
-    value: { productId: productId, quantity: quantity },
+    value: {
+      productId: productId,
+      color: color,
+      size: size,
+      quantity: quantity,
+    },
   });
 }
 
-export function cartRemove(dispatch, productId) {
+export function cartRemove(dispatch, productId, color, size) {
   return dispatch({
     type: "REMOVE",
-    value: { productId: productId },
+    value: { productId: productId, color: color, size: size },
   });
 }
 
