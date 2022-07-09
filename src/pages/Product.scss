@@ -228,43 +228,10 @@ input[name="size"]:checked + span {
   // padding: 4px 0;
 }
 
-.product__checkout__quantity div {
+.product__checkout__quantity > div {
   display: flex;
   align-items: center;
   gap: 12px;
-}
-
-input[type="number"] {
-  all: unset;
-  border: 1px solid $clr__gray;
-  border-radius: 16px;
-  background-color: $clr__white;
-  width: 6ch;
-  padding: 3px 0;
-  font-style: normal;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  font-weight: 400;
-  color: $clr__black;
-  cursor: pointer;
-  text-align: center;
-}
-
-input[type="number"]:not(:focus):hover {
-  animation: hoverAnimation 0.4s infinite alternate;
-}
-
-input[type="number"]:focus {
-  border: 1px solid $clr__lightgreen;
-}
-
-input[type="number"]:invalid {
-  border: 1px solid $clr__error;
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  appearance: none;
 }
 
 .product__checkout__nav {

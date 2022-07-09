@@ -7,7 +7,7 @@ const initialState = { cart: [], doUpload: false };
 
 function reducer(state, { type, value }) {
   switch (type) {
-    case "GET":
+    case "GET": {
       const getItem = JSON.parse(localStorage.getItem("cart"));
 
       if (!getItem) {
@@ -16,37 +16,39 @@ function reducer(state, { type, value }) {
         return { ...state, cart: getItem };
       }
       break;
+    }
 
-    case "ADD":
-      const sameAddObj = state.cart.find(
+    case "ADD": {
+      const isSame = state.cart.find(
         (object) =>
           object.productId === value.productId &&
           object.color === value.color &&
           object.size === value.size
       );
 
-      const newAddState = state.cart.filter((object) =>
-        object === sameAddObj
+      const newState = state.cart.map((object) =>
+        object === isSame
           ? { ...object, quantity: (object.quantity += value.quantity) }
           : object
       );
 
-      if (sameAddObj) {
-        return { ...state, cart: newAddState, doUpload: true };
+      if (isSame) {
+        return { ...state, cart: newState, doUpload: true };
       } else {
         return { ...state, cart: [...state.cart, value], doUpload: true };
       }
+    }
 
-    case "REMOVE":
-      const sameRemoveObj = state.cart.find(
+    case "REMOVE": {
+      const isSame = state.cart.find(
         (object) =>
           object.productId === value.productId &&
           object.color === value.color &&
           object.size === value.size
       );
 
-      const newRemoveState = state.cart.filter((object) =>
-        object !== sameRemoveObj
+      const newState = state.cart.filter((object) =>
+        object !== isSame
           ? object
           : object.quantity > 1
           ? {
@@ -56,14 +58,34 @@ function reducer(state, { type, value }) {
           : null
       );
 
-      return { ...state, cart: newRemoveState, doUpload: true };
+      return { ...state, cart: newState, doUpload: true };
+    }
 
-    case "UPLOAD":
+    case "SET": {
+      const isSame = state.cart.find(
+        (object) =>
+          object.productId === value.productId &&
+          object.color === value.color &&
+          object.size === value.size
+      );
+
+      const newState = state.cart.map((object) =>
+        object === isSame && value.quantity >= 1
+          ? { ...object, quantity: value.quantity }
+          : object
+      );
+
+      return { ...state, cart: newState, doUpload: true };
+    }
+
+    case "UPLOAD": {
       if (state.doUpload) {
         localStorage.setItem("cart", JSON.stringify(state.cart));
         return { ...state, cart: state.cart, doUpload: false };
       }
       break;
+    }
+
     default:
       return state;
   }
@@ -97,6 +119,18 @@ export function cartRemove(dispatch, productId, color, size) {
   return dispatch({
     type: "REMOVE",
     value: { productId: productId, color: color, size: size },
+  });
+}
+
+export function cartSet(dispatch, productId, color, size, quantity) {
+  return dispatch({
+    type: "SET",
+    value: {
+      productId: productId,
+      color: color,
+      size: size,
+      quantity: quantity,
+    },
   });
 }
 

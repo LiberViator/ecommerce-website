@@ -1,23 +1,45 @@
-export default function QuantityInput(
+import "./QtyInput.scss";
+
+export default function QtyInput({
+  type,
   value,
-  increase,
-  decrease,
-  custom,
-  min,
-  max
-) {
-  return (
-    <div>
-      <div onClick={() => decrease}>-</div>
-      <input
-        type="number"
-        name="quantity"
-        min={min}
-        max={max}
-        value={value}
-        onChange={custom}
-      />
-      <div onClick={() => increase}>+</div>
-    </div>
-  );
+  onIncrease,
+  onDecrease,
+  onSet,
+}) {
+  switch (type) {
+    case "PRODUCT": {
+      return (
+        <div className="quantity">
+          <button onClick={onDecrease}>
+            <img src="./assets/decrease.svg" alt="" />
+          </button>
+          <input type="number" value={value} onChange={onSet} min={1} />
+          <button onClick={onIncrease}>
+            <img src="./assets/increase.svg" alt="" />
+          </button>
+        </div>
+      );
+    }
+
+    case "CART": {
+      return (
+        <div className="quantity">
+          <button onClick={onDecrease}>
+            <img
+              src={value <= 1 ? "./assets/trash.svg" : "./assets/decrease.svg"}
+              alt=""
+            />
+          </button>
+          <input type="number" value={value} onChange={onSet} min={1} />
+          <button onClick={onIncrease}>
+            <img src="./assets/increase.svg" alt="" />
+          </button>
+        </div>
+      );
+    }
+
+    default:
+      break;
+  }
 }

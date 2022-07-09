@@ -1,0 +1,51 @@
+@import "./../styles.scss";
+
+.quantity {
+  height: 32px;
+  max-width: 96px;
+
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+
+  border: 1px solid $clr__gray;
+  border-radius: 16px;
+  background-color: $clr__white;
+}
+
+.quantity button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  flex-shrink: 0;
+}
+
+.quantity input {
+  all: unset;
+  width: 100%;
+  font-style: normal;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+  color: $clr__black;
+  cursor: text;
+  text-align: center;
+}
+
+input[name="number"]:not(:focus) + .quantity:hover {
+  animation: hoverAnimation 0.4s infinite alternate;
+}
+
+input[name="number"]:focus ~ .quantity {
+  border: 1px solid $clr__lightgreen;
+}
+
+input[name="number"]:invalid + .quantity {
+  border: 1px solid $clr__error;
+}
+
+.quantity input::-webkit-inner-spin-button,
+.quantity input::-webkit-outer-spin-button {
+  appearance: none;
+}

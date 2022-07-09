@@ -1,10 +1,17 @@
 import { useEffect, useContext } from "react";
 
 import { CatalogContext, catalogGet } from "./../contexts/catalogContext";
-import { CartContext, cartAdd, cartRemove } from "./../contexts/cartContext";
+import {
+  CartContext,
+  cartAdd,
+  cartRemove,
+  cartSet,
+} from "./../contexts/cartContext";
 
 import Header from "./../layout/Header";
 import Footer from "./../layout/Footer";
+
+import QtyInput from "../components/QtyInput";
 
 import "./Cart.scss";
 
@@ -55,6 +62,18 @@ export default function Cart() {
 function Item({ productData, color, size, quantity }) {
   const [, cartDispatch] = useContext(CartContext);
 
+  const handleIncrease = (e) => {
+    e.preventDefault();
+    cartAdd(cartDispatch, productData.id, color, size, 1);
+  };
+  const handleDecrease = (e) => {
+    e.preventDefault();
+    cartRemove(cartDispatch, productData.id, color, size);
+  };
+  const handleSet = (e) => {
+    cartSet(cartDispatch, productData.id, color, size, Number(e.target.value));
+  };
+
   return (
     <div>
       <h3>Product Photo</h3>
@@ -62,17 +81,13 @@ function Item({ productData, color, size, quantity }) {
       <h4>{productData.price}</h4>
       <h4>Color: {color}</h4>
       <h4>Size: {size}</h4>
-      <h4>{quantity}</h4>
-      <button
-        onClick={(e) => cartAdd(cartDispatch, productData.id, color, size, 1)}
-      >
-        Add
-      </button>
-      <button
-        onClick={(e) => cartRemove(cartDispatch, productData.id, color, size)}
-      >
-        Delete
-      </button>
+      <QtyInput
+        type="CART"
+        value={quantity}
+        onIncrease={handleIncrease}
+        onDecrease={handleDecrease}
+        onSet={handleSet}
+      />
     </div>
   );
 }

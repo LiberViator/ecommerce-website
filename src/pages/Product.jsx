@@ -195,6 +195,15 @@ function Size(props) {
 
 function Quantity() {
   const [{ product, quantity }, dispatch] = useContext(ProductContext);
+  const handleIncrease = (e) => {
+    e.preventDefault();
+    productSetQuantity(dispatch, quantity + 1);
+  };
+  const handleDecrease = (e) => {
+    e.preventDefault();
+    quantity > 1 && productSetQuantity(dispatch, quantity - 1);
+  };
+  const handleSet = (e) => productSetQuantity(dispatch, e.target.value);
 
   return (
     <div className="product__checkout__quantity">
@@ -203,16 +212,11 @@ function Quantity() {
           Quantity:
         </label>
         <QtyInput
+          type="PRODUCT"
           value={quantity}
-          increase={function () {
-            productSetQuantity(dispatch, quantity + 1);
-          }}
-          decrease={() =>
-            quantity > 1 && productSetQuantity(dispatch, quantity - 1)
-          }
-          custom={(e) => productSetQuantity(dispatch, e.target.value)}
-          min={1}
-          max={product ? product.quantity : 1}
+          onIncrease={handleIncrease}
+          onDecrease={handleDecrease}
+          onSet={handleSet}
         />
       </div>
       <h4 className="product__checkout__title">In Stock</h4>
