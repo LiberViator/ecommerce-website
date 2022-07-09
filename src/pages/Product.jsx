@@ -18,6 +18,7 @@ import Button from "./../components/Button";
 import Divider from "./../components/Divider";
 import Gallery from "./../components/Gallery";
 import Rating from "./../components/Rating";
+import QtyInput from "../components/QtyInput";
 
 import "./Product.scss";
 
@@ -201,35 +202,18 @@ function Quantity() {
         <label className="product__checkout__title" htmlFor="quantity">
           Quantity:
         </label>
-        <div>
-          <div
-            onClick={(e) => {
-              if (quantity > 1) {
-                productSetQuantity(dispatch, quantity - 1);
-              } else {
-              }
-            }}
-          >
-            -
-          </div>
-          <input
-            type="number"
-            name="quantity"
-            min="1"
-            max={product ? product.quantity : 1}
-            value={quantity}
-            onChange={(e) => {
-              productSetQuantity(dispatch, e.target.value);
-            }}
-          />
-          <div
-            onClick={(e) => {
-              productSetQuantity(dispatch, quantity + 1);
-            }}
-          >
-            +
-          </div>
-        </div>
+        <QtyInput
+          value={quantity}
+          increase={function () {
+            productSetQuantity(dispatch, quantity + 1);
+          }}
+          decrease={() =>
+            quantity > 1 && productSetQuantity(dispatch, quantity - 1)
+          }
+          custom={(e) => productSetQuantity(dispatch, e.target.value)}
+          min={1}
+          max={product ? product.quantity : 1}
+        />
       </div>
       <h4 className="product__checkout__title">In Stock</h4>
     </div>
