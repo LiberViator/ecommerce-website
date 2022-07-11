@@ -13,48 +13,34 @@
   grid-template:
     "gallery"
     "checkout"
-    "divider1"
     "overview"
-    "divider2"
     "specs"
-    "divider3"
     "reviews";
   max-width: $lyt-large;
   width: 100%;
   transition: gap 0.2s;
-  gap: 0;
-}
-
-.product__checkout,
-.product__overview,
-.product__specs,
-.product__reviews {
-  padding: 16px $lyt-padding 24px;
-}
-
-.product__content > hr {
-  border-width: 6px;
-  border-color: $clr__gray;
-
-  :nth-child(1) {
-    grid-area: divider1;
-  }
-
-  :nth-child(2) {
-    grid-area: divider2;
-  }
-
-  :nth-child(3) {
-    grid-area: divider3;
-  }
+  padding-bottom: 24px;
+  gap: 16px;
 }
 
 // Checkout
 .product__checkout {
   display: flex;
   flex-direction: column;
-  height: auto;
+  gap: 16px;
   grid-area: checkout;
+}
+
+.product__checkout > hr,
+.product__overview > hr,
+.product__specs > hr {
+  border-width: 6px;
+}
+
+.product__checkout__content {
+  display: flex;
+  flex-direction: column;
+  padding: 0 $lyt-padding;
 }
 
 .product__checkout__name {
@@ -214,9 +200,8 @@ input[name="size"]:checked + span {
   color: white;
 }
 
-.product__checkout > hr {
+.product__checkout__content > hr {
   margin-bottom: 16px;
-  color: $clr__gray;
 }
 
 .product__checkout__quantity {
@@ -225,7 +210,6 @@ input[name="size"]:checked + span {
   align-items: center;
   margin-bottom: 16px;
   gap: 12px;
-  // padding: 4px 0;
 }
 
 .product__checkout__quantity > div {
@@ -260,14 +244,26 @@ input[name="size"]:checked + span {
 
 // Overview
 .product__overview {
-  height: 400px;
   grid-area: overview;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.product__overview__content {
+  padding: 0 $lyt-padding;
 }
 
 // Specification
 .product__specs {
-  height: 400px;
   grid-area: specs;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.product__specs__content {
+  padding: 0 $lyt-padding;
 }
 
 .product__specs ul {
@@ -280,14 +276,16 @@ input[name="size"]:checked + span {
   padding: 16px 0;
 }
 
-.product__specs ul > hr {
-  border-color: $clr__gray;
-}
-
 // Reviews
 .product__reviews {
-  height: 400px;
   grid-area: reviews;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.product__reviews__content {
+  padding: 0 $lyt-padding;
 }
 
 @media (min-width: $lyt-medium) {
@@ -298,11 +296,10 @@ input[name="size"]:checked + span {
   }
 
   .product__content {
-    grid-template:
-      "gallery checkout"
-      "overview checkout"
-      "specs checkout"
-      "reviews reviews";
+    grid-template: "gallery checkout";
+    // "overview checkout"
+    // "specs checkout"
+    // "reviews reviews";
     grid-template-columns: 5fr 3fr;
     padding: 24px 0 32px;
     gap: 24px 32px;
@@ -315,7 +312,9 @@ input[name="size"]:checked + span {
     padding: 0;
   }
 
-  .product__content > hr {
+  .product__checkout > hr,
+  .product__overview > hr,
+  .product__specs > hr {
     display: none;
   }
 }

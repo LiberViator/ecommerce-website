@@ -1,13 +1,13 @@
 import "./QtyInput.scss";
 
 export default function QtyInput({
-  type,
+  variant,
   value,
   onIncrease,
   onDecrease,
   onSet,
 }) {
-  switch (type) {
+  switch (variant) {
     case "PRODUCT": {
       return (
         <div className="quantity">

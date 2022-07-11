@@ -13,6 +13,7 @@ $clr__hover: hsla(0, 0%, 0%, 0.16);
 $lyt-small: 320px;
 $lyt-medium: 765px;
 $lyt-large: 1080px;
+$lyt-margin: 16px;
 $lyt-padding: 20px;
 
 *,
@@ -28,8 +29,8 @@ $lyt-padding: 20px;
 html,
 body,
 .App {
-  height: 100%;
   width: 100%;
+  min-height: 100vh;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
@@ -89,9 +90,15 @@ hr {
   border: none;
   border-top: 1px solid;
   border-left: 1px solid;
+  border-color: $clr__gray;
+}
+
+b {
+  font-weight: 500;
 }
 
 @media (min-width: $lyt-medium) {
+  $lyt-margin: 24px;
   $lyt-padding: 40px;
 }
 

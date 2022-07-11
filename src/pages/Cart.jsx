@@ -1,4 +1,5 @@
 import { useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 
 import { CatalogContext, catalogGet } from "./../contexts/catalogContext";
 import {
@@ -31,27 +32,30 @@ export default function Cart() {
       <Header />
       <div className="cart">
         <div className="cart__content">
-          {cart &&
-            catalog &&
-            cart.map((_cartItem, index) => {
-              const productData = catalog.find((_product) =>
-                _product.id === _cartItem.productId ? _product : false
-              );
+          <div className="cart__list">
+            {cart &&
+              catalog &&
+              cart.map((_cartItem, index) => {
+                const productData = catalog.find((_product) =>
+                  _product.id === _cartItem.productId ? _product : false
+                );
 
-              if (!productData) {
-                return null;
-              }
+                if (!productData) {
+                  return null;
+                }
 
-              return (
-                <Item
-                  productData={productData}
-                  color={_cartItem.color}
-                  size={_cartItem.size}
-                  quantity={_cartItem.quantity}
-                  key={index}
-                />
-              );
-            })}
+                return (
+                  <Item
+                    productData={productData}
+                    color={_cartItem.color}
+                    size={_cartItem.size}
+                    quantity={_cartItem.quantity}
+                    key={index}
+                  />
+                );
+              })}
+          </div>
+          <div className="cart__checkout"></div>
         </div>
       </div>
       <Footer />
@@ -75,19 +79,34 @@ function Item({ productData, color, size, quantity }) {
   };
 
   return (
-    <div>
-      <h3>Product Photo</h3>
-      <h3>{productData.title}</h3>
-      <h4>{productData.price}</h4>
-      <h4>Color: {color}</h4>
-      <h4>Size: {size}</h4>
-      <QtyInput
-        type="CART"
-        value={quantity}
-        onIncrease={handleIncrease}
-        onDecrease={handleDecrease}
-        onSet={handleSet}
-      />
-    </div>
+    <section className="cart__list__item">
+      <div className="cart__list__item__content">
+        <div className="cart__list__item__image">
+          <img src={productData.images[0]} alt="" />
+        </div>
+        <div className="cart__list__item__details">
+          <Link to={`/${productData.id}`}>
+            <h3>{productData.title}</h3>
+          </Link>
+          <h4>
+            Color: <b>{color}</b>
+          </h4>
+          <h4>
+            Size: <b>{size}</b>
+          </h4>
+        </div>
+        <div className="cart__list__item__price">
+          <h3>{productData.price}</h3>
+          <QtyInput
+            variant="CART"
+            value={quantity}
+            onIncrease={handleIncrease}
+            onDecrease={handleDecrease}
+            onSet={handleSet}
+          />
+        </div>
+      </div>
+      <hr />
+    </section>
   );
 }
