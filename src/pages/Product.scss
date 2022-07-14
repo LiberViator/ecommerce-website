@@ -3,6 +3,7 @@
 .product {
   display: flex;
   justify-content: center;
+  flex-grow: 1;
   width: 100%;
   transition: padding 0.2s;
 }
@@ -12,15 +13,27 @@
   flex-direction: column;
   grid-template:
     "gallery"
-    "checkout"
-    "overview"
-    "specs"
-    "reviews";
+    "checkout";
+  // "overview"
+  // "specs"
+  // "reviews";
   max-width: $lyt-large;
   width: 100%;
-  transition: gap 0.2s;
   padding-bottom: 24px;
+  transition: gap 0.2s;
   gap: 16px;
+
+  > * > hr {
+    border-width: 6px;
+  }
+
+  > *:last-child > hr {
+    display: none;
+  }
+
+  > * > [class*="content"] {
+    padding: 0 $lyt-padding;
+  }
 }
 
 // Checkout
@@ -31,16 +44,9 @@
   grid-area: checkout;
 }
 
-.product__checkout > hr,
-.product__overview > hr,
-.product__specs > hr {
-  border-width: 6px;
-}
-
 .product__checkout__content {
   display: flex;
   flex-direction: column;
-  padding: 0 $lyt-padding;
 }
 
 .product__checkout__name {
@@ -244,26 +250,18 @@ input[name="size"]:checked + span {
 
 // Overview
 .product__overview {
-  grid-area: overview;
   display: flex;
   flex-direction: column;
+  grid-area: overview;
   gap: 16px;
-}
-
-.product__overview__content {
-  padding: 0 $lyt-padding;
 }
 
 // Specification
 .product__specs {
-  grid-area: specs;
   display: flex;
   flex-direction: column;
+  grid-area: specs;
   gap: 16px;
-}
-
-.product__specs__content {
-  padding: 0 $lyt-padding;
 }
 
 .product__specs ul {
@@ -278,22 +276,14 @@ input[name="size"]:checked + span {
 
 // Reviews
 .product__reviews {
-  grid-area: reviews;
   display: flex;
   flex-direction: column;
+  grid-area: reviews;
   gap: 16px;
-}
-
-.product__reviews__content {
-  padding: 0 $lyt-padding;
 }
 
 @media (min-width: $lyt-medium) {
   $lyt-padding: 40px;
-
-  .product {
-    padding: 0 $lyt-padding;
-  }
 
   .product__content {
     grid-template: "gallery checkout";
@@ -303,19 +293,18 @@ input[name="size"]:checked + span {
     grid-template-columns: 5fr 3fr;
     padding: 24px 0 32px;
     gap: 24px 32px;
-  }
 
-  .product__checkout,
-  .product__overview,
-  .product__specs,
-  .product__reviews {
-    padding: 0;
-  }
+    > * > div {
+      padding: 0;
+    }
 
-  .product__checkout > hr,
-  .product__overview > hr,
-  .product__specs > hr {
-    display: none;
+    > * > hr {
+      display: none;
+    }
+
+    > * > [class*="content"] {
+      padding: 0;
+    }
   }
 }
 

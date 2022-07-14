@@ -4,8 +4,8 @@ const productList = [
     title: "Polarstjärna - Camping Tent for Hiking and Outdoor",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt pellentesque placerat sed elementum aliquet. Dignissim posuere volutpat nulla ornare facilisi amet.",
-    price: "$99,00",
-    quantity: 10,
+    price: 99,
+    stock: 10,
     colors: ["Navy Green", "Blue", "Orange"],
     sizes: ["Small", "Medium", "Large"],
     images: [
@@ -32,11 +32,11 @@ const productList = [
   },
   {
     id: 1,
-    title: "test",
+    title: "Vandringssäng - Camping Tent for Hiking and Outdoor",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt pellentesque placerat sed elementum aliquet. Dignissim posuere volutpat nulla ornare facilisi amet.",
-    price: "$99,00",
-    quantity: 10,
+    price: 87,
+    stock: 10,
     colors: ["Navy Green", "Blue", "Orange"],
     sizes: ["Small", "Medium", "Large"],
     images: [

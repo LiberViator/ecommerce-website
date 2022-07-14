@@ -9,7 +9,7 @@ export default function Gallery({ product }) {
     const imageQuantity = product.images.length - 1;
 
     return (
-      <div className="gallery">
+      <section className="gallery">
         <Preview
           product={product}
           imageIndex={imageIndex}
@@ -22,7 +22,7 @@ export default function Gallery({ product }) {
           setImageIndex={setImageIndex}
           imageQuantity={imageQuantity}
         />
-      </div>
+      </section>
     );
   }
 }

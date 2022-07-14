@@ -35,16 +35,12 @@
   text-align: center;
 }
 
-input[name="number"]:not(:focus) + .quantity:hover {
+.quantity:not(:focus-within):hover {
   animation: hoverAnimation 0.4s infinite alternate;
 }
 
-input[name="number"]:focus ~ .quantity {
+.quantity:focus-within {
   border: 1px solid $clr__lightgreen;
-}
-
-input[name="number"]:invalid + .quantity {
-  border: 1px solid $clr__error;
 }
 
 .quantity input::-webkit-inner-spin-button,

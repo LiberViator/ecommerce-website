@@ -36,7 +36,7 @@ export default function Product() {
   return (
     <>
       <Header />
-      <div className="product">
+      <main className="product">
         <div className="product__content">
           <Gallery product={product} />
           <Checkout>
@@ -50,36 +50,31 @@ export default function Product() {
             <Divider />
             <Quantity />
             <nav className="product__checkout__nav">
-              <button
-                className="button button_cart"
+              <Button
+                variant="PRODUCT"
                 onClick={(e) =>
                   cartAdd(cartDispatch, product.id, color, size, quantity)
                 }
-              >
-                Add to Cart
-              </button>
-              <Button type="like" />
+              />
+              <Button variant="LIKE" />
             </nav>
           </Checkout>
-
-          {/* <Overview></Overview> */}
-
-          {/* <Specs /> */}
-
-          {/* <Reviews></Reviews> */}
+          {/* <Overview></Overview>
+          <Specs></Specs>
+          <Reviews></Reviews> */}
         </div>
-      </div>
+      </main>
       <Footer />
     </>
   );
 }
 
-function Checkout(props) {
+function Checkout({ children }) {
   return (
-    <div className="product__checkout">
-      <div className="product__checkout__content">{props.children}</div>
+    <section className="product__checkout">
+      <div className="product__checkout__content">{children}</div>
       <hr />
-    </div>
+    </section>
   );
 }
 
@@ -109,7 +104,7 @@ function Price() {
   return (
     <div className="product__checkout__pricing">
       <h2 className="product__checkout__pricing__current">
-        {product ? product.price : ""}
+        {product && `$${product.price},00`}
       </h2>
     </div>
   );
@@ -136,7 +131,20 @@ function Colors() {
         </h4>
         <ul>
           {product.colors.map((item, index) => (
-            <Color item={item} index={index} key={index} />
+            <Color
+              item={item}
+              hex={
+                item === "Navy Green"
+                  ? "#386641"
+                  : item === "Blue"
+                  ? "#2A4494"
+                  : item === "Orange"
+                  ? "#F18F01"
+                  : ""
+              }
+              index={index}
+              key={index}
+            />
           ))}
         </ul>
       </div>
@@ -144,7 +152,7 @@ function Colors() {
   }
 }
 
-function Color(props) {
+function Color({ index, hex }) {
   const [{ product, color }, dispatch] = useContext(ProductContext);
 
   return (
@@ -154,11 +162,11 @@ function Color(props) {
         id="color"
         name="color"
         onChange={(e) => {
-          productSetColor(dispatch, product.colors[props.index]);
+          productSetColor(dispatch, product.colors[index]);
         }}
-        checked={color === product.colors[props.index]}
+        checked={color === product.colors[index]}
       />
-      <span style={{ backgroundColor: "#000000" }} />
+      <span style={{ backgroundColor: hex }} />
     </li>
   );
 }
@@ -232,13 +240,13 @@ function Quantity() {
 // Overview
 function Overview(props) {
   return (
-    <div id="overview" className="product__overview">
+    <section id="overview" className="product__overview">
       <div className="product__overview__content">
         <h2 className="product__heading">Overview:</h2>
         {props.children}
       </div>
       <hr />
-    </div>
+    </section>
   );
 }
 
@@ -247,7 +255,7 @@ function Specs() {
   const [{ product }] = useContext(ProductContext);
 
   return (
-    <div id="specification" className="product__specs">
+    <section id="specification" className="product__specs">
       <div className="product__specs__content">
         <h2 className="product__heading">Specification:</h2>
         <ul className="product__specs__list">
@@ -257,7 +265,7 @@ function Specs() {
         </ul>
       </div>
       <hr />
-    </div>
+    </section>
   );
 }
 
@@ -273,11 +281,12 @@ function SpecsItem(props) {
 // Reviews
 function Reviews(props) {
   return (
-    <div id="reviews" className="product__reviews">
+    <section id="reviews" className="product__reviews">
       <div className="product__reviews__content">
         <h2 className="product__heading">Reviews:</h2>
         {props.children}
       </div>
-    </div>
+      <hr />
+    </section>
   );
 }

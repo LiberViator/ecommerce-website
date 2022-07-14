@@ -1,27 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+
+import { CartContext } from "./../contexts/cartContext";
 
 import "./Header.scss";
 
 export default function Header() {
   const [isOpen, setOpen] = useState(false);
+  const [{ cart }] = useContext(CartContext);
 
   return (
     <header className="header">
       <Topbar>
-        <TopbarLogo />
+        <img
+          className="header__topbar__logo"
+          src="./assets/logo.svg"
+          alt="logo"
+        />
         <TopbarMenu>
-          <TopbarItem href="test" text="Polarstjärna" />
-          <TopbarItem href="test" text="Vandringssäng" />
-          <TopbarItem href="test" text="Contact" />
+          <Link className="header__topbar__item" to="/0">
+            <h4>Polarstjärna</h4>
+          </Link>
+          <Link className="header__topbar__item" to="/1">
+            <h4>Vandringssäng</h4>
+          </Link>
         </TopbarMenu>
         <TopbarProfile>
-          <TopbarItem icon="./assets/cart.svg" href="/cart" alt="My Cart" />
-          <TopbarItem
+          <Link className="header__topbar__item" to="/cart">
+            <div className="counter">
+              {cart.length >= 1 ? <span>{cart.length}</span> : ""}
+              <img
+                className="header__topbar__item__icon"
+                src="./assets/cart.svg"
+                alt="My Cart"
+              />
+            </div>
+          </Link>
+          {/* <TopbarItem
             icon="./assets/account.svg"
             href="/account"
             alt="My Account"
-          />
+          /> */}
         </TopbarProfile>
         <Hamburger
           isOpen={isOpen}
@@ -32,99 +51,84 @@ export default function Header() {
       </Topbar>
       <Sidebar isOpen={isOpen}>
         <SidebarMenu>
-          <SidebarItem text="Polarstjärna" href="" />
-          <SidebarItem text="Vandringssäng" href="" />
-          <SidebarItem text="Contact" href="" />
+          <Link className="header__sidebar__item" to="/0">
+            <h4>Polarstjärna</h4>
+          </Link>
+          <Link className="header__sidebar__item" to="/1">
+            <h4>Vandringssäng</h4>
+          </Link>
+          {/* <SidebarItem text="Polarstjärna" to="/0" />
+          <SidebarItem text="Vandringssäng" to="/1" /> */}
         </SidebarMenu>
         <SidebarProfile>
-          <SidebarItem text="Cart" icon="./assets/cart.svg" href="/cart" />
-          <SidebarItem
+          <Link className="header__sidebar__item" to="/cart">
+            <div className="counter">
+              {cart.length >= 1 ? <span>{cart.length}</span> : ""}
+              <img src="./assets/cart.svg" alt="My Cart" />
+            </div>
+
+            <h4>Cart</h4>
+          </Link>
+          {/* <SidebarItem
             text="Account"
             icon="./assets/account.svg"
             href="/account"
-          />
+          /> */}
         </SidebarProfile>
       </Sidebar>
+
+      <aside
+        className={isOpen ? "header__fade header__fade_open" : "header__fade"}
+        onClick={() => setOpen(false)}
+      ></aside>
     </header>
   );
 }
 
-function Topbar(props) {
+function Topbar({ children }) {
   return (
     <div className="header__topbar">
-      <div className="header__topbar__content">{props.children}</div>
+      <div className="header__topbar__content">{children}</div>
     </div>
   );
 }
 
-function TopbarLogo() {
+function TopbarMenu({ children }) {
+  return <ul className="header__topbar__menu">{children}</ul>;
+}
+
+function TopbarProfile({ children }) {
+  return <ul className="header__topbar__profile">{children}</ul>;
+}
+
+function Hamburger({ isOpen, onClick }) {
   return (
-    <img className="header__topbar__logo" src="./assets/logo.svg" alt="logo" />
-  );
-}
-
-function TopbarMenu(props) {
-  return <ul className="header__topbar__menu">{props.children}</ul>;
-}
-
-function TopbarProfile(props) {
-  return <ul className="header__topbar__profile">{props.children}</ul>;
-}
-
-function TopbarItem(props) {
-  return (
-    <Link className="header__topbar__item" to={props.href}>
-      {props.icon ? (
-        <img
-          className="header__topbar__item__icon"
-          src={props.icon}
-          alt={props.alt}
-        />
-      ) : (
-        ""
-      )}
-      {props.text ? props.text : ""}
-    </Link>
-  );
-}
-
-function Hamburger(props) {
-  return (
-    <button className="header__topbar__hamburger" onClick={props.onClick}>
+    <button className="header__topbar__hamburger" onClick={onClick}>
       <img
         className="header__topbar__hamburger__icon"
-        src={props.isOpen ? "./assets/close.svg" : "./assets/menu.svg"}
+        src={isOpen ? "./assets/close.svg" : "./assets/menu.svg"}
         alt="Menu button"
       />
     </button>
   );
 }
 
-function Sidebar(props) {
+function Sidebar({ children, isOpen }) {
   return (
     <aside
-      className={`header__sidebar ${
-        props.isOpen ? "header__sidebar_open" : ""
-      }`}
+      className={
+        isOpen ? "header__sidebar header__sidebar_open" : "header__sidebar"
+      }
     >
-      {props.children}
+      {children}
     </aside>
   );
 }
 
-function SidebarMenu(props) {
-  return <div className="header__sidebar__menu">{props.children}</div>;
+function SidebarMenu({ children }) {
+  return <div className="header__sidebar__menu">{children}</div>;
 }
 
-function SidebarProfile(props) {
-  return <div className="header__sidebar__profile">{props.children}</div>;
-}
-
-function SidebarItem(props) {
-  return (
-    <Link className="header__sidebar__item" to={props.href}>
-      {props.icon ? <img src={props.icon} alt={props.alt} /> : ""}
-      <h4>{props.text}</h4>
-    </Link>
-  );
+function SidebarProfile({ children }) {
+  return <div className="header__sidebar__profile">{children}</div>;
 }

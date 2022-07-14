@@ -46,8 +46,8 @@ export function productGet(dispatch, productId) {
     type: "GET",
     value: {
       product: productData,
-      color: productData.colors[0],
-      size: productData.sizes[0],
+      color: productData.colors ? productData.colors[0] : undefined,
+      size: productData.sizes ? productData.sizes[0] : undefined,
     },
   });
 }
