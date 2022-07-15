@@ -20,11 +20,7 @@ export default function Cart() {
   useEffect(() => {
     catalogGet(
       catalogDispatch,
-      cart.filter((_cartItem) =>
-        cart.find((_sameItem) => _sameItem.productId === _cartItem.productId)
-          ? false
-          : _cartItem.productId
-      )
+      cart.map((_cartItem) => _cartItem.productId)
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
@@ -131,18 +127,6 @@ function Item({ productData, color, size, quantity }) {
 }
 
 function Receipt() {
-  const [catalog] = useContext(CatalogContext);
-  const [{ cart }] = useContext(CartContext);
-
-  if (catalog && cart && cart.length >= 1) {
-    const found = catalog.map((_item) => _item.price);
-
-    console.log(catalog);
-
-    // const sumPrices = getPrices.reduce((total, item) => total + item);
-    // console.log(sumPrices);
-  }
-
   return (
     <section className="cart__receipt">
       <div className="cart__receipt__content">
@@ -167,13 +151,28 @@ function Receipt() {
 }
 
 function Checkout() {
+  const [catalog] = useContext(CatalogContext);
+  const [{ cart }] = useContext(CartContext);
+
+  // const getPrices = cart.map((_cartItem) => {
+  //   const catalogProduct = catalog.find(
+  //     (_catalogItem) => _catalogItem.id === _cartItem.productId
+  //   );
+
+  //   const multipliedPrices = catalogProduct.price * _cartItem.quantity;
+
+  //   return multipliedPrices;
+  // });
+
+  // const sumPrices = getPrices.reduce((total, item) => total + item);
+
   return (
     <section className="cart__checkout">
       <div className="cart__checkout__content">
         <hr />
         <div className="cart__checkout__total">
           <h3>Total</h3>
-          <h3>$119,00</h3>
+          {/* <h3>{`$${sumPrices},00`}</h3> */}
         </div>
         <Button variant="CHECKOUT" />
       </div>
