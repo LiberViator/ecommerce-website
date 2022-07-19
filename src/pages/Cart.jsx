@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { CatalogContext, catalogGet } from "./../contexts/catalogContext";
 import {
@@ -14,16 +14,45 @@ import Button from "../components/Button";
 import "./Cart.scss";
 
 export default function Cart() {
-  const [, catalogDispatch] = useContext(CatalogContext);
+  const [catalog, catalogDispatch] = useContext(CatalogContext);
   const [{ cart }] = useContext(CartContext);
+  const [total, setTotal] = useState(0);
+
+  function getTotal() {
+    const getPrices = cart.map((_cartItem) => {
+      const catalogProduct = catalog.find(
+        (_catalogProduct) => _catalogProduct.id === _cartItem.productId
+      );
+
+      if (!catalogProduct) {
+        return null;
+      }
+
+      const mpyPrices = catalogProduct.price * _cartItem.quantity;
+      return mpyPrices;
+    });
+
+    if (getPrices.length >= 1) {
+      const sumPrices = getPrices.reduce((total, item) => total + item);
+      setTotal(sumPrices);
+    } else {
+      setTotal(0);
+    }
+  }
+
+  function getUniqueProductId() {
+    return [...new Set(cart.map((_cartItem) => _cartItem.productId))];
+  }
 
   useEffect(() => {
-    catalogGet(
-      catalogDispatch,
-      cart.map((_cartItem) => _cartItem.productId)
-    );
+    catalogGet(catalogDispatch, getUniqueProductId());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
+
+  useEffect(() => {
+    getTotal();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cart, catalog]);
 
   return (
     <>
@@ -31,8 +60,8 @@ export default function Cart() {
       <main className="cart">
         <div className="cart__content">
           <CartList />
-          <Receipt />
-          <Checkout />
+          <Receipt total={total} />
+          <Checkout total={total} />
         </div>
       </main>
       <Footer />
@@ -126,7 +155,7 @@ function Item({ productData, color, size, quantity }) {
   );
 }
 
-function Receipt() {
+function Receipt({ total }) {
   return (
     <section className="cart__receipt">
       <div className="cart__receipt__content">
@@ -134,8 +163,7 @@ function Receipt() {
         <hr />
         <div className="cart__receipt__subtotal">
           <h4>Subtotal</h4>
-          <h4>$119,00</h4>
-          {/* <h4>{cart.reduce}</h4> */}
+          <h4>{`$${total},00`}</h4>
         </div>
         <div className="cart__receipt__discount">
           <h4>Discount</h4>
@@ -150,21 +178,9 @@ function Receipt() {
   );
 }
 
-function Checkout() {
+function Checkout({ total }) {
   const [catalog] = useContext(CatalogContext);
   const [{ cart }] = useContext(CartContext);
-
-  // const getPrices = cart.map((_cartItem) => {
-  //   const catalogProduct = catalog.find(
-  //     (_catalogItem) => _catalogItem.id === _cartItem.productId
-  //   );
-
-  //   const multipliedPrices = catalogProduct.price * _cartItem.quantity;
-
-  //   return multipliedPrices;
-  // });
-
-  // const sumPrices = getPrices.reduce((total, item) => total + item);
 
   return (
     <section className="cart__checkout">
@@ -172,7 +188,7 @@ function Checkout() {
         <hr />
         <div className="cart__checkout__total">
           <h3>Total</h3>
-          {/* <h3>{`$${sumPrices},00`}</h3> */}
+          <h3>{`$${total},00`}</h3>
         </div>
         <Button variant="CHECKOUT" />
       </div>
