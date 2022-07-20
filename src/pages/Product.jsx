@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 
 import {
@@ -18,20 +18,22 @@ import Button from "./../components/Button";
 import Divider from "./../components/Divider";
 import Gallery from "./../components/Gallery";
 import Rating from "./../components/Rating";
-import QtyInput from "../components/QtyInput";
+import ColorInp from "../components/ColorInp";
+import SizeInp from "../components/SizeInp";
+import QuantityInp from "../components/QuantityInp";
 
 import "./Product.scss";
 
 export default function Product() {
   const { productLink } = useParams();
-  const [productId] = useState(Number(productLink));
   const [{ product, color, size, quantity }, productDispatch] =
     useContext(ProductContext);
   const [, cartDispatch] = useContext(CartContext);
 
   useEffect(() => {
-    productGet(productDispatch, productId);
-  }, []);
+    productGet(productDispatch, Number(productLink));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [productLink]);
 
   return (
     <>
@@ -89,10 +91,7 @@ function Name() {
 function Ranking() {
   return (
     <div className="product__checkout__ranking">
-      <div>
-        <img src="./assets/star.svg" alt="" />
-        {/* {productRanking ? productRanking : ""} */}
-      </div>
+      <Rating rate={3.7} />
       <a href="#reviews">See 8 reviews</a>
     </div>
   );
@@ -154,20 +153,16 @@ function Colors() {
 
 function Color({ index, hex }) {
   const [{ product, color }, dispatch] = useContext(ProductContext);
+  const handleChange = (e) => {
+    productSetColor(dispatch, product.colors[index]);
+  };
 
   return (
-    <li>
-      <input
-        type="radio"
-        id="color"
-        name="color"
-        onChange={(e) => {
-          productSetColor(dispatch, product.colors[index]);
-        }}
-        checked={color === product.colors[index]}
-      />
-      <span style={{ backgroundColor: hex }} />
-    </li>
+    <ColorInp
+      onChange={handleChange}
+      isChecked={color === product.colors[index]}
+      colorCode={hex}
+    />
   );
 }
 
@@ -190,19 +185,16 @@ function Sizes() {
 
 function Size(props) {
   const [{ product, size }, dispatch] = useContext(ProductContext);
+  const handleChange = (e) => {
+    productSetSize(dispatch, product.sizes[props.index]);
+  };
 
   return (
-    <li>
-      <input
-        type="radio"
-        name="size"
-        onChange={(e) => {
-          productSetSize(dispatch, product.sizes[props.index]);
-        }}
-        checked={size === product.sizes[props.index]}
-      />
-      <span>{product.sizes[props.index]}</span>
-    </li>
+    <SizeInp
+      onChange={handleChange}
+      isChecked={size === product.sizes[props.index]}
+      sizeName={product.sizes[props.index]}
+    />
   );
 }
 
@@ -224,7 +216,7 @@ function Quantity() {
         <label className="product__checkout__title" htmlFor="quantity">
           Quantity:
         </label>
-        <QtyInput
+        <QuantityInp
           variant="PRODUCT"
           value={quantity}
           onIncrease={handleIncrease}
@@ -238,55 +230,55 @@ function Quantity() {
 }
 
 // Overview
-function Overview(props) {
-  return (
-    <section id="overview" className="product__overview">
-      <div className="product__overview__content">
-        <h2 className="product__heading">Overview:</h2>
-        {props.children}
-      </div>
-      <hr />
-    </section>
-  );
-}
+// function Overview(props) {
+//   return (
+//     <section id="overview" className="product__overview">
+//       <div className="product__overview__content">
+//         <h2 className="product__heading">Overview:</h2>
+//         {props.children}
+//       </div>
+//       <hr />
+//     </section>
+//   );
+// }
 
 // Specification
-function Specs() {
-  const [{ product }] = useContext(ProductContext);
+// function Specs() {
+//   const [{ product }] = useContext(ProductContext);
 
-  return (
-    <section id="specification" className="product__specs">
-      <div className="product__specs__content">
-        <h2 className="product__heading">Specification:</h2>
-        <ul className="product__specs__list">
-          {product && product.colors
-            ? product.colors.map((item, index) => <SpecsItem key={index} />)
-            : ""}
-        </ul>
-      </div>
-      <hr />
-    </section>
-  );
-}
+//   return (
+//     <section id="specification" className="product__specs">
+//       <div className="product__specs__content">
+//         <h2 className="product__heading">Specification:</h2>
+//         <ul className="product__specs__list">
+//           {product && product.colors
+//             ? product.colors.map((item, index) => <SpecsItem key={index} />)
+//             : ""}
+//         </ul>
+//       </div>
+//       <hr />
+//     </section>
+//   );
+// }
 
-function SpecsItem(props) {
-  return (
-    <li className="product__specs__list__item">
-      <h4>Weight:</h4>
-      <h3>600g</h3>
-    </li>
-  );
-}
+// function SpecsItem(props) {
+//   return (
+//     <li className="product__specs__list__item">
+//       <h4>Weight:</h4>
+//       <h3>600g</h3>
+//     </li>
+//   );
+// }
 
 // Reviews
-function Reviews(props) {
-  return (
-    <section id="reviews" className="product__reviews">
-      <div className="product__reviews__content">
-        <h2 className="product__heading">Reviews:</h2>
-        {props.children}
-      </div>
-      <hr />
-    </section>
-  );
-}
+// function Reviews(props) {
+//   return (
+//     <section id="reviews" className="product__reviews">
+//       <div className="product__reviews__content">
+//         <h2 className="product__heading">Reviews:</h2>
+//         {props.children}
+//       </div>
+//       <hr />
+//     </section>
+//   );
+// }

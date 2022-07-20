@@ -136,7 +136,7 @@
   background-color: $clr__lightgray;
   grid-area: checkout;
 
-  // z-index: 90;
+  z-index: 90;
 }
 
 .cart__checkout__content {
@@ -175,12 +175,6 @@
     > * > [class*="content"] {
       padding: 0;
     }
-  }
-
-  .cart__list {
-  }
-
-  .cart__list__item {
   }
 
   .cart__list__item__content {

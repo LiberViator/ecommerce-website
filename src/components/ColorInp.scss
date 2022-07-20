@@ -1,0 +1,38 @@
+@import "./../styles.scss";
+
+.color-input {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+}
+
+.color-input input {
+  all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $clr__gray;
+  border-radius: 20px;
+  background-color: $clr__white;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.color-input input:not(:checked):hover {
+  animation: hoverAnimation 0.4s infinite alternate;
+}
+
+.color-input input:checked {
+  border-color: $clr__lightgreen;
+}
+
+.color-input input + span {
+  position: absolute;
+  border-radius: 10px;
+  background-color: $clr__gray;
+  height: 20px;
+  width: 20px;
+  pointer-events: none;
+}

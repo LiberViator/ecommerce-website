@@ -1,4 +1,5 @@
 import { useReducer, createContext } from "react";
+
 import productList from "../db/products";
 
 export const ProductContext = createContext();
@@ -80,10 +81,10 @@ export function productSetQuantity(dispatch, quantity) {
 }
 
 export default function ProductProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [productState, productDispatch] = useReducer(reducer, initialState);
 
   return (
-    <ProductContext.Provider value={[state, dispatch]}>
+    <ProductContext.Provider value={[productState, productDispatch]}>
       {children}
     </ProductContext.Provider>
   );

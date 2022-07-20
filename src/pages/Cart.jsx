@@ -9,7 +9,7 @@ import {
 } from "./../contexts/cartContext";
 import Header from "./../layout/Header";
 import Footer from "./../layout/Footer";
-import QtyInput from "../components/QtyInput";
+import QuantityInp from "../components/QuantityInp";
 import Button from "../components/Button";
 import "./Cart.scss";
 
@@ -141,7 +141,7 @@ function Item({ productData, color, size, quantity }) {
         </div>
         <div className="cart__list__item__price">
           <h3>{`$${productData.price},00`}</h3>
-          <QtyInput
+          <QuantityInp
             variant="CART"
             value={quantity}
             onIncrease={handleIncrease}

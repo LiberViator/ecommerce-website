@@ -1,0 +1,51 @@
+@import "./../styles.scss";
+
+.size-input {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+}
+
+.size-input input {
+  all: unset;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $clr__gray;
+  border-radius: 2px;
+  background-color: $clr__white;
+  height: 32px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.size-input input:not(:checked):hover {
+  animation: hoverAnimation 0.4s infinite alternate;
+}
+
+.size-input input:checked {
+  background-color: $clr__lightgreen;
+  border-color: $clr__lightgreen;
+}
+
+.size-input input:focus-visible {
+  background-color: $clr__white;
+  border-color: $clr__lightgreen;
+  color: black;
+}
+
+.size-input input + span {
+  position: absolute;
+  font-style: normal;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+  pointer-events: none;
+}
+
+.size-input input:not(:focus-visible):checked + span {
+  color: white;
+}

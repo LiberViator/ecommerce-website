@@ -61,12 +61,12 @@
   margin-bottom: 16px;
 }
 
-.product__checkout__ranking div {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 12px;
-}
+// .product__checkout__ranking div {
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   gap: 12px;
+// }
 
 .product__checkout__pricing {
   display: flex;
@@ -110,43 +110,6 @@
   // padding: 4px 0;
 }
 
-.product__checkout__colors ul li {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  list-style-type: none;
-}
-
-input[name="color"] {
-  all: unset;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid $clr__gray;
-  border-radius: 20px;
-  background-color: $clr__white;
-  padding: 15px;
-  cursor: pointer;
-}
-
-input[name="color"]:not(:checked):hover {
-  animation: hoverAnimation 0.4s infinite alternate;
-}
-
-input[name="color"]:checked {
-  border-color: $clr__lightgreen;
-}
-
-input[name="color"] + span {
-  position: absolute;
-  border-radius: 10px;
-  background-color: $clr__gray;
-  height: 20px;
-  width: 20px;
-  pointer-events: none;
-}
-
 .product__checkout__sizes {
   display: flex;
   flex-direction: column;
@@ -160,50 +123,6 @@ input[name="color"] + span {
   grid-template-rows: repeat(32px);
   width: 100%;
   gap: 12px;
-}
-
-.product__checkout__sizes ul li {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  list-style-type: none;
-}
-
-input[name="size"] {
-  all: unset;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid $clr__gray;
-  border-radius: 2px;
-  background-color: $clr__white;
-  height: 32px;
-  width: 100%;
-  cursor: pointer;
-}
-
-input[name="size"]:not(:checked):hover {
-  animation: hoverAnimation 0.4s infinite alternate;
-}
-
-input[name="size"]:checked {
-  background-color: $clr__lightgreen;
-  border-color: $clr__lightgreen;
-}
-
-input[name="size"] + span {
-  position: absolute;
-  font-style: normal;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  font-weight: 400;
-  pointer-events: none;
-}
-
-input[name="size"]:checked + span {
-  color: white;
 }
 
 .product__checkout__content > hr {

@@ -1,6 +1,6 @@
-import "./QtyInput.scss";
+import "./QuantityInp.scss";
 
-export default function QtyInput({
+export default function QuantityInp({
   variant,
   value,
   onIncrease,

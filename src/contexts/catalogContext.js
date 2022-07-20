@@ -26,10 +26,10 @@ export function catalogGet(dispatch, productId) {
 }
 
 export default function CatalogProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [catalogState, catalogDispatch] = useReducer(reducer, initialState);
 
   return (
-    <CatalogContext.Provider value={[state, dispatch]}>
+    <CatalogContext.Provider value={[catalogState, catalogDispatch]}>
       {children}
     </CatalogContext.Provider>
   );

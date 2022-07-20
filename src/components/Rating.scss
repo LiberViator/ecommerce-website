@@ -1,0 +1,15 @@
+@import "./../styles.scss";
+
+.rating {
+  background-color: $clr__gray;
+  height: 24px;
+  min-width: 112px;
+  mask-image: url(./../../public/assets/rating.svg);
+}
+
+.rating span {
+  display: block;
+  background-color: $clr__lightgreen;
+  min-height: 100%;
+  width: 100%;
+}

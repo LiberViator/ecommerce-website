@@ -139,16 +139,16 @@ export function cartCheckout() {
 }
 
 export default function CartProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [cartState, cartDispatch] = useReducer(reducer, initialState);
 
-  window.addEventListener("beforeunload", () => cartUpload(dispatch));
+  window.addEventListener("beforeunload", () => cartUpload(cartDispatch));
 
   useEffect(() => {
-    cartGet(dispatch);
+    cartGet(cartDispatch);
   }, []);
 
   return (
-    <CartContext.Provider value={[state, dispatch]}>
+    <CartContext.Provider value={[cartState, cartDispatch]}>
       {children}
     </CartContext.Provider>
   );

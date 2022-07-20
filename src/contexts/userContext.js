@@ -99,10 +99,10 @@ export function userUpdate(dispatch) {
 }
 
 export default function UserProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [userState, userDispatch] = useReducer(reducer, initialState);
 
   return (
-    <UserContext.Provider value={[state, dispatch]}>
+    <UserContext.Provider value={[userState, userDispatch]}>
       {children}
     </UserContext.Provider>
   );

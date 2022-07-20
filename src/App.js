@@ -19,19 +19,14 @@ export default function App() {
         <UserProvider>
           <CatalogProvider>
             <CartProvider>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route
-                  path="/:productLink"
-                  element={
-                    <ProductProvider>
-                      <Product />
-                    </ProductProvider>
-                  }
-                />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="*" element={<NoPage />} />
-              </Routes>
+              <ProductProvider>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/:productLink" element={<Product />} />
+                  <Route path="/cart" element={<Cart />} />
+                  <Route path="*" element={<NoPage />} />
+                </Routes>
+              </ProductProvider>
             </CartProvider>
           </CatalogProvider>
         </UserProvider>
