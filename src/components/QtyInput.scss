@@ -1,31 +1,41 @@
 @import "./../styles.scss";
 
 .quantity {
-  height: 32px;
-  max-width: 96px;
-
+  position: relative;
   display: flex;
   flex-direction: row;
-  gap: 0;
-
-  border: 1px solid $clr__gray;
-  border-radius: 16px;
-  background-color: $clr__white;
-
+  justify-content: space-between;
+  height: 32px;
+  width: 96px;
   overflow: hidden;
 }
 
 .quantity button {
+  z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 32px;
   flex-shrink: 0;
+  border-radius: 16px;
+  height: 32px;
+  width: 32px;
+}
+
+.quantity button:focus-visible {
+  border: 1px solid $clr__lightgreen;
+  height: 30px;
+  width: 30px;
 }
 
 .quantity input {
   all: unset;
-  width: 100%;
+  z-index: 1;
+  position: absolute;
+  border: 1px solid $clr__gray;
+  border-radius: 16px;
+  background-color: $clr__white;
+  height: calc(100% - 2px);
+  width: calc(100% - 2px);
   font-style: normal;
   font-size: 1rem;
   line-height: 1.5rem;
@@ -35,11 +45,11 @@
   text-align: center;
 }
 
-.quantity:not(:focus-within):hover {
+.quantity:hover > input:not(:focus) {
   animation: hoverAnimation 0.4s infinite alternate;
 }
 
-.quantity:focus-within {
+.quantity input:focus {
   border: 1px solid $clr__lightgreen;
 }
 
