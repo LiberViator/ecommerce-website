@@ -11,7 +11,7 @@ function reducer(state, { type, value }) {
       const getItem = JSON.parse(localStorage.getItem("cart"));
 
       if (!getItem) {
-        localStorage.setItem("cart", []);
+        localStorage.setItem("cart", JSON.stringify([]));
       } else {
         return { ...state, cart: getItem };
       }

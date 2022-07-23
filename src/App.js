@@ -21,9 +21,9 @@ export default function App() {
             <CartProvider>
               <ProductProvider>
                 <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/:productLink" element={<Product />} />
-                  <Route path="/cart" element={<Cart />} />
+                  <Route exact path="/" element={<Home />} />
+                  <Route exact path="/:productLink" element={<Product />} />
+                  <Route exact path="/cart" element={<Cart />} />
                   <Route path="*" element={<NoPage />} />
                 </Routes>
               </ProductProvider>
