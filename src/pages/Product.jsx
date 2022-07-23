@@ -119,8 +119,10 @@ function Description() {
 }
 
 function Colors() {
-  const [{ product, color }] = useContext(ProductContext);
-
+  const [{ product, color }, dispatch] = useContext(ProductContext);
+  const handleChange = (index) => {
+    productSetColor(dispatch, product.colors[index]);
+  };
   if (product && product.colors.length > 1) {
     return (
       <div className="product__checkout__colors">
@@ -129,9 +131,10 @@ function Colors() {
         </h4>
         <ul>
           {product.colors.map((item, index) => (
-            <Color
-              item={item}
-              hex={
+            <ColorInp
+              onChange={() => handleChange(index)}
+              isChecked={color === product.colors[index]}
+              colorCode={
                 item === "Navy Green"
                   ? "#386641"
                   : item === "Blue"
@@ -140,7 +143,6 @@ function Colors() {
                   ? "#F18F01"
                   : ""
               }
-              index={index}
               key={index}
             />
           ))}
@@ -150,23 +152,12 @@ function Colors() {
   }
 }
 
-function Color({ index, hex }) {
-  const [{ product, color }, dispatch] = useContext(ProductContext);
-  const handleChange = (e) => {
-    productSetColor(dispatch, product.colors[index]);
-  };
-
-  return (
-    <ColorInp
-      onChange={handleChange}
-      isChecked={color === product.colors[index]}
-      colorCode={hex}
-    />
-  );
-}
-
 function Sizes() {
-  const [{ product }] = useContext(ProductContext);
+  const [{ product, size }, dispatch] = useContext(ProductContext);
+
+  const handleChange = (index) => {
+    productSetSize(dispatch, product.sizes[index]);
+  };
 
   if (product && product.colors.length > 1) {
     return (
@@ -174,27 +165,17 @@ function Sizes() {
         <h4 className="product__checkout__title">Size</h4>
         <ul>
           {product.sizes.map((item, index) => (
-            <Size item={item} index={index} key={index} />
+            <SizeInp
+              onChange={() => handleChange(index)}
+              isChecked={size === product.sizes[index]}
+              sizeName={product.sizes[index]}
+              key={index}
+            />
           ))}
         </ul>
       </div>
     );
   }
-}
-
-function Size(props) {
-  const [{ product, size }, dispatch] = useContext(ProductContext);
-  const handleChange = (e) => {
-    productSetSize(dispatch, product.sizes[props.index]);
-  };
-
-  return (
-    <SizeInp
-      onChange={handleChange}
-      isChecked={size === product.sizes[props.index]}
-      sizeName={product.sizes[props.index]}
-    />
-  );
 }
 
 function Quantity() {

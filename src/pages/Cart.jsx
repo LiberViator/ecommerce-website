@@ -179,9 +179,6 @@ function Receipt({ total }) {
 }
 
 function Checkout({ total }) {
-  const [catalog] = useContext(CatalogContext);
-  const [{ cart }] = useContext(CartContext);
-
   return (
     <section className="cart__checkout">
       <div className="cart__checkout__content">

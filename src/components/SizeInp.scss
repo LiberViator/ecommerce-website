@@ -19,11 +19,8 @@
   background-color: $clr__white;
   height: 32px;
   width: 100%;
+  color: $clr__black;
   cursor: pointer;
-}
-
-.size-input input:not(:checked):hover {
-  animation: hoverAnimation 0.4s infinite alternate;
 }
 
 .size-input input:checked {
@@ -31,11 +28,15 @@
   border-color: $clr__lightgreen;
 }
 
-.size-input input:focus-visible {
-  background-color: $clr__white;
-  border-color: $clr__lightgreen;
-  color: black;
+.size-input input:not(:checked):hover {
+  animation: hoverAnimation 0.4s infinite alternate;
 }
+
+// .size-input input:focus-visible {
+//   background-color: $clr__white;
+//   border-color: $clr__lightgreen;
+//   color: $clr__black;
+// }
 
 .size-input input + span {
   position: absolute;
@@ -46,6 +47,6 @@
   pointer-events: none;
 }
 
-.size-input input:not(:focus-visible):checked + span {
-  color: white;
+.size-input input:checked + span {
+  color: $clr__white !important;
 }

@@ -4,12 +4,11 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  height: auto;
   width: 100%;
   overflow: hidden;
   gap: 8px;
   grid-area: gallery;
-  touch-action: pan-y;
+  touch-action: none;
 }
 
 .gallery__preview {
