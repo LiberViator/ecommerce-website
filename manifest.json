@@ -2,7 +2,7 @@
   "short_name": "React App",
   "name": "Create React App Sample",
   "icons": [],
-  "start_url": ".",
+  "start_url": "https://liberviator.github.io/ecommerce-website/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
