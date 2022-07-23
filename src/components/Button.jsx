@@ -14,7 +14,7 @@ export default function Button({ variant, onClick }) {
     case "LIKE": {
       return (
         <button className="button button_like">
-          <img src="./assets/heart.svg" alt="Like this product" />
+          <img src="assets/heart.svg" alt="Like this product" />
         </button>
       );
     }
