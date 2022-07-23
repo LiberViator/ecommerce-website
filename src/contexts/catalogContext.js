@@ -1,5 +1,5 @@
 import { useReducer, createContext } from "react";
-import productList from "../db/products";
+import productList from "db/products";
 
 export const CatalogContext = createContext();
 

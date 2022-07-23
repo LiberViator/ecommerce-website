@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import Divider from "./../components/Divider";
-
 import "./Footer.scss";
 
 export default function Footer() {
@@ -10,7 +8,7 @@ export default function Footer() {
       <Navigation>
         <Contact>
           <img
-            src="./assets/logo.svg"
+            src="assets/logo.svg"
             alt="logo"
             className="footer__nav__contact__logo"
           />
@@ -21,18 +19,18 @@ export default function Footer() {
           </h4>
           <h4 className="footer__nav__contact__item">+62 361 419 288</h4>
           <nav className="footer__nav__contact__item">
-            <img src="./assets/instagram.svg" alt="instagram link" />
-            <img src="./assets/facebook.svg" alt="facebook link" />
+            <img src="assets/instagram.svg" alt="instagram link" />
+            <img src="assets/facebook.svg" alt="facebook link" />
           </nav>
         </Contact>
-        <Divider />
+        <hr />
         <Accordion text="Services">
           <AccordionItem text="Returns & Exchanges" link="" />
           <AccordionItem text="Shipping Info" link="" />
           <AccordionItem text="Tracking Order" link="" />
           <AccordionItem text="Order status" link="" />
         </Accordion>
-        <Divider />
+        <hr />
         <Accordion text="Info">
           <AccordionItem text="About Us" link="" />
           <AccordionItem text="Privacy Policy" link="" />
@@ -82,7 +80,7 @@ function Accordion(props) {
         <h3 className="footer__nav__accordion__button__text">{props.text}</h3>
         <img
           className="footer__nav__accordion__button__icon"
-          src={isOpen ? "./assets/hide.svg" : "./assets/show.svg"}
+          src={isOpen ? "assets/hide.svg" : "assets/show.svg"}
           alt=""
         />
       </button>

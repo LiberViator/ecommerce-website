@@ -7,20 +7,19 @@ import {
   productSetColor,
   productSetSize,
   productSetQuantity,
-} from "./../contexts/productContext";
+} from "contexts/productContext";
 
-import { CartContext, cartAdd } from "./../contexts/cartContext";
+import { CartContext, cartAdd } from "contexts/cartContext";
 
-import Header from "./../layout/Header";
-import Footer from "./../layout/Footer";
+import Header from "layout/Header";
+import Footer from "layout/Footer";
 
-import Button from "./../components/Button";
-import Divider from "./../components/Divider";
-import Gallery from "./../components/Gallery";
-import Rating from "./../components/Rating";
-import ColorInp from "../components/ColorInp";
-import SizeInp from "../components/SizeInp";
-import QuantityInp from "../components/QuantityInp";
+import Button from "components/Button";
+import Gallery from "components/Gallery";
+import Rating from "components/Rating";
+import ColorInp from "components/ColorInp";
+import SizeInp from "components/SizeInp";
+import QuantityInp from "components/QuantityInp";
 
 import "./Product.scss";
 
@@ -46,10 +45,10 @@ export default function Product() {
             <Ranking />
             <Price />
             <Description />
-            <Divider />
+            <hr />
             <Colors />
             <Sizes />
-            <Divider />
+            <hr />
             <Quantity />
             <nav className="product__checkout__nav">
               <Button

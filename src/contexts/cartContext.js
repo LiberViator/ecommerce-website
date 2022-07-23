@@ -1,5 +1,5 @@
 import { useEffect, useReducer, createContext } from "react";
-import cartList from "../db/carts";
+import cartList from "db/carts";
 
 export const CartContext = createContext();
 

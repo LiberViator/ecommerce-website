@@ -1,5 +1,5 @@
 import { useReducer, createContext } from "react";
-import userList from "../db/users";
+import userList from "db/users";
 
 export const UserContext = createContext();
 

@@ -1,16 +1,16 @@
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { CatalogContext, catalogGet } from "./../contexts/catalogContext";
+import { CatalogContext, catalogGet } from "contexts/catalogContext";
 import {
   CartContext,
   cartAdd,
   cartRemove,
   cartSet,
-} from "./../contexts/cartContext";
-import Header from "./../layout/Header";
-import Footer from "./../layout/Footer";
-import QuantityInp from "../components/QuantityInp";
-import Button from "../components/Button";
+} from "contexts/cartContext";
+import Header from "layout/Header";
+import Footer from "layout/Footer";
+import QuantityInp from "components/QuantityInp";
+import Button from "components/Button";
 import "./Cart.scss";
 
 export default function Cart() {

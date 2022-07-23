@@ -7,7 +7,7 @@ import {
   userCreate,
   userRemove,
   userUpdate,
-} from "./../contexts/userContext";
+} from "contexts/userContext";
 
 export default function Home() {
   // const { id, name } = useContext(UserContext);

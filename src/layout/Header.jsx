@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
-import { CartContext } from "./../contexts/cartContext";
+import { CartContext } from "contexts/cartContext";
 
 import "./Header.scss";
 
@@ -14,7 +14,7 @@ export default function Header() {
       <Topbar>
         <img
           className="header__topbar__logo"
-          src="./assets/logo.svg"
+          src="assets/logo.svg"
           alt="logo"
         />
         <TopbarMenu>
@@ -31,7 +31,7 @@ export default function Header() {
               {cart.length >= 1 ? <span>{cart.length}</span> : ""}
               <img
                 className="header__topbar__item__icon"
-                src="./assets/cart.svg"
+                src="assets/cart.svg"
                 alt="My Cart"
               />
             </div>
@@ -64,7 +64,7 @@ export default function Header() {
           <Link className="header__sidebar__item" to="/cart">
             <div className="counter">
               {cart.length >= 1 ? <span>{cart.length}</span> : ""}
-              <img src="./assets/cart.svg" alt="My Cart" />
+              <img src="assets/cart.svg" alt="My Cart" />
             </div>
 
             <h4>Cart</h4>
@@ -106,7 +106,7 @@ function Hamburger({ isOpen, onClick }) {
     <button className="header__topbar__hamburger" onClick={onClick}>
       <img
         className="header__topbar__hamburger__icon"
-        src={isOpen ? "./assets/close.svg" : "./assets/menu.svg"}
+        src={isOpen ? "assets/close.svg" : "assets/menu.svg"}
         alt="Menu button"
       />
     </button>
