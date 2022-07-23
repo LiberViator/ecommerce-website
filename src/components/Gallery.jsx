@@ -34,22 +34,24 @@ function Preview({ product, imageIndex, setImageIndex, imageQuantity }) {
   const [finishPos, setFinishPos] = useState(undefined);
   const therehold = 48;
 
-  function touchStart(e) {
+  const handleTouchStart = (e) => {
+    e.preventDefault();
     setIsDragging(true);
     setStartPos(e.clientX);
-  }
+  };
 
-  function touchMove(e) {
+  const handleTouchMove = (e) => {
     if (isDragging) {
+      e.preventDefault();
       setStyle({
         left: `calc(${e.clientX - startPos}px + -100% * ${imageIndex})`,
         transition: "none",
       });
       setFinishPos(e.clientX);
     }
-  }
+  };
 
-  function touchEnd() {
+  const handleTouchEnd = (e) => {
     if (
       isDragging &&
       finishPos < startPos - therehold &&
@@ -70,7 +72,7 @@ function Preview({ product, imageIndex, setImageIndex, imageQuantity }) {
     setStartPos(undefined);
     setFinishPos(undefined);
     setIsDragging(false);
-  }
+  };
 
   useEffect(() => {
     setStyle({ left: `calc(-100% * ${imageIndex})` });
@@ -81,10 +83,10 @@ function Preview({ product, imageIndex, setImageIndex, imageQuantity }) {
       <div
         className="gallery__preview__content"
         style={style}
-        onPointerDown={touchStart}
-        onPointerMove={touchMove}
-        onPointerUp={touchEnd}
-        onPointerLeave={touchEnd}
+        onPointerDown={(e) => handleTouchStart(e)}
+        onPointerMove={(e) => handleTouchMove(e)}
+        onPointerUp={(e) => handleTouchEnd(e)}
+        onPointerLeave={(e) => handleTouchEnd(e)}
       >
         {product.images.map((image, index) => (
           <PreviewImage src={image} key={index} />
@@ -106,8 +108,6 @@ function PreviewImage({ src }) {
 }
 
 function List({ product, imageIndex, setImageIndex, imageQuantity }) {
-  const [style, setStyle] = useState({});
-
   return (
     <div className="gallery__list">
       <div
