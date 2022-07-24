@@ -1,4 +1,4 @@
-import { useReducer, createContext } from "react";
+import { useReducer, createContext, useEffect } from "react";
 import userList from "db/users";
 
 export const UserContext = createContext();
@@ -100,6 +100,7 @@ export function userUpdate(dispatch) {
 
 export default function UserProvider({ children }) {
   const [userState, userDispatch] = useReducer(reducer, initialState);
+  useEffect(() => {}, []);
 
   return (
     <UserContext.Provider value={[userState, userDispatch]}>

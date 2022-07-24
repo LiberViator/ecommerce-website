@@ -81,8 +81,10 @@ function CartList() {
         {cart &&
           catalog &&
           cart.map((_cartItem, index) => {
-            const productData = catalog.find((_product) =>
-              _product.id === _cartItem.productId ? _product : false
+            const productData = catalog.find((_catalogProduct) =>
+              _catalogProduct.id === _cartItem.productId
+                ? _catalogProduct
+                : false
             );
 
             if (!productData) {
@@ -133,7 +135,7 @@ function Item({ productData, color, size, quantity }) {
 
         <div className="cart__list__item__details">
           <h4>
-            Color: <span>{color}</span>
+            Color: <span>{color.name}</span>
           </h4>
           <h4>
             Size: <span>{size}</span>

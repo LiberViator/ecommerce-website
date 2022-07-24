@@ -33,7 +33,7 @@ function reducer(state, { type, value }) {
     case "QUANTITY":
       return {
         ...state,
-        quantity: value.quantity,
+        quantity: value.quantity < 1 ? 1 : value.quantity,
       };
     default:
       return state;

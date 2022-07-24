@@ -57,7 +57,7 @@ export default function Product() {
                   cartAdd(cartDispatch, product.id, color, size, quantity)
                 }
               />
-              <Button variant="LIKE" />
+              {/* <Button variant="LIKE" /> */}
             </nav>
           </Checkout>
           {/* <Overview></Overview>
@@ -127,23 +127,15 @@ function Colors() {
     return (
       <div className="product__checkout__colors">
         <h4 className="product__checkout__title">
-          Color: <span>{color}</span>
+          Color: <span>{color.name}</span>
         </h4>
         <ul>
-          {product.colors.map((item, index) => (
+          {product.colors.map((_color, index) => (
             <ColorInp
               onChange={() => handleChange(index)}
-              isChecked={color === product.colors[index]}
-              colorCode={
-                item === "Navy Green"
-                  ? "#386641"
-                  : item === "Blue"
-                  ? "#2A4494"
-                  : item === "Orange"
-                  ? "#F18F01"
-                  : ""
-              }
-              key={index}
+              isChecked={color === product.colors[_color.id]}
+              colorCode={_color.code}
+              key={_color.id}
             />
           ))}
         </ul>
@@ -179,7 +171,7 @@ function Sizes() {
 }
 
 function Quantity() {
-  const [{ quantity }, dispatch] = useContext(ProductContext);
+  const [{ product, quantity }, dispatch] = useContext(ProductContext);
   const handleIncrease = (e) => {
     e.preventDefault();
     productSetQuantity(dispatch, quantity + 1);
@@ -204,7 +196,9 @@ function Quantity() {
           onSet={handleSet}
         />
       </div>
-      <h4 className="product__checkout__title">In Stock</h4>
+      <h4 className="product__checkout__title">
+        {product && quantity >= product.stock ? "Out of Stock" : "In Stock"}
+      </h4>
     </div>
   );
 }

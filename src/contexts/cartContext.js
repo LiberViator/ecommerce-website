@@ -26,10 +26,10 @@ function reducer(state, { type, value }) {
           object.size === value.size
       );
 
-      const newState = state.cart.map((object) =>
-        object === isSame
-          ? { ...object, quantity: (object.quantity += value.quantity) }
-          : object
+      const newState = state.cart.map((_object) =>
+        _object === isSame
+          ? { ..._object, quantity: (_object.quantity += value.quantity) }
+          : _object
       );
 
       if (isSame) {
@@ -41,19 +41,19 @@ function reducer(state, { type, value }) {
 
     case "REMOVE": {
       const isSame = state.cart.find(
-        (object) =>
-          object.productId === value.productId &&
-          object.color === value.color &&
-          object.size === value.size
+        (_object) =>
+          _object.productId === value.productId &&
+          _object.color === value.color &&
+          _object.size === value.size
       );
 
-      const newState = state.cart.filter((object) =>
-        object !== isSame
-          ? object
-          : object.quantity > 1
+      const newState = state.cart.filter((_object) =>
+        _object !== isSame
+          ? _object
+          : _object.quantity > 1
           ? {
-              ...object,
-              quantity: (object.quantity -= 1),
+              ..._object,
+              quantity: (_object.quantity -= 1),
             }
           : null
       );
@@ -63,16 +63,16 @@ function reducer(state, { type, value }) {
 
     case "SET": {
       const isSame = state.cart.find(
-        (object) =>
-          object.productId === value.productId &&
-          object.color === value.color &&
-          object.size === value.size
+        (_object) =>
+          _object.productId === value.productId &&
+          _object.color === value.color &&
+          _object.size === value.size
       );
 
-      const newState = state.cart.map((object) =>
-        object === isSame && value.quantity >= 1
-          ? { ...object, quantity: value.quantity }
-          : object
+      const newState = state.cart.map((_object) =>
+        _object === isSame && value.quantity >= 1
+          ? { ..._object, quantity: value.quantity }
+          : _object
       );
 
       return { ...state, cart: newState, doUpload: true };
@@ -82,6 +82,19 @@ function reducer(state, { type, value }) {
       if (state.doUpload) {
         localStorage.setItem("cart", JSON.stringify(state.cart));
         return { ...state, cart: state.cart, doUpload: false };
+      }
+      break;
+    }
+
+    case "CLEAR": {
+      const getSession = sessionStorage.getItem("isFitstVisit");
+
+      if (!getSession) {
+        sessionStorage.setItem("isFitstVisit", JSON.stringify(true));
+        localStorage.clear();
+      } else {
+        sessionStorage.setItem("isFitstVisit", JSON.stringify(false));
+        return;
       }
       break;
     }
@@ -134,6 +147,12 @@ export function cartSet(dispatch, productId, color, size, quantity) {
   });
 }
 
+export function cartClear(dispatch) {
+  return dispatch({
+    type: "CLEAR",
+  });
+}
+
 export function cartCheckout() {
   console.log("Checkout");
 }
@@ -144,6 +163,7 @@ export default function CartProvider({ children }) {
   window.addEventListener("beforeunload", () => cartUpload(cartDispatch));
 
   useEffect(() => {
+    cartClear(cartDispatch);
     cartGet(cartDispatch);
   }, []);
 
