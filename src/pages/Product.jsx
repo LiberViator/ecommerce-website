@@ -126,14 +126,13 @@ function Colors() {
   if (product && product.colors.length > 1) {
     return (
       <div className="product__checkout__colors">
-        <h4 className="product__checkout__title">
-          Color: <span>{color.name}</span>
-        </h4>
+        <h4 className="product__checkout__title">Color</h4>
         <ul>
           {product.colors.map((_color, index) => (
             <ColorInp
               onChange={() => handleChange(index)}
               isChecked={color === product.colors[_color.id]}
+              colorName={_color.name}
               colorCode={_color.code}
               key={_color.id}
             />

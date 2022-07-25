@@ -3,21 +3,22 @@
 .color-input {
   position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
+  border-radius: 2px;
+  background-color: $clr__gray;
+  min-height: 32px;
+  width: 100%;
+  flex-grow: 1;
+  overflow: hidden;
   list-style-type: none;
+  cursor: pointer;
 }
 
 .color-input input {
   all: unset;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid $clr__gray;
-  border-radius: 20px;
-  background-color: $clr__white;
-  padding: 15px;
-  cursor: pointer;
+  flex-shrink: 0;
+  margin-right: 1px;
+  width: 32px;
 }
 
 .color-input input:not(:checked):hover {
@@ -28,11 +29,10 @@
   border-color: $clr__lightgreen;
 }
 
-.color-input input + span {
-  position: absolute;
-  border-radius: 10px;
+.color-input span {
+  flex-grow: 1;
+  border: 1px solid $clr__gray;
   background-color: $clr__gray;
-  height: 20px;
-  width: 20px;
-  pointer-events: none;
+  background-color: $clr__white;
+  padding: 0 8px;
 }

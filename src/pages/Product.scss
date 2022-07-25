@@ -91,23 +91,15 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
-  width: 100%;
   gap: 12px;
-}
-
-.product__checkout__colors span {
-  font-style: normal;
-  font-size: 1rem;
-  font-weight: 500;
-  color: $clr__black;
 }
 
 .product__checkout__colors ul {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 3fr));
+  grid-template-rows: repeat(minmax(32px, auto));
   width: 100%;
   gap: 12px;
-  // padding: 4px 0;
 }
 
 .product__checkout__sizes {
@@ -120,7 +112,7 @@
 .product__checkout__sizes ul {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 3fr));
-  grid-template-rows: repeat(32px);
+  grid-template-rows: repeat(minmax(32px, auto));
   width: 100%;
   gap: 12px;
 }

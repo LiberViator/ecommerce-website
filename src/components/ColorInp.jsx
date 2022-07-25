@@ -1,6 +1,11 @@
 import "./ColorInp.scss";
 
-export default function ColorInp({ onChange, isChecked, colorCode }) {
+export default function ColorInp({
+  onChange,
+  isChecked,
+  colorName,
+  colorCode,
+}) {
   return (
     <li className="color-input">
       <input
@@ -8,8 +13,9 @@ export default function ColorInp({ onChange, isChecked, colorCode }) {
         name="color"
         onChange={onChange}
         checked={isChecked}
+        style={{ backgroundColor: colorCode }}
       />
-      <span style={{ backgroundColor: colorCode }} />
+      <span>{colorName}</span>
     </li>
   );
 }

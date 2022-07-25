@@ -10,6 +10,7 @@ const productList = [
       { id: 0, name: "Navy Green", code: "#386641" },
       { id: 1, name: "Blue", code: "#2A4494" },
       { id: 2, name: "Orange", code: "#F18F01" },
+      { id: 3, name: "Orange", code: "#F18F01" },
     ],
     sizes: ["Small", "Medium", "Large"],
     images: [
