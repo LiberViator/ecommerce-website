@@ -58,15 +58,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 16px;
 }
-
-// .product__checkout__ranking div {
-//   display: flex;
-//   flex-direction: row;
-//   align-items: center;
-//   gap: 12px;
-// }
 
 .product__checkout__pricing {
   display: flex;

@@ -1,5 +1,7 @@
-import { useState, useEffect, useContext } from "react";
+// Imports
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 import { CatalogContext, catalogGet } from "contexts/catalogContext";
 import {
   CartContext,
@@ -7,12 +9,16 @@ import {
   cartRemove,
   cartSet,
 } from "contexts/cartContext";
-import Header from "layout/Header";
+
 import Footer from "layout/Footer";
-import QuantityInp from "components/QuantityInp";
+import Header from "layout/Header";
+
 import Button from "components/Button";
+import QuantityInp from "components/QuantityInp";
+
 import "./Cart.scss";
 
+// Main component
 export default function Cart() {
   const [catalog, catalogDispatch] = useContext(CatalogContext);
   const [{ cart }] = useContext(CartContext);
@@ -138,7 +144,7 @@ function Item({ productData, color, size, quantity }) {
             Color: <span>{color.name}</span>
           </h4>
           <h4>
-            Size: <span>{size}</span>
+            Size: <span>{size.name}</span>
           </h4>
         </div>
         <div className="cart__list__item__price">

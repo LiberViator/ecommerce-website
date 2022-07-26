@@ -1,28 +1,30 @@
-import { useEffect, useContext } from "react";
+// Imports
+import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import {
   ProductContext,
   productGet,
   productSetColor,
-  productSetSize,
   productSetQuantity,
+  productSetSize,
 } from "contexts/productContext";
 
 import { CartContext, cartAdd } from "contexts/cartContext";
 
-import Header from "layout/Header";
 import Footer from "layout/Footer";
+import Header from "layout/Header";
 
 import Button from "components/Button";
-import Gallery from "components/Gallery";
-import Rating from "components/Rating";
 import ColorInp from "components/ColorInp";
-import SizeInp from "components/SizeInp";
+import Gallery from "components/Gallery";
 import QuantityInp from "components/QuantityInp";
+import Rating from "components/Rating";
+import SizeInp from "components/SizeInp";
 
 import "./Product.scss";
 
+// Main component
 export default function Product() {
   const { productLink } = useParams();
   const [{ product, color, size, quantity }, productDispatch] =
@@ -91,7 +93,7 @@ function Ranking() {
   return (
     <div className="product__checkout__ranking">
       <Rating rate={3.7} />
-      <a href="#reviews">See 8 reviews</a>
+      <h4>See 8 reviews</h4>
     </div>
   );
 }
@@ -157,9 +159,9 @@ function Sizes() {
         <ul>
           {product.sizes.map((item, index) => (
             <SizeInp
-              onChange={() => handleChange(index)}
-              isChecked={size === product.sizes[index]}
-              sizeName={product.sizes[index]}
+              onClick={() => handleChange(index)}
+              isChecked={size === item}
+              sizeName={item.name}
               key={index}
             />
           ))}

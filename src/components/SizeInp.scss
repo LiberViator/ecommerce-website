@@ -1,7 +1,6 @@
 @import "styles.scss";
 
 .size-input {
-  all: unset;
   position: relative;
   display: flex;
   justify-content: center;
@@ -12,47 +11,17 @@
   cursor: pointer;
   min-height: 32px;
   width: 100%;
-}
-
-.size-input::before {
-  all: unset;
-  position: relative;
-  display: flex;
-  flex-grow: 1;
-  justify-content: center;
-  align-items: center;
   border: 1px solid $clr__gray;
   background-color: $clr__white;
-  width: 100%;
-  height: max-content;
   color: $clr__black;
 }
 
-.size-input:checked {
+.size-input_checked {
   background-color: $clr__lightgreen;
   border-color: $clr__lightgreen;
+  color: $clr__white;
 }
 
-.size-input:not(:checked):hover {
+.size-input:not([class*="size-input_checked"]):hover {
   animation: hoverAnimation 0.4s infinite alternate;
-}
-
-// .size-input input:focus-visible {
-//   background-color: $clr__white;
-//   border-color: $clr__lightgreen;
-//   color: $clr__black;
-// }
-
-.size-input:: {
-  display: flex;
-  position: absolute;
-  font-style: normal;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  font-weight: 400;
-  pointer-events: none;
-}
-
-.size-input input:checked + span {
-  color: $clr__white !important;
 }

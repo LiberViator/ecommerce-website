@@ -7,7 +7,7 @@ export default function ColorInp({
   colorCode,
 }) {
   return (
-    <li className="color-input">
+    <div className="color-input">
       <input
         type="radio"
         name="color"
@@ -16,6 +16,6 @@ export default function ColorInp({
         style={{ backgroundColor: colorCode }}
       />
       <span>{colorName}</span>
-    </li>
+    </div>
   );
 }

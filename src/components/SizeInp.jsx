@@ -1,13 +1,12 @@
 import "./SizeInp.scss";
 
-export default function SizeInp({ onChange, isChecked, sizeName }) {
+export default function SizeInp({ onClick, isChecked, sizeName }) {
   return (
-    <input
-      className="size-input"
-      type="radio"
-      name="size"
-      onChange={onChange}
-      checked={isChecked}
-    />
+    <button
+      className={isChecked ? "size-input size-input_checked" : "size-input"}
+      onClick={onClick}
+    >
+      {sizeName}
+    </button>
   );
 }
