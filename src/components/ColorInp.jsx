@@ -1,21 +1,13 @@
 import "./ColorInp.scss";
 
-export default function ColorInp({
-  onChange,
-  isChecked,
-  colorName,
-  colorCode,
-}) {
+export default function ColorInp({ onClick, isChecked, colorName, colorCode }) {
   return (
-    <div className="color-input">
-      <input
-        type="radio"
-        name="color"
-        onChange={onChange}
-        checked={isChecked}
-        style={{ backgroundColor: colorCode }}
-      />
-      <span>{colorName}</span>
-    </div>
+    <button
+      className={isChecked ? "color-input color-input_checked" : "color-input"}
+      onClick={onClick}
+    >
+      <span style={{ backgroundColor: colorCode }} />
+      <div>{colorName}</div>
+    </button>
   );
 }

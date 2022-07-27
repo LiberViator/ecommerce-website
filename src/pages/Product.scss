@@ -90,8 +90,12 @@
 
 .product__checkout__colors ul {
   display: grid;
+  flex-wrap: wrap;
   grid-template-columns: repeat(auto-fill, minmax(100px, 3fr));
-  grid-template-rows: repeat(minmax(32px, auto));
+  grid-template-rows: repeat(minmax(32px, 1fr));
+  // grid-auto-columns: 100px;
+  grid-auto-rows: auto;
+  // grid-auto-flow: column;
   width: 100%;
   gap: 12px;
 }
@@ -106,7 +110,7 @@
 .product__checkout__sizes ul {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 3fr));
-  grid-template-rows: repeat(minmax(32px, auto));
+  grid-auto-rows: 32px;
   width: 100%;
   gap: 12px;
 }

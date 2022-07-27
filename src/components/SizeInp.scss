@@ -1,27 +1,28 @@
 @import "styles.scss";
 
 .size-input {
+  all: unset;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  list-style-type: none;
-  border-radius: 2px;
-  overflow: hidden;
-  cursor: pointer;
-  min-height: 32px;
-  width: 100%;
   border: 1px solid $clr__gray;
+  border-radius: 2px;
   background-color: $clr__white;
+  min-height: 32px;
+  overflow: hidden;
+  padding: 0 12px;
+  white-space: nowrap;
   color: $clr__black;
+  cursor: pointer;
 }
 
 .size-input_checked {
   background-color: $clr__lightgreen;
-  border-color: $clr__lightgreen;
   color: $clr__white;
+  border-color: $clr__lightgreen;
 }
 
-.size-input:not([class*="size-input_checked"]):hover {
+.size-input:not([class*="checked"]):hover {
   animation: hoverAnimation 0.4s infinite alternate;
 }

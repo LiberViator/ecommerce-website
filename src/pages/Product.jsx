@@ -132,7 +132,7 @@ function Colors() {
         <ul>
           {product.colors.map((_color, index) => (
             <ColorInp
-              onChange={() => handleChange(index)}
+              onClick={() => handleChange(index)}
               isChecked={color === product.colors[_color.id]}
               colorName={_color.name}
               colorCode={_color.code}
@@ -152,16 +152,16 @@ function Sizes() {
     productSetSize(dispatch, product.sizes[index]);
   };
 
-  if (product && product.colors.length > 1) {
+  if (product && product.sizes.length > 1) {
     return (
       <div className="product__checkout__sizes">
         <h4 className="product__checkout__title">Size</h4>
         <ul>
-          {product.sizes.map((item, index) => (
+          {product.sizes.map((_size, index) => (
             <SizeInp
               onClick={() => handleChange(index)}
-              isChecked={size === item}
-              sizeName={item.name}
+              isChecked={size === _size}
+              sizeName={_size.name}
               key={index}
             />
           ))}
