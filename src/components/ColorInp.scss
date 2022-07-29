@@ -4,36 +4,39 @@
   position: relative;
   display: flex;
   flex-direction: row;
+  flex-grow: 1;
+  flex-shrink: 0;
   border-radius: 2px;
-  background-color: $clr__white;
   min-height: 32px;
-
   overflow: hidden;
   white-space: nowrap;
   cursor: pointer;
+  text-align: center;
 }
 
 .color-input span {
   flex-shrink: 0;
+  margin-right: 1px;
   width: 32px;
 }
 
-.color-input:not([class*="checked"]) div:hover {
-  animation: hoverAnimation 0.4s infinite alternate;
+.color-input div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  flex-shrink: 0;
+  border: 1px solid $clr__gray;
+  background-color: $clr__white;
+  padding: 0 12px;
 }
 
 .color-input_checked div {
   background-color: $clr__lightgreen;
   color: $clr__white;
-  border-color: $clr__lightgreen !important;
-  border-left: 1px solid $clr__gray !important;
+  border-color: $clr__lightgreen;
 }
 
-.color-input div {
-  display: flex;
-  flex-grow: 1;
-  flex-shrink: 1;
-  border: 1px solid $clr__gray;
-  justify-content: center;
-  align-items: center;
+.color-input:not([class*="checked"]) div:hover {
+  animation: hoverAnimation 0.4s infinite alternate;
 }

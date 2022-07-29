@@ -6,15 +6,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-grow: 1;
+  flex-shrink: 0;
   border: 1px solid $clr__gray;
   border-radius: 2px;
   background-color: $clr__white;
   min-height: 32px;
+  min-width: fit-content;
   overflow: hidden;
   padding: 0 12px;
   white-space: nowrap;
   color: $clr__black;
   cursor: pointer;
+  text-align: center;
 }
 
 .size-input_checked {
