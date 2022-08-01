@@ -1,6 +1,6 @@
 # <b> E-Commerce Hiking Website </b>
 
-[Demo][demo_link] |
+[Demo][demo_link]
 
 ## Overview
 
@@ -15,5 +15,11 @@ SCSS – CSS extension language
 JavaScript – Programming language
 <br>
 React – Front-end JavaScript library
+
+## Installation
+
+You can install using this command:
+<br>
+`npm i https://github.com/LiberViator/ecommerce-website`
 
 [demo_link]: https://liberviator.github.io/ecommerce-website/0
