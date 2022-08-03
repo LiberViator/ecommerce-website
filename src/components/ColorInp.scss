@@ -1,40 +1,37 @@
 @import "styles.scss";
 
 .color-input {
-  position: relative;
   display: flex;
-  flex-direction: row;
-  flex-grow: 1;
-  flex-shrink: 0;
-  border-radius: 2px;
+  position: relative;
   min-height: 32px;
-  overflow: hidden;
+  border-radius: 2px;
+  text-align: center;
   white-space: nowrap;
   cursor: pointer;
-  text-align: center;
+  overflow: hidden;
+  flex-direction: row;
+  flex: 0 0 auto;
 }
 
 .color-input span {
-  flex-shrink: 0;
-  margin-right: 1px;
   width: 32px;
+  margin-right: 1px;
 }
 
 .color-input div {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  flex-shrink: 0;
+  padding: 0 12px;
   border: 1px solid $clr__gray;
   background-color: $clr__white;
-  padding: 0 12px;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 auto;
 }
 
 .color-input_checked div {
+  border-color: $clr__lightgreen;
   background-color: $clr__lightgreen;
   color: $clr__white;
-  border-color: $clr__lightgreen;
 }
 
 .color-input:not([class*="checked"]) div:hover {

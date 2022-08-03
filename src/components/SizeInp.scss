@@ -2,29 +2,27 @@
 
 .size-input {
   all: unset;
-  position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  flex-shrink: 0;
+  position: relative;
+  min-height: 32px;
+  padding: 0 12px;
   border: 1px solid $clr__gray;
   border-radius: 2px;
   background-color: $clr__white;
-  min-height: 32px;
-  min-width: fit-content;
-  overflow: hidden;
-  padding: 0 12px;
-  white-space: nowrap;
   color: $clr__black;
-  cursor: pointer;
   text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 auto;
 }
 
 .size-input_checked {
+  border-color: $clr__lightgreen;
   background-color: $clr__lightgreen;
   color: $clr__white;
-  border-color: $clr__lightgreen;
 }
 
 .size-input:not([class*="checked"]):hover {

@@ -1,6 +1,7 @@
 // Imports
 import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import useFormatCurrency from "hooks/useFormatCurrency";
 
 import {
   ProductContext,
@@ -9,7 +10,6 @@ import {
   productSetQuantity,
   productSetSize,
 } from "contexts/productContext";
-
 import { CartContext, cartAdd } from "contexts/cartContext";
 
 import Footer from "layout/Footer";
@@ -84,9 +84,9 @@ function Checkout({ children }) {
 function Name() {
   const [{ product }] = useContext(ProductContext);
 
-  return (
-    <h2 className="product__checkout__name">{product ? product.title : ""}</h2>
-  );
+  if (!product || !product.hasOwnProperty("title")) return undefined;
+
+  return <h2 className="product__checkout__name">{product.title}</h2>;
 }
 
 function Ranking() {
@@ -101,11 +101,13 @@ function Ranking() {
 function Price() {
   const [{ product }] = useContext(ProductContext);
 
+  const formatPrice = useFormatCurrency(product.price);
+
+  if (!product || !product.hasOwnProperty("price")) return undefined;
+
   return (
     <div className="product__checkout__pricing">
-      <h2 className="product__checkout__pricing__current">
-        {product && `$${product.price},00`}
-      </h2>
+      <h2 className="product__checkout__pricing__current">{formatPrice}</h2>
     </div>
   );
 }
@@ -113,66 +115,69 @@ function Price() {
 function Description() {
   const [{ product }] = useContext(ProductContext);
 
-  return (
-    <p className="product__checkout__desc">
-      {product ? product.description : ""}
-    </p>
-  );
+  if (!product || !product.hasOwnProperty("description")) return undefined;
+
+  return <p className="product__checkout__desc">{product.description}</p>;
 }
 
 function Colors() {
   const [{ product, color }, dispatch] = useContext(ProductContext);
+
+  if (!product || !product.hasOwnProperty("colors")) return undefined;
+
   const handleChange = (index) => {
     productSetColor(dispatch, product.colors[index]);
   };
-  if (product && product.colors.length > 1) {
-    return (
-      <div className="product__checkout__colors">
-        <h4 className="product__checkout__title">Color</h4>
-        <ul>
-          {product.colors.map((_color, index) => (
-            <ColorInp
-              onClick={() => handleChange(index)}
-              isChecked={color === product.colors[_color.id]}
-              colorName={_color.name}
-              colorCode={_color.code}
-              key={_color.id}
-            />
-          ))}
-        </ul>
-      </div>
-    );
-  }
+
+  return (
+    <div className="product__checkout__colors">
+      <h4 className="product__checkout__title">Color</h4>
+      <ul>
+        {product.colors.map((_color, index) => (
+          <ColorInp
+            onClick={() => handleChange(index)}
+            isChecked={color === product.colors[_color.id]}
+            colorName={_color.name}
+            colorCode={_color.code}
+            key={_color.id}
+          />
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 function Sizes() {
   const [{ product, size }, dispatch] = useContext(ProductContext);
 
+  if (!product || !product.hasOwnProperty("sizes")) return undefined;
+
   const handleChange = (index) => {
     productSetSize(dispatch, product.sizes[index]);
   };
 
-  if (product && product.sizes.length > 1) {
-    return (
-      <div className="product__checkout__sizes">
-        <h4 className="product__checkout__title">Size</h4>
-        <ul>
-          {product.sizes.map((_size, index) => (
-            <SizeInp
-              onClick={() => handleChange(index)}
-              isChecked={size === _size}
-              sizeName={_size.name}
-              key={index}
-            />
-          ))}
-        </ul>
-      </div>
-    );
-  }
+  return (
+    <div className="product__checkout__sizes">
+      <h4 className="product__checkout__title">Size</h4>
+      <ul>
+        {product.sizes.map((_size, index) => (
+          <SizeInp
+            onClick={() => handleChange(index)}
+            isChecked={size === _size}
+            sizeName={_size.name}
+            key={index}
+          />
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 function Quantity() {
   const [{ product, quantity }, dispatch] = useContext(ProductContext);
+
+  if (!product) return undefined;
+
   const handleIncrease = (e) => {
     e.preventDefault();
     productSetQuantity(dispatch, quantity + 1);
