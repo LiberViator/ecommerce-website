@@ -90,7 +90,11 @@
 
 .product__checkout__colors ul {
   // display: grid;
-  // grid-template-columns: repeat(auto-fill, minmax(150px, auto));
+  // width: 100%;
+  // grid-template-columns: repeat(
+  //   auto-fit,
+  //   minmax(min-content, calc((100% / 3) - 8px))
+  // );
   // grid-auto-rows: 32px;
   // gap: 12px;
   display: flex;

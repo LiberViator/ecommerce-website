@@ -3,6 +3,9 @@
 .color-input {
   display: flex;
   position: relative;
+  width: calc((100% / 3) - 8px);
+  min-width: fit-content;
+  max-width: 100%;
   min-height: 32px;
   border-radius: 2px;
   text-align: center;
@@ -16,6 +19,7 @@
 .color-input span {
   width: 32px;
   margin-right: 1px;
+  flex: 0 0 auto;
 }
 
 .color-input div {
@@ -34,6 +38,6 @@
   color: $clr__white;
 }
 
-.color-input:not([class*="checked"]) div:hover {
+.color-input:not([class*="checked"]):hover div {
   animation: hoverAnimation 0.4s infinite alternate;
 }

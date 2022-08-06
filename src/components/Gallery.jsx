@@ -35,8 +35,8 @@ function Preview({ product, imageIndex, setImageIndex, imageQuantity }) {
   const therehold = 48;
 
   const handleTouchStart = (e) => {
-    window.requestAnimationFrame(handleTouchMove);
     e.preventDefault();
+    window.requestAnimationFrame(handleTouchMove);
     setIsDragging(true);
     setStartPos(e.clientX);
   };

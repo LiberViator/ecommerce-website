@@ -80,34 +80,29 @@ function CartList() {
   const [catalog] = useContext(CatalogContext);
   const [{ cart }] = useContext(CartContext);
 
+  if (!catalog || !cart) return undefined;
+
   return (
     <section className="cart__list">
       <div className="cart__list__content">
-        <h2>{`Shopping cart (${cart.length})`}</h2>
-        <hr />
-        {cart &&
-          catalog &&
-          cart.map((_cartItem, index) => {
-            const productData = catalog.find((_catalogProduct) =>
-              _catalogProduct.id === _cartItem.productId
-                ? _catalogProduct
-                : false
-            );
+        {/* <h2>{`Shopping cart (${cart.length})`}</h2> */}
+        {cart.map((_cartItem, index) => {
+          const productData = catalog.find((_catalogProduct) =>
+            _catalogProduct.id === _cartItem.productId ? _catalogProduct : false
+          );
 
-            if (!productData) {
-              return null;
-            }
+          if (!productData) return null;
 
-            return (
-              <Item
-                productData={productData}
-                color={_cartItem.color}
-                size={_cartItem.size}
-                quantity={_cartItem.quantity}
-                key={index}
-              />
-            );
-          })}
+          return (
+            <Item
+              productData={productData}
+              color={_cartItem.color}
+              size={_cartItem.size}
+              quantity={_cartItem.quantity}
+              key={index}
+            />
+          );
+        })}
       </div>
       <hr />
     </section>
@@ -170,9 +165,7 @@ function Item({ productData, color, size, quantity }) {
 }
 
 function Receipt({ total }) {
-  const formatPrice = useFormatPrice(total ? total : undefined);
-
-  if (!total) return undefined;
+  const formatPrice = useFormatPrice(total ? total : 0);
 
   return (
     <section className="cart__receipt">
@@ -197,9 +190,7 @@ function Receipt({ total }) {
 }
 
 function Checkout({ total }) {
-  const formatPrice = useFormatPrice(total ? total : undefined);
-
-  if (!total) return undefined;
+  const formatPrice = useFormatPrice(total ? total : 0);
 
   return (
     <section className="cart__checkout">

@@ -100,7 +100,7 @@ function Ranking() {
 
 function Price() {
   const [{ product }] = useContext(ProductContext);
-  const formatPrice = useFormatPrice(product ? product.price : undefined);
+  const formatPrice = useFormatPrice(product ? product.price : 0);
 
   if (!product || !product.hasOwnProperty("price")) return undefined;
 
