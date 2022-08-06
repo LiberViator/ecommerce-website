@@ -35,6 +35,7 @@ function Preview({ product, imageIndex, setImageIndex, imageQuantity }) {
   const therehold = 48;
 
   const handleTouchStart = (e) => {
+    window.requestAnimationFrame(handleTouchMove);
     e.preventDefault();
     setIsDragging(true);
     setStartPos(e.clientX);
@@ -69,6 +70,7 @@ function Preview({ product, imageIndex, setImageIndex, imageQuantity }) {
     } else {
       setStyle({ left: `calc(-100% * ${imageIndex})` });
     }
+    window.cancelAnimationFrame(handleTouchMove);
     setStartPos(undefined);
     setFinishPos(undefined);
     setIsDragging(false);
