@@ -1,7 +1,7 @@
 // Imports
 import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import useFormatCurrency from "hooks/useFormatCurrency";
+import useFormatPrice from "hooks/useFormatPrice";
 
 import {
   ProductContext,
@@ -100,8 +100,7 @@ function Ranking() {
 
 function Price() {
   const [{ product }] = useContext(ProductContext);
-
-  const formatPrice = useFormatCurrency(product.price);
+  const formatPrice = useFormatPrice(product ? product.price : undefined);
 
   if (!product || !product.hasOwnProperty("price")) return undefined;
 

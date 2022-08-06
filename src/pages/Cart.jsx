@@ -1,6 +1,7 @@
 // Imports
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useFormatPrice from "hooks/useFormatPrice";
 
 import { CatalogContext, catalogGet } from "contexts/catalogContext";
 import {
@@ -115,6 +116,11 @@ function CartList() {
 
 function Item({ productData, color, size, quantity }) {
   const [, cartDispatch] = useContext(CartContext);
+  const formatPrice = useFormatPrice(
+    productData ? productData.price : undefined
+  );
+
+  if (!productData) return undefined;
 
   const handleIncrease = (e) => {
     e.preventDefault();
@@ -148,7 +154,7 @@ function Item({ productData, color, size, quantity }) {
           </h4>
         </div>
         <div className="cart__list__item__price">
-          <h3>{`$${productData.price},00`}</h3>
+          <h3>{formatPrice}</h3>
           <QuantityInp
             variant="CART"
             value={quantity}
@@ -164,6 +170,10 @@ function Item({ productData, color, size, quantity }) {
 }
 
 function Receipt({ total }) {
+  const formatPrice = useFormatPrice(total ? total : undefined);
+
+  if (!total) return undefined;
+
   return (
     <section className="cart__receipt">
       <div className="cart__receipt__content">
@@ -171,7 +181,7 @@ function Receipt({ total }) {
         <hr />
         <div className="cart__receipt__subtotal">
           <h4>Subtotal</h4>
-          <h4>{`$${total},00`}</h4>
+          <h4>{formatPrice}</h4>
         </div>
         <div className="cart__receipt__discount">
           <h4>Discount</h4>
@@ -187,13 +197,17 @@ function Receipt({ total }) {
 }
 
 function Checkout({ total }) {
+  const formatPrice = useFormatPrice(total ? total : undefined);
+
+  if (!total) return undefined;
+
   return (
     <section className="cart__checkout">
       <div className="cart__checkout__content">
         <hr />
         <div className="cart__checkout__total">
           <h3>Total</h3>
-          <h3>{`$${total},00`}</h3>
+          <h3>{formatPrice}</h3>
         </div>
         <Button variant="CHECKOUT" />
       </div>
