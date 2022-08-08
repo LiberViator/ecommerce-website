@@ -36,6 +36,7 @@ function Preview({ product, imageIndex, setImageIndex, imageQuantity }) {
 
   const handleTouchStart = (e) => {
     e.preventDefault();
+    window.requestAnimationFrame(handleTouchMove);
     setIsDragging(true);
     setStartPos(e.clientX);
   };
@@ -69,6 +70,7 @@ function Preview({ product, imageIndex, setImageIndex, imageQuantity }) {
     } else {
       setStyle({ left: `calc(-100% * ${imageIndex})` });
     }
+    window.cancelAnimationFrame(handleTouchMove);
     setStartPos(undefined);
     setFinishPos(undefined);
     setIsDragging(false);
