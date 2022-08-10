@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import "./Footer.scss";
 
@@ -7,11 +8,14 @@ export default function Footer() {
     <footer className="footer">
       <Navigation>
         <Contact>
-          <img
-            src="assets/logo.svg"
-            alt="logo"
-            className="footer__nav__contact__logo"
-          />
+          <Link to="/">
+            <img
+              src="assets/logo.svg"
+              alt="logo"
+              className="footer__nav__contact__logo"
+            />
+          </Link>
+
           <h4 className="footer__nav__contact__item">
             4206 Corbin Branch Road
             <br />

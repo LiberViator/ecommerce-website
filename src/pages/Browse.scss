@@ -1,0 +1,88 @@
+@import "styles.scss";
+
+.browse {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  width: 100%;
+  padding: 16px 0 0;
+  transition: padding 0.2s;
+}
+
+.browse__content {
+  display: grid;
+  flex-direction: column;
+  grid-template:
+    "search"
+    "filtr"
+    "list";
+  grid-template-rows: auto auto auto;
+  max-width: $lyt-large;
+  width: 100%;
+  gap: 16px 40px;
+}
+
+.browse__search {
+  display: flex;
+  grid-area: search;
+  width: 100%;
+  height: 40px;
+  gap: 16px;
+}
+
+.browse__search__input {
+  all: unset;
+  padding: 0 16px;
+  border-radius: 2px;
+  border: 1px solid $clr__gray;
+  background-color: $clr__white;
+  flex: 1;
+}
+
+.browse__search__submit {
+  all: unset;
+  background-color: $clr__lightgreen;
+  width: 40px;
+  border-radius: 2px;
+}
+
+.browse__filtr {
+  grid-area: filtr;
+  width: 256px;
+  height: 100%;
+  background-color: $clr__white;
+}
+
+.browse__list {
+  display: grid;
+  grid-area: list;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-auto-rows: max-content;
+  width: 100%;
+  height: 100%;
+  background-color: $clr__white;
+  gap: 16px;
+}
+
+.browse__list__item {
+  background-color: $clr__gray;
+  aspect-ratio: 3/4;
+}
+
+@media (min-width: $lyt-medium) {
+  $lyt-padding: 40px;
+
+  .browse {
+    padding: 0 $lyt-padding;
+  }
+
+  .browse__content {
+    grid-template:
+      "filtr search"
+      "filtr list";
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    padding: 24px 0 32px;
+    gap: 24px 40px;
+  }
+}

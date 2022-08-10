@@ -12,11 +12,14 @@ export default function Header() {
   return (
     <header className="header">
       <Topbar>
-        <img
-          className="header__topbar__logo"
-          src="assets/logo.svg"
-          alt="logo"
-        />
+        <Link to="/">
+          <img
+            className="header__topbar__logo"
+            src="assets/logo.svg"
+            alt="logo"
+          />
+        </Link>
+
         <TopbarMenu>
           <Link className="header__topbar__item" to="/0">
             <h4>Polarstjärna</h4>

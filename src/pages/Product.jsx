@@ -1,6 +1,7 @@
 // Imports
 import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
+
 import useFormatPrice from "hooks/useFormatPrice";
 
 import {

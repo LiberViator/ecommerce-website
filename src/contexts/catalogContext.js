@@ -15,14 +15,21 @@ function reducer(state, { type, value }) {
 }
 
 export function catalogGet(dispatch, productId) {
-  const products = productId.map((_id) =>
-    productList.find((_product) => _product.id === _id)
-  );
-
-  return dispatch({
-    type: "GET",
-    value: products,
-  });
+  if (!productId) {
+    const products = productList.map((_product) => _product);
+    return dispatch({
+      type: "GET",
+      value: products,
+    });
+  } else {
+    const products = productId.map((_id) =>
+      productList.find((_product) => _product.id === _id)
+    );
+    return dispatch({
+      type: "GET",
+      value: products,
+    });
+  }
 }
 
 export default function CatalogProvider({ children }) {
