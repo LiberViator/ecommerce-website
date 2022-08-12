@@ -3,11 +3,19 @@
 
 ## Links
 
-[Demo][demo_link]
+[Live Demo][link_demo]
 
 ## Overview
 
 I created an e-commerce website to show my coding skills. When I started it, I could understand JavaScript on a base level and used the React library for the first time. I planned to upgrade my knowledge of JavaScript and learn the most popular and significant community front-end framework. After I finished MVP of the project, my knowledge of JavaScript was polished, and my understanding of the React library grew.
+
+## Features
+
+- [x] Adding products to the cart
+- [x] Removing products from the cart
+- [x] Choosing product's color and size
+- [x] Fetching data when needed, not every time product ammount have been changed.
+- [x] Responsive design
 
 ## Used technologies
 
@@ -19,10 +27,20 @@ JavaScript – Programming language
 <br>
 React – Front-end JavaScript library
 
-## Installation
+## Run locally
 
-You can install using this command:
-<br>
-`npm i https://github.com/LiberViator/ecommerce-website`
+### 1. Clone repository
 
-[demo_link]: https://liberviator.github.io/ecommerce-website/0
+`git clone https://github.com/LiberViator/ecommerce-website`
+
+### 2. Install dependencies
+
+`npm install` or `yarn install`
+
+### 3. Run
+
+`npm start`
+
+<!-- Links -->
+
+[link_demo]: https://liberviator.github.io/ecommerce-website/0
