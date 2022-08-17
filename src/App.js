@@ -5,7 +5,6 @@ import CatalogProvider from "contexts/catalogContext";
 import CartProvider from "contexts/cartContext";
 import ProductProvider from "contexts/productContext";
 
-import Home from "pages/Home";
 import Product from "pages/Product";
 import Cart from "pages/Cart";
 import Browse from "pages/Browse";
@@ -21,7 +20,7 @@ export default function App() {
           <CartProvider>
             <ProductProvider>
               <Routes>
-                <Route path="/" element={<Navigate to="products" />} />
+                <Route path="/" element={<Navigate to="/0" />} />
                 <Route exact path="products" element={<Browse />} />
                 <Route exact path=":productLink" element={<Product />} />
                 <Route exact path="cart" element={<Cart />} />
