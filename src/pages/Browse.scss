@@ -2,71 +2,99 @@
 
 .browse {
   display: flex;
-  justify-content: center;
-  flex-grow: 1;
   width: 100%;
   padding: 16px 0 0;
   transition: padding 0.2s;
+  justify-content: center;
+  flex-grow: 1;
 }
 
 .browse__content {
   display: grid;
+  width: 100%;
+  max-width: $lyt-large;
   flex-direction: column;
   grid-template:
     "search"
     "filtr"
     "list";
   grid-template-rows: auto auto auto;
-  max-width: $lyt-large;
-  width: 100%;
   gap: 16px 40px;
 }
 
 .browse__search {
   display: flex;
-  grid-area: search;
   width: 100%;
   height: 40px;
+  grid-area: search;
   gap: 16px;
 }
 
 .browse__search__input {
   all: unset;
   padding: 0 16px;
-  border-radius: 2px;
   border: 1px solid $clr__gray;
+  border-radius: 2px;
   background-color: $clr__white;
   flex: 1;
 }
 
 .browse__search__submit {
   all: unset;
-  background-color: $clr__lightgreen;
   width: 40px;
   border-radius: 2px;
+  background-color: $clr__lightgreen;
 }
 
 .browse__filtr {
-  grid-area: filtr;
   width: 256px;
   height: 100%;
   background-color: $clr__white;
+  grid-area: filtr;
 }
 
 .browse__list {
   display: grid;
+  width: 100%;
+  height: 100%;
   grid-area: list;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   grid-auto-rows: max-content;
-  width: 100%;
-  height: 100%;
-  background-color: $clr__white;
   gap: 16px;
 }
 
 .browse__list__item {
-  background-color: $clr__gray;
+  display: flex;
+  flex-direction: column;
   aspect-ratio: 3/4;
+}
+
+.browse__list__item__image {
+  width: 100%;
+  margin-bottom: 12px;
+  aspect-ratio: 1/1;
+
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.browse__list__item__title {
+  margin-bottom: 12px;
+
+  > h4 {
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.browse__list__item__price {
+  text-align: right;
 }
 
 @media (min-width: $lyt-medium) {
@@ -77,12 +105,12 @@
   }
 
   .browse__content {
+    padding: 24px 0 32px;
     grid-template:
       "filtr search"
       "filtr list";
     grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr;
-    padding: 24px 0 32px;
     gap: 24px 40px;
   }
 }

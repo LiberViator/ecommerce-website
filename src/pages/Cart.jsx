@@ -132,9 +132,9 @@ function Item({ productData, color, size, quantity }) {
   return (
     <div className="cart__list__item">
       <div className="cart__list__item__content">
-        <div className="cart__list__item__image">
+        <Link className="cart__list__item__image" to={`/${productData.id}`}>
           <img src={productData.images[0]} alt="" />
-        </div>
+        </Link>
 
         <Link className="cart__list__item__title" to={`/${productData.id}`}>
           <h3>{productData.title}</h3>
