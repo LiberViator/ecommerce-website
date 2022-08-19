@@ -18,12 +18,18 @@ export default function Browse() {
   const [catalog, catalogDispatch] = useContext(CatalogContext);
   const [page, setPage] = useState("");
   const [search, setSearch] = useState("");
-  const [filtredData, setFilteredData] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  function getUniqueProductId() {
+    return filteredProducts.length > 0
+      ? [...new Set(filteredProducts.map((_product) => _product.id))]
+      : undefined;
+  }
 
   useEffect(() => {
-    catalogGet(catalogDispatch);
+    catalogGet(catalogDispatch, getUniqueProductId());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [filteredProducts]);
 
   return (
     <>
@@ -33,10 +39,10 @@ export default function Browse() {
           <BrowseSearch
             search={search}
             setSearch={setSearch}
-            setFilteredData={setFilteredData}
+            setFilteredProducts={setFilteredProducts}
           />
           <BrowseFiltr />
-          <BrowseList filteredData={filtredData} />
+          <BrowseList search={search} filteredProducts={filteredProducts} />
         </div>
       </main>
       <Footer />
@@ -44,15 +50,13 @@ export default function Browse() {
   );
 }
 
-function BrowseSearch({ search, setSearch, setFilteredData }) {
+function BrowseSearch({ search, setSearch, setFilteredProducts }) {
   const [catalog] = useContext(CatalogContext);
 
   if (!catalog) return undefined;
 
   const handleClick = () => {
-    setFilteredData(
-      catalog.filter((_catalogItem) => _catalogItem.title.includes(search))
-    );
+    setFilteredProducts();
   };
 
   return (
@@ -81,18 +85,21 @@ function BrowseFiltr() {
   return <section className="browse__filtr"></section>;
 }
 
-function BrowseList(filteredData) {
+function BrowseList({ filteredProducts }) {
   const [catalog] = useContext(CatalogContext);
+
+  if (!catalog) return undefined;
 
   return (
     <section className="browse__list">
-      {filteredData > 0
-        ? filteredData.map((_catalogItem, index) => (
+      {filteredProducts.length > 0
+        ? filteredProducts.map((_catalogItem, index) => (
             <BrowseItem productData={_catalogItem} key={index} />
           ))
         : catalog.map((_catalogItem, index) => (
             <BrowseItem productData={_catalogItem} key={index} />
           ))}
+      {console.log(filteredProducts)}
     </section>
   );
 }

@@ -7,29 +7,29 @@ const initialState = [];
 
 function reducer(state, { type, value }) {
   switch (type) {
-    case "GET":
-      return value;
+    case "GET": {
+      if (!productId) {
+        const products = productList.map((_product) => _product);
+        return { ...state, products };
+      } else {
+        const products = productId.map((_id) =>
+          productList.find((_product) => _product.id === _id)
+        );
+        return;
+      }
+      return { ...state, products };
+    }
+
     default:
       return state;
   }
 }
 
 export function catalogGet(dispatch, productId) {
-  if (!productId) {
-    const products = productList.map((_product) => _product);
-    return dispatch({
-      type: "GET",
-      value: products,
-    });
-  } else {
-    const products = productId.map((_id) =>
-      productList.find((_product) => _product.id === _id)
-    );
-    return dispatch({
-      type: "GET",
-      value: products,
-    });
-  }
+  return dispatch({
+    type: "GET",
+    value: productId,
+  });
 }
 
 export default function CatalogProvider({ children }) {
