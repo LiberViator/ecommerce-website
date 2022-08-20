@@ -1,23 +1,29 @@
 import { useReducer, createContext } from "react";
-import productList from "db/products";
+import fetchedProductList from "db/products";
 
 export const CatalogContext = createContext();
 
-const initialState = [];
+const initialState = { catalog: [], filteredProducts: [] };
 
 function reducer(state, { type, value }) {
   switch (type) {
     case "GET": {
-      if (!productId) {
-        const products = productList.map((_product) => _product);
-        return { ...state, products };
-      } else {
-        const products = productId.map((_id) =>
-          productList.find((_product) => _product.id === _id)
-        );
-        return;
-      }
-      return { ...state, products };
+      const getProducts = !value
+        ? fetchedProductList.map((_product) => _product)
+        : value.map((_id) =>
+            fetchedProductList.find((_product) => _product.id === _id)
+          );
+
+      return { ...state, catalog: getProducts };
+    }
+
+    case "FILTER": {
+      const filteredProducts =
+        state.catalog.filter((_catalogItem) =>
+          _catalogItem.title.includes(value)
+        ) || undefined;
+
+      return { ...state, filteredProducts: filteredProducts };
     }
 
     default:
@@ -25,10 +31,17 @@ function reducer(state, { type, value }) {
   }
 }
 
-export function catalogGet(dispatch, productId) {
+export function catalogGet(dispatch, productIds) {
   return dispatch({
     type: "GET",
-    value: productId,
+    value: productIds,
+  });
+}
+
+export function catalogFilter(dispatch, searchQuery) {
+  return dispatch({
+    type: "FILTER",
+    value: searchQuery,
   });
 }
 

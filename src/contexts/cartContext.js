@@ -1,5 +1,5 @@
 import { useEffect, useReducer, createContext } from "react";
-import cartList from "db/carts";
+import fetchedCartList from "db/carts";
 
 export const CartContext = createContext();
 
@@ -19,20 +19,20 @@ function reducer(state, { type, value }) {
     }
 
     case "ADD": {
-      const isSame = state.cart.find(
-        (object) =>
-          object.productId === value.productId &&
-          object.color === value.color &&
-          object.size === value.size
+      const sameItem = state.cart.find(
+        (_item) =>
+          _item.productId === value.productId &&
+          _item.color === value.color &&
+          _item.size === value.size
       );
 
-      const newState = state.cart.map((_object) =>
-        _object === isSame
-          ? { ..._object, quantity: (_object.quantity += value.quantity) }
-          : _object
+      const newState = state.cart.map((_item) =>
+        _item === sameItem
+          ? { ..._item, quantity: (_item.quantity += value.quantity) }
+          : _item
       );
 
-      if (isSame) {
+      if (sameItem) {
         return { ...state, cart: newState, doUpload: true };
       } else {
         return { ...state, cart: [...state.cart, value], doUpload: true };
@@ -40,20 +40,20 @@ function reducer(state, { type, value }) {
     }
 
     case "REMOVE": {
-      const isSame = state.cart.find(
-        (_object) =>
-          _object.productId === value.productId &&
-          _object.color === value.color &&
-          _object.size === value.size
+      const sameItem = state.cart.find(
+        (_item) =>
+          _item.productId === value.productId &&
+          _item.color === value.color &&
+          _item.size === value.size
       );
 
-      const newState = state.cart.filter((_object) =>
-        _object !== isSame
-          ? _object
-          : _object.quantity > 1
+      const newState = state.cart.filter((_item) =>
+        _item !== sameItem
+          ? _item
+          : _item.quantity > 1
           ? {
-              ..._object,
-              quantity: (_object.quantity -= 1),
+              ..._item,
+              quantity: (_item.quantity -= 1),
             }
           : null
       );
@@ -62,17 +62,17 @@ function reducer(state, { type, value }) {
     }
 
     case "SET": {
-      const isSame = state.cart.find(
-        (_object) =>
-          _object.productId === value.productId &&
-          _object.color === value.color &&
-          _object.size === value.size
+      const sameItem = state.cart.find(
+        (_item) =>
+          _item.productId === value.productId &&
+          _item.color === value.color &&
+          _item.size === value.size
       );
 
-      const newState = state.cart.map((_object) =>
-        _object === isSame && value.quantity >= 1
-          ? { ..._object, quantity: value.quantity }
-          : _object
+      const newState = state.cart.map((_item) =>
+        _item === sameItem && value.quantity >= 1
+          ? { ..._item, quantity: value.quantity }
+          : _item
       );
 
       return { ...state, cart: newState, doUpload: true };

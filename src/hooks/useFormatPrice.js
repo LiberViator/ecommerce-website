@@ -1,6 +1,10 @@
 export default function useFormatPrice(ammount) {
-  return ammount.toLocaleString("en-US", {
+  if (!ammount) return undefined;
+
+  const formatPrice = ammount.toLocaleString("en-US", {
     style: "currency",
     currency: "USD",
   });
+
+  return formatPrice;
 }

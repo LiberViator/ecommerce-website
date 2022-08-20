@@ -40,9 +40,12 @@
 }
 
 .browse__search__submit {
-  all: unset;
+  display: flex;
   width: 40px;
+  height: 40px;
   border-radius: 2px;
+  justify-content: center;
+  align-items: center;
   background-color: $clr__lightgreen;
 }
 

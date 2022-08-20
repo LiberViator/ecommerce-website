@@ -77,7 +77,7 @@ export default function Cart() {
 }
 
 function CartList() {
-  const [catalog] = useContext(CatalogContext);
+  const [{ catalog }] = useContext(CatalogContext);
   const [{ cart }] = useContext(CartContext);
 
   if (!catalog || !cart) return undefined;

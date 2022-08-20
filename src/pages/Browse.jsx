@@ -1,9 +1,13 @@
 // Imports
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import useFormatPrice from "hooks/useFormatPrice";
 
-import { CatalogContext, catalogGet } from "contexts/catalogContext";
+import {
+  CatalogContext,
+  catalogGet,
+  catalogFilter,
+} from "contexts/catalogContext";
 
 import Footer from "layout/Footer";
 import Header from "layout/Header";
@@ -15,21 +19,14 @@ import "./Browse.scss";
 
 // Main component
 export default function Browse() {
-  const [catalog, catalogDispatch] = useContext(CatalogContext);
+  const [{ catalog }, catalogDispatch] = useContext(CatalogContext);
   const [page, setPage] = useState("");
-  const [search, setSearch] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState([]);
-
-  function getUniqueProductId() {
-    return filteredProducts.length > 0
-      ? [...new Set(filteredProducts.map((_product) => _product.id))]
-      : undefined;
-  }
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    catalogGet(catalogDispatch, getUniqueProductId());
+    catalogGet(catalogDispatch);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filteredProducts]);
+  }, []);
 
   return (
     <>
@@ -37,12 +34,11 @@ export default function Browse() {
       <main className="browse">
         <div className="browse__content">
           <BrowseSearch
-            search={search}
-            setSearch={setSearch}
-            setFilteredProducts={setFilteredProducts}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
           />
           <BrowseFiltr />
-          <BrowseList search={search} filteredProducts={filteredProducts} />
+          <BrowseList searchQuery={searchQuery} />
         </div>
       </main>
       <Footer />
@@ -50,29 +46,26 @@ export default function Browse() {
   );
 }
 
-function BrowseSearch({ search, setSearch, setFilteredProducts }) {
-  const [catalog] = useContext(CatalogContext);
+function BrowseSearch({ searchQuery, setSearchQuery }) {
+  const [{ catalog }, catalogDispatch] = useContext(CatalogContext);
+
+  const handleChange = (e) => setSearchQuery(e.target.value);
+
+  const handleClick = () => catalogFilter(catalogDispatch, searchQuery);
 
   if (!catalog) return undefined;
-
-  const handleClick = () => {
-    setFilteredProducts();
-  };
-
   return (
     <section className="browse__search">
       <input
-        type="text"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        type="search"
+        placeholder="Search.."
+        value={searchQuery}
+        onChange={(e) => handleChange(e)}
         className="browse__search__input"
       />
-      <input
-        type="submit"
-        className="browse__search__submit"
-        value=">"
-        onClick={handleClick}
-      />
+      <button className="browse__search__submit" onClick={handleClick}>
+        <img src="assets/search.svg" alt="Search" />
+      </button>
     </section>
   );
 }
@@ -85,14 +78,14 @@ function BrowseFiltr() {
   return <section className="browse__filtr"></section>;
 }
 
-function BrowseList({ filteredProducts }) {
-  const [catalog] = useContext(CatalogContext);
+function BrowseList({ searchQuery }) {
+  const [{ catalog, filteredProducts }] = useContext(CatalogContext);
 
   if (!catalog) return undefined;
 
   return (
     <section className="browse__list">
-      {filteredProducts.length > 0
+      {filteredProducts.length > 0 || searchQuery.length > 0
         ? filteredProducts.map((_catalogItem, index) => (
             <BrowseItem productData={_catalogItem} key={index} />
           ))
@@ -105,7 +98,7 @@ function BrowseList({ filteredProducts }) {
 }
 
 function BrowseItem({ productData }) {
-  const [catalog] = useContext(CatalogContext);
+  const [{ catalog }] = useContext(CatalogContext);
   const formatPrice = useFormatPrice(
     productData ? productData.price : undefined
   );
