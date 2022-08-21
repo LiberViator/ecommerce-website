@@ -1,6 +1,6 @@
 import { useReducer, createContext } from "react";
 
-import productList from "db/products";
+import fetchedProductList from "db/products";
 
 export const ProductContext = createContext();
 
@@ -13,13 +13,22 @@ const initialState = {
 
 function reducer(state, { type, value }) {
   switch (type) {
-    case "GET":
+    case "GET": {
+      const productData =
+        fetchedProductList.find(
+          (_product) => _product.id === value.productId
+        ) || undefined;
+
+      if (!productData) return { ...state };
+
       return {
         ...state,
-        product: value.product,
-        color: value.color,
-        size: value.size,
+        product: productData,
+        color: productData.colors[0],
+        size: productData.sizes[0],
       };
+    }
+
     case "COLOR":
       return {
         ...state,
@@ -41,14 +50,10 @@ function reducer(state, { type, value }) {
 }
 
 export function productGet(dispatch, productId) {
-  const productData = productList.find((element) => element.id === productId);
-
   return dispatch({
     type: "GET",
     value: {
-      product: productData,
-      color: productData.colors ? productData.colors[0] : undefined,
-      size: productData.sizes ? productData.sizes[0] : undefined,
+      productId: productId,
     },
   });
 }

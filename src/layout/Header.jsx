@@ -12,23 +12,22 @@ export default function Header() {
   return (
     <header className="header">
       <Topbar>
-        <Link to="/">
+        <Link className="header__topbar__item" to="/">
           <img
             className="header__topbar__logo"
             src="assets/logo.svg"
             alt="logo"
           />
         </Link>
-
-        <TopbarMenu>
-          <Link className="header__topbar__item" to="/0">
-            <h4>Polarstjärna</h4>
+        <ul className="header__topbar__menu">
+          <Link className="header__topbar__item" to="/">
+            <h4>Home</h4>
           </Link>
-          <Link className="header__topbar__item" to="/1">
-            <h4>Vandringssäng</h4>
+          <Link className="header__topbar__item" to="/products">
+            <h4>Products</h4>
           </Link>
-        </TopbarMenu>
-        <TopbarProfile>
+        </ul>
+        <ul className="header__topbar__profile">
           <Link className="header__topbar__item" to="/cart">
             <div className="counter">
               {cart.length >= 1 ? <span>{cart.length}</span> : ""}
@@ -44,26 +43,30 @@ export default function Header() {
             href="/account"
             alt="My Account"
           /> */}
-        </TopbarProfile>
-        <Hamburger
-          isOpen={isOpen}
+        </ul>
+        <button
+          className="header__topbar__hamburger"
           onClick={() => {
             !isOpen ? setOpen(true) : setOpen(false);
           }}
-        />
+        >
+          <img
+            className="header__topbar__hamburger__icon"
+            src={isOpen ? "assets/close.svg" : "assets/menu.svg"}
+            alt="Menu button"
+          />
+        </button>
       </Topbar>
       <Sidebar isOpen={isOpen}>
-        <SidebarMenu>
-          <Link className="header__sidebar__item" to="/0">
-            <h4>Polarstjärna</h4>
+        <div className="header__sidebar__menu">
+          <Link className="header__sidebar__item" to="/">
+            <h4>Home</h4>
           </Link>
-          <Link className="header__sidebar__item" to="/1">
-            <h4>Vandringssäng</h4>
+          <Link className="header__sidebar__item" to="/products">
+            <h4>Products</h4>
           </Link>
-          {/* <SidebarItem text="Polarstjärna" to="/0" />
-          <SidebarItem text="Vandringssäng" to="/1" /> */}
-        </SidebarMenu>
-        <SidebarProfile>
+        </div>
+        <div className="header__sidebar__profile">
           <Link className="header__sidebar__item" to="/cart">
             <div className="counter">
               {cart.length >= 1 ? <span>{cart.length}</span> : ""}
@@ -77,13 +80,13 @@ export default function Header() {
             icon="./assets/account.svg"
             href="/account"
           /> */}
-        </SidebarProfile>
+        </div>
       </Sidebar>
 
       <aside
         className={isOpen ? "header__fade header__fade_open" : "header__fade"}
         onClick={() => setOpen(false)}
-      ></aside>
+      />
     </header>
   );
 }
@@ -93,26 +96,6 @@ function Topbar({ children }) {
     <div className="header__topbar">
       <div className="header__topbar__content">{children}</div>
     </div>
-  );
-}
-
-function TopbarMenu({ children }) {
-  return <ul className="header__topbar__menu">{children}</ul>;
-}
-
-function TopbarProfile({ children }) {
-  return <ul className="header__topbar__profile">{children}</ul>;
-}
-
-function Hamburger({ isOpen, onClick }) {
-  return (
-    <button className="header__topbar__hamburger" onClick={onClick}>
-      <img
-        className="header__topbar__hamburger__icon"
-        src={isOpen ? "assets/close.svg" : "assets/menu.svg"}
-        alt="Menu button"
-      />
-    </button>
   );
 }
 
@@ -126,12 +109,4 @@ function Sidebar({ children, isOpen }) {
       {children}
     </aside>
   );
-}
-
-function SidebarMenu({ children }) {
-  return <div className="header__sidebar__menu">{children}</div>;
-}
-
-function SidebarProfile({ children }) {
-  return <div className="header__sidebar__profile">{children}</div>;
 }

@@ -21,7 +21,7 @@ import "./Cart.scss";
 
 // Main component
 export default function Cart() {
-  const [catalog, catalogDispatch] = useContext(CatalogContext);
+  const [{ catalog }, catalogDispatch] = useContext(CatalogContext);
   const [{ cart }] = useContext(CartContext);
   const [total, setTotal] = useState(0);
 
@@ -132,11 +132,17 @@ function Item({ productData, color, size, quantity }) {
   return (
     <div className="cart__list__item">
       <div className="cart__list__item__content">
-        <Link className="cart__list__item__image" to={`/${productData.id}`}>
+        <Link
+          className="cart__list__item__image"
+          to={`/products/${productData.id}`}
+        >
           <img src={productData.images[0]} alt="" />
         </Link>
 
-        <Link className="cart__list__item__title" to={`/${productData.id}`}>
+        <Link
+          className="cart__list__item__title"
+          to={`/products/${productData.id}`}
+        >
           <h3>{productData.title}</h3>
         </Link>
 
@@ -165,7 +171,7 @@ function Item({ productData, color, size, quantity }) {
 }
 
 function Receipt({ total }) {
-  const formatPrice = useFormatPrice(total ? total : 0);
+  const formatPrice = useFormatPrice(total);
 
   return (
     <section className="cart__receipt">

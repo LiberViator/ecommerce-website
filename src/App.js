@@ -18,15 +18,21 @@ export default function App() {
       <UserProvider>
         <CatalogProvider>
           <CartProvider>
-            <ProductProvider>
-              <Routes>
-                <Route path="/" element={<Navigate to="/0" />} />
-                <Route exact path="products" element={<Browse />} />
-                <Route exact path=":productLink" element={<Product />} />
-                <Route exact path="cart" element={<Cart />} />
-                <Route path="*" element={<NoPage />} />
-              </Routes>
-            </ProductProvider>
+            <Routes>
+              <Route path="/" element={<Navigate to="/products" />} />
+              <Route exact path="/products" element={<Browse />} />
+              <Route
+                exact
+                path="/products/:productLink"
+                element={
+                  <ProductProvider>
+                    <Product />
+                  </ProductProvider>
+                }
+              />
+              <Route exact path="/cart" element={<Cart />} />
+              <Route path="*" element={<NoPage />} />
+            </Routes>
           </CartProvider>
         </CatalogProvider>
       </UserProvider>

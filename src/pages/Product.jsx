@@ -63,9 +63,9 @@ export default function Product() {
               {/* <Button variant="LIKE" /> */}
             </nav>
           </Checkout>
-          {/* <Overview></Overview>
+          <Overview></Overview>
           <Specs></Specs>
-          <Reviews></Reviews> */}
+          <Reviews></Reviews>
         </div>
       </main>
       <Footer />
@@ -210,36 +210,38 @@ function Quantity() {
 }
 
 // Overview
-// function Overview(props) {
-//   return (
-//     <section id="overview" className="product__overview">
-//       <div className="product__overview__content">
-//         <h2 className="product__heading">Overview:</h2>
-//         {props.children}
-//       </div>
-//       <hr />
-//     </section>
-//   );
-// }
+function Overview(props) {
+  return (
+    <section id="overview" className="product__overview">
+      <div className="product__overview__content">
+        <span className="wip">Overview</span>
+        {/* <h2 className="product__heading">Overview:</h2>
+        {props.children} */}
+      </div>
+      <hr />
+    </section>
+  );
+}
 
 // Specification
-// function Specs() {
-//   const [{ product }] = useContext(ProductContext);
+function Specs() {
+  const [{ product }] = useContext(ProductContext);
 
-//   return (
-//     <section id="specification" className="product__specs">
-//       <div className="product__specs__content">
-//         <h2 className="product__heading">Specification:</h2>
-//         <ul className="product__specs__list">
-//           {product && product.colors
-//             ? product.colors.map((item, index) => <SpecsItem key={index} />)
-//             : ""}
-//         </ul>
-//       </div>
-//       <hr />
-//     </section>
-//   );
-// }
+  return (
+    <section id="specification" className="product__specs">
+      <div className="product__specs__content">
+        <span className="wip">Specifications</span>
+        {/* <h2 className="product__heading">Specification:</h2>
+        <ul className="product__specs__list">
+          {product && product.colors
+            ? product.colors.map((item, index) => <SpecsItem key={index} />)
+            : ""}
+        </ul> */}
+      </div>
+      <hr />
+    </section>
+  );
+}
 
 // function SpecsItem(props) {
 //   return (
@@ -251,14 +253,15 @@ function Quantity() {
 // }
 
 // Reviews
-// function Reviews(props) {
-//   return (
-//     <section id="reviews" className="product__reviews">
-//       <div className="product__reviews__content">
-//         <h2 className="product__heading">Reviews:</h2>
-//         {props.children}
-//       </div>
-//       <hr />
-//     </section>
-//   );
-// }
+function Reviews(props) {
+  return (
+    <section id="reviews" className="product__reviews">
+      <div className="product__reviews__content">
+        <span className="wip">Reviews</span>
+        {/* <h2 className="product__heading">Reviews:</h2>
+        {props.children} */}
+      </div>
+      <hr />
+    </section>
+  );
+}

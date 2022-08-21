@@ -8,9 +8,9 @@ const initialState = { catalog: [], filteredProducts: [] };
 function reducer(state, { type, value }) {
   switch (type) {
     case "GET": {
-      const getProducts = !value
+      const getProducts = !value.productIds
         ? fetchedProductList.map((_product) => _product)
-        : value.map((_id) =>
+        : value.productIds.map((_id) =>
             fetchedProductList.find((_product) => _product.id === _id)
           );
 
@@ -20,7 +20,7 @@ function reducer(state, { type, value }) {
     case "FILTER": {
       const filteredProducts =
         state.catalog.filter((_catalogItem) =>
-          _catalogItem.title.includes(value)
+          _catalogItem.title.includes(value.searchQuery)
         ) || undefined;
 
       return { ...state, filteredProducts: filteredProducts };
@@ -34,14 +34,14 @@ function reducer(state, { type, value }) {
 export function catalogGet(dispatch, productIds) {
   return dispatch({
     type: "GET",
-    value: productIds,
+    value: { productIds: productIds },
   });
 }
 
 export function catalogFilter(dispatch, searchQuery) {
   return dispatch({
     type: "FILTER",
-    value: searchQuery,
+    value: { searchQuery: searchQuery },
   });
 }
 

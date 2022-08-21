@@ -37,7 +37,7 @@ export default function Browse() {
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
           />
-          <BrowseFiltr />
+          <BrowseFilter />
           <BrowseList searchQuery={searchQuery} />
         </div>
       </main>
@@ -54,6 +54,7 @@ function BrowseSearch({ searchQuery, setSearchQuery }) {
   const handleClick = () => catalogFilter(catalogDispatch, searchQuery);
 
   if (!catalog) return undefined;
+
   return (
     <section className="browse__search">
       <input
@@ -70,12 +71,16 @@ function BrowseSearch({ searchQuery, setSearchQuery }) {
   );
 }
 
-function BrowseFiltr() {
+function BrowseFilter() {
   const [catalog] = useContext(CatalogContext);
 
   if (!catalog) return undefined;
 
-  return <section className="browse__filtr"></section>;
+  return (
+    <section className="browse__filter">
+      <span className="wip">Filter</span>
+    </section>
+  );
 }
 
 function BrowseList({ searchQuery }) {
@@ -107,10 +112,16 @@ function BrowseItem({ productData }) {
 
   return (
     <div className="browse__list__item">
-      <Link className="browse__list__item__image" to={`/${productData.id}`}>
+      <Link
+        className="browse__list__item__image"
+        to={`/products/${productData.id}`}
+      >
         <img src={productData.images[0]} alt={productData.title} />
       </Link>
-      <Link className="browse__list__item__title" to={`/${productData.id}`}>
+      <Link
+        className="browse__list__item__title"
+        to={`/products/${productData.id}`}
+      >
         <h4>{productData.title}</h4>
       </Link>
       <h3 className="browse__list__item__price">{formatPrice}</h3>

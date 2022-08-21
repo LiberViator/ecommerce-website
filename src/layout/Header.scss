@@ -1,22 +1,22 @@
 @import "styles.scss";
 
 .header {
-  z-index: 100;
   position: sticky;
   top: 0;
-  height: 56px;
   width: 100%;
+  height: 56px;
+  z-index: 100;
 }
 
 .header__topbar {
   display: flex;
-  justify-content: center;
-  background: $clr__green;
-  height: 56px;
   width: 100%;
+  height: 56px;
   padding: 0 0 0 $lyt-padding;
-  color: $clr__white;
   transition: background-color 0.2s ease-out, padding 0.2s;
+  background: $clr__green;
+  color: $clr__white;
+  justify-content: center;
 }
 
 .header__topbar_clear {
@@ -25,13 +25,16 @@
 
 .header__topbar__content {
   display: grid;
+  width: 100%;
+  max-width: $lyt-large;
   align-items: center;
   grid-auto-flow: column;
-  max-width: $lyt-large;
-  width: 100%;
 }
 
 .header__topbar__item {
+  display: flex;
+  width: fit-content;
+  align-items: center;
 }
 
 .counter {
@@ -39,20 +42,20 @@
 }
 
 .counter span {
+  display: flex;
   position: absolute;
   top: 12px;
   left: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 16px;
   height: 16px;
+  border-radius: 100%;
   background-color: $clr__lightgreen;
   color: $clr__white;
-  border-radius: 100%;
   font-size: 12px;
   font-weight: 500;
   z-index: 100;
+  justify-content: center;
+  align-items: center;
 }
 
 .header__topbar__hamburger {
@@ -67,8 +70,8 @@
 }
 
 .header__topbar__hamburger__icon {
-  height: 24px;
   width: 24px;
+  height: 24px;
 }
 
 .header__topbar__menu {
@@ -86,19 +89,19 @@
 }
 
 .header__sidebar {
+  display: flex;
   position: fixed;
   top: 56px;
-  bottom: 0;
   right: -256px;
-  display: flex;
-  flex-direction: column;
-  background-color: $clr__lightgray;
-  max-width: 256px;
+  bottom: 0;
   width: 100%;
+  max-width: 256px;
   padding: 16px 0 24px;
-  color: $clr__black;
   transition: right 0.2s ease-out;
+  background-color: $clr__lightgray;
+  color: $clr__black;
   z-index: 100;
+  flex-direction: column;
 }
 
 .header__sidebar_open {
@@ -111,8 +114,8 @@
 
 .header__sidebar__item {
   display: flex;
-  align-items: center;
   padding: 16px 40px 16px 32px;
+  align-items: center;
   gap: 12px;
 }
 
@@ -129,15 +132,15 @@
   position: absolute;
   width: 100vw;
   height: 100vh;
-  background-color: hsla(0, 0%, 0%, 0.16);
-  visibility: hidden;
   transition: visibility 0.2s ease-out, opacity 0.2s ease-out;
+  background-color: hsla(0, 0%, 0%, 0.16);
   opacity: 0;
+  visibility: hidden;
 }
 
 .header__fade_open {
-  visibility: visible;
   opacity: 1;
+  visibility: visible;
 }
 
 @media (min-width: $lyt-medium) {

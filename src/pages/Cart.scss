@@ -2,23 +2,23 @@
 
 .cart {
   display: flex;
-  justify-content: center;
-  flex-grow: 1;
   width: 100%;
   padding: 16px 0 0;
   transition: padding 0.2s;
+  justify-content: center;
+  flex-grow: 1;
 }
 
 .cart__content {
   display: grid;
+  width: 100%;
+  max-width: $lyt-large;
   flex-direction: column;
   grid-template:
     "list"
     "receipt"
     "checkout";
   grid-template-rows: auto auto auto;
-  max-width: $lyt-large;
-  width: 100%;
   gap: 16px 40px;
 
   > * > hr {
@@ -40,8 +40,8 @@
 
 .cart__list__content {
   display: flex;
-  flex-direction: column;
   margin-bottom: 24px;
+  flex-direction: column;
   gap: 16px;
 }
 
@@ -69,20 +69,20 @@
 }
 
 .cart__list__item__image {
-  height: 80px;
   width: 80px;
+  height: 80px;
   grid-area: image;
 
   > img {
-    height: 100%;
     width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 }
 
 .cart__list__item__title {
-  margin-bottom: 16px;
   width: fit-content;
+  margin-bottom: 16px;
   grid-area: title;
 
   > h3 {
@@ -92,15 +92,15 @@
 
 .cart__list__item__details {
   display: flex;
-  flex-direction: column;
   width: fit-content;
   color: $clr__darkgray;
+  flex-direction: column;
   grid-area: details;
   gap: 8px;
 
   span {
-    white-space: nowrap;
     color: $clr__black;
+    white-space: nowrap;
   }
 }
 
@@ -133,15 +133,15 @@
   position: sticky;
   bottom: 0;
   background-color: $clr__lightgray;
-  grid-area: checkout;
 
   z-index: 90;
+  grid-area: checkout;
 }
 
 .cart__checkout__content {
   display: flex;
-  flex-direction: column;
   padding: 0 $lyt-padding 24px !important;
+  flex-direction: column;
   gap: 16px;
 }
 
@@ -159,12 +159,12 @@
   }
 
   .cart__content {
+    padding: 24px 0 32px;
     grid-template:
       "list receipt"
       "list checkout";
     grid-template-columns: 5fr 3fr;
     grid-template-rows: auto 1fr;
-    padding: 24px 0 32px;
     gap: 24px 40px;
 
     > * > hr {
@@ -187,8 +187,8 @@
   }
 
   .cart__list__item__image {
-    height: 128px;
     width: 128px;
+    height: 128px;
   }
 
   .cart__checkout {
