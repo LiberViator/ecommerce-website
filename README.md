@@ -41,6 +41,11 @@ React – Front-end JavaScript library
 
 `npm start`
 
+## License
+
+[MIT][link_license]
+
 <!-- Links -->
 
-[link_demo]: https://liberviator.github.io/ecommerce-website/0
+[link_demo]: https://liberviator.github.io/ecommerce-website/
+[link_license]: https://github.com/LiberViator/ecommerce-website/blob/master/LICENSE

@@ -18,10 +18,9 @@ function reducer(state, { type, value }) {
     }
 
     case "FILTER": {
-      const filteredProducts =
-        state.catalog.filter((_catalogItem) =>
-          _catalogItem.title.includes(value.searchQuery)
-        ) || undefined;
+      const filteredProducts = state.catalog.filter((_catalogItem) =>
+        _catalogItem.title.includes(value.searchQuery)
+      );
 
       return { ...state, filteredProducts: filteredProducts };
     }
