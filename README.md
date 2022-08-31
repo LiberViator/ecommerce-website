@@ -48,4 +48,4 @@ Distributed under the MIT License. See [LICENSE.txt][link_license] for more info
 <!-- Links -->
 
 [link_demo]: https://liberviator.github.io/ecommerce-website/
-[link_license]: https://github.com/LiberViator/ecommerce-website/blob/master/LICENSE
+[link_license]: https://github.com/LiberViator/ecommerce-website/blob/master/LICENSE.txt
