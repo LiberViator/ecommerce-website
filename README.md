@@ -43,7 +43,7 @@ React – Front-end JavaScript library
 
 ## License
 
-Distributed under the MIT License. See [LICENSE][link_license] for more information.
+Distributed under the MIT License. See [LICENSE.txt][link_license] for more information.
 
 <!-- Links -->
 
