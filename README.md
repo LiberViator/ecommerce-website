@@ -12,9 +12,9 @@ I created an e-commerce website to show my coding skills. When I started it, I c
 ## Screenshots
 
 <p align="center">
-  <img src="screenshots/browse.png" width="32.6%">
-  <img src="screenshots/product.png" width="32.6%">
-  <img src="screenshots/cart.png" width="32.6%">
+  <img src="screenshots/browse.png" width="32%">
+  <img src="screenshots/product.png" width="32%">
+  <img src="screenshots/cart.png" width="32%">
 </p>
 
 ## Features
