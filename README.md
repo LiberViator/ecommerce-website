@@ -1,15 +1,15 @@
 <h1 align="center"> E-Commerce Hiking Website </h1>
 <p align="center">An e-commerce hiking website, made with React.</p>
 
-## Links
+## 🔗 Links
 
 [Live Demo][link_demo]
 
-## Overview
+## 📋 Overview
 
 An e-commerce hiking website, that is made with React front-end framework to demonstrate my coding skills and polish my knowledge in programming. When I started it, I could understand JavaScript on a basic level and used the React library for the first time.
 
-## Screenshots
+## 📸 Screenshots
 
 <p align="center">
   <img src="screenshots/browse.png" width="32%">
@@ -17,7 +17,7 @@ An e-commerce hiking website, that is made with React front-end framework to dem
   <img src="screenshots/cart.png" width="32%">
 </p>
 
-## Features
+## 🔬 Features
 
 - [x] Adding products to the cart
 - [x] Removing products from the cart
@@ -25,7 +25,7 @@ An e-commerce hiking website, that is made with React front-end framework to dem
 - [x] Fetching data when needed, not every time product ammount have been changed.
 - [x] Responsive design
 
-## Used technologies
+## 🔩 Used technologies
 
 HTML – Markdown language
 <br>
@@ -35,7 +35,7 @@ JavaScript – Programming language
 <br>
 React – Front-end JavaScript library
 
-## Run locally
+## ✈️ Run locally
 
 ### 1. Clone repository
 
@@ -47,9 +47,9 @@ React – Front-end JavaScript library
 
 ### 3. Run
 
-`npm start`
+`npm run start`
 
-## License
+## ⚖️ License
 
 Distributed under the MIT License. See [LICENSE.txt][link_license] for more information.
 
