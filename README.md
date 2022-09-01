@@ -7,7 +7,7 @@
 
 ## Overview
 
-I created an e-commerce website to show my coding skills. When I started it, I could understand JavaScript on a base level and used the React library for the first time. I planned to upgrade my knowledge of JavaScript and learn the most popular and significant community front-end framework. After I finished MVP of the project, my knowledge of JavaScript was polished, and my understanding of the React library grew.
+An e-commerce hiking website, that is made with React front-end framework to demonstrate my coding skills and polish my knowledge in programming. When I started it, I could understand JavaScript on a basic level and used the React library for the first time.
 
 ## Screenshots
 
