@@ -1,5 +1,5 @@
 // Imports
-import { useContext, useEffect, useState, useCallback } from "react";
+import { useContext, useEffect, useState, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
 import useFormatPrice from "hooks/useFormatPrice";
 
@@ -86,20 +86,22 @@ function BrowseFilter() {
 function BrowseList({ searchQuery }) {
   const [{ catalog, filteredProducts }] = useContext(CatalogContext);
 
-  if (!catalog) return undefined;
+  return useMemo(() => {
+    if (!catalog) return undefined;
 
-  return (
-    <section className="browse__list">
-      {filteredProducts.length > 0 || searchQuery.length > 0
-        ? filteredProducts.map((_catalogItem, index) => (
-            <BrowseItem productData={_catalogItem} key={index} />
-          ))
-        : catalog.map((_catalogItem, index) => (
-            <BrowseItem productData={_catalogItem} key={index} />
-          ))}
-      {console.log(filteredProducts)}
-    </section>
-  );
+    return (
+      <section className="browse__list">
+        {filteredProducts.length > 0 || searchQuery.length > 0
+          ? filteredProducts.map((_catalogItem, index) => (
+              <BrowseItem productData={_catalogItem} key={index} />
+            ))
+          : catalog.map((_catalogItem, index) => (
+              <BrowseItem productData={_catalogItem} key={index} />
+            ))}
+        {console.log(filteredProducts)}
+      </section>
+    );
+  }, [filteredProducts]);
 }
 
 function BrowseItem({ productData }) {
