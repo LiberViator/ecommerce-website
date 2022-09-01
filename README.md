@@ -9,6 +9,14 @@
 
 I created an e-commerce website to show my coding skills. When I started it, I could understand JavaScript on a base level and used the React library for the first time. I planned to upgrade my knowledge of JavaScript and learn the most popular and significant community front-end framework. After I finished MVP of the project, my knowledge of JavaScript was polished, and my understanding of the React library grew.
 
+## Screenshots
+
+<p align="center">
+  <img src="screenshots/browse.png" width="32.6%">
+  <img src="screenshots/product.png" width="32.6%">
+  <img src="screenshots/cart.png" width="32.6%">
+</p>
+
 ## Features
 
 - [x] Adding products to the cart
@@ -48,4 +56,4 @@ Distributed under the MIT License. See [LICENSE.txt][link_license] for more info
 <!-- Links -->
 
 [link_demo]: https://liberviator.github.io/ecommerce-website/
-[link_license]: https://github.com/LiberViator/ecommerce-website/blob/master/LICENSE.txt
+[link_license]: /LICENSE.txt
