@@ -19,7 +19,8 @@ import "./Browse.scss";
 
 // Main component
 export default function Browse() {
-  const [{ catalog }, catalogDispatch] = useContext(CatalogContext);
+  const [{ catalog, filteredProducts }, catalogDispatch] =
+    useContext(CatalogContext);
   const [page, setPage] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -38,7 +39,12 @@ export default function Browse() {
             setSearchQuery={setSearchQuery}
           />
           <BrowseFilter />
-          <BrowseList searchQuery={searchQuery} />
+          {useMemo(
+            () => (
+              <BrowseList searchQuery={searchQuery} />
+            ),
+            [filteredProducts]
+          )}
         </div>
       </main>
       <Footer />
@@ -86,22 +92,28 @@ function BrowseFilter() {
 function BrowseList({ searchQuery }) {
   const [{ catalog, filteredProducts }] = useContext(CatalogContext);
 
-  return useMemo(() => {
-    if (!catalog) return undefined;
+  const filter =
+    filteredProducts.length > 0 || searchQuery.length > 0
+      ? filteredProducts.map((_catalogItem, index) => (
+          <BrowseItem productData={_catalogItem} key={index} />
+        ))
+      : catalog.map((_catalogItem, index) => (
+          <BrowseItem productData={_catalogItem} key={index} />
+        ));
 
-    return (
-      <section className="browse__list">
-        {filteredProducts.length > 0 || searchQuery.length > 0
-          ? filteredProducts.map((_catalogItem, index) => (
-              <BrowseItem productData={_catalogItem} key={index} />
-            ))
-          : catalog.map((_catalogItem, index) => (
-              <BrowseItem productData={_catalogItem} key={index} />
-            ))}
-        {console.log(filteredProducts)}
-      </section>
-    );
-  }, [filteredProducts]);
+  return <section className="browse__list">{filter}</section>;
+
+  // return (
+  //   <section className="browse__list">
+  //     {filteredProducts.length > 0 || searchQuery.length > 0
+  //       ? filteredProducts.map((_catalogItem, index) => (
+  //           <BrowseItem productData={_catalogItem} key={index} />
+  //         ))
+  //       : catalog.map((_catalogItem, index) => (
+  //           <BrowseItem productData={_catalogItem} key={index} />
+  //         ))}
+  //   </section>
+  // );
 }
 
 function BrowseItem({ productData }) {
