@@ -19,18 +19,18 @@ An e-commerce hiking website, that is made with React front-end framework to dem
 
 ## 🔬 Features
 
-- [x] Adding/Removing products to/from the cart
-- [x] Choosing product's options (color, size)
-- [x] Fetching data when needed, not every time product amount changes.
-- [x] Searching product through the catalog
-- [x] Responsive design
+- Adding/Removing products to/from the cart
+- Choosing product's options (color, size)
+- Fetching data when needed, not every time product amount changes.
+- Searching product through the catalog
+- Responsive design
 
 ## 🔩 Used technologies
 
-- HTML – Markdown language
-- SCSS – CSS extension language
-- JavaScript – Programming language
-- React – Front-end JavaScript library
+- **HTML** – Markdown language
+- **SCSS** – CSS extension language
+- **JavaScript** – Programming language
+- **React** – Front-end JavaScript library
 
 ## ✈️ Run locally
 
