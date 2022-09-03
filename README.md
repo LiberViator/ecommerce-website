@@ -19,10 +19,10 @@ An e-commerce hiking website, that is made with React front-end framework to dem
 
 ## 🔬 Features
 
-- [x] Adding products to the cart
-- [x] Removing products from the cart
-- [x] Choosing product's color and size
-- [x] Fetching data when needed, not every time product ammount have been changed.
+- [x] Adding/Removing products to/from the cart
+- [x] Choosing product's options (color, size)
+- [x] Fetching data when needed, not every time product amount changes.
+- [x] Searching product through the catalog
 - [x] Responsive design
 
 ## 🔩 Used technologies
