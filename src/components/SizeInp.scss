@@ -9,7 +9,7 @@
   max-width: 100%;
   min-height: 32px;
   border: 1px solid $clr__gray;
-  border-radius: 2px;
+  border-radius: $stl__corners;
   background-color: $clr__white;
   color: $clr__black;
   text-align: center;
@@ -29,5 +29,5 @@
 }
 
 .size-input:not([class*="checked"]):hover {
-  animation: hoverAnimation 0.4s infinite alternate;
+  border-color: $clr__darkgray;
 }

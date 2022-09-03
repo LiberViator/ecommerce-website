@@ -46,11 +46,11 @@
 }
 
 .quantity:hover > input:not(:focus) {
-  border: 1px solid $clr__lightgreen;
+  border: 1px solid $clr__darkgray;
 }
 
 .quantity input:focus {
-  animation: hoverAnimation 0.4s infinite alternate;
+  border-color: $clr__lightgreen;
 }
 
 .quantity input::-webkit-inner-spin-button,

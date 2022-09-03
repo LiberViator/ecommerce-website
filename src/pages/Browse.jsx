@@ -23,8 +23,10 @@ export default function Browse() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [searchQuery, setSearchQuery] = useState(
-    searchParams?.get("search") || ""
+    searchParams.get("search") || ""
   );
+
+  const params = Object.fromEntries([...searchParams]);
 
   useEffect(() => {
     catalogGet(catalogDispatch);
@@ -59,11 +61,12 @@ export default function Browse() {
 }
 
 function BrowseSearch({ searchQuery, setSearchQuery }) {
-  const [{ catalog }, catalogDispatch] = useContext(CatalogContext);
+  const [{ catalog }] = useContext(CatalogContext);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleChange = (e) => setSearchQuery(e.target.value);
 
-  const handleClick = () => catalogFilter(catalogDispatch, searchQuery);
+  const handleClick = () => setSearchParams({ search: searchQuery });
 
   if (!catalog) return undefined;
 
@@ -76,12 +79,9 @@ function BrowseSearch({ searchQuery, setSearchQuery }) {
         onChange={(e) => handleChange(e)}
         className="browse__search__input"
       />
-      <Link
-        className="browse__search__submit"
-        to={`/products?search=${searchQuery}`}
-      >
+      <button className="browse__search__submit" onClick={() => handleClick()}>
         <img src="assets/search.svg" alt="Search" />
-      </Link>
+      </button>
     </section>
   );
 }

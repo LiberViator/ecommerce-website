@@ -7,7 +7,6 @@
   min-width: fit-content;
   max-width: 100%;
   min-height: 32px;
-  border-radius: 2px;
   text-align: center;
   white-space: nowrap;
   cursor: pointer;
@@ -20,6 +19,7 @@
   width: 32px;
   margin-right: 1px;
   flex: 0 0 auto;
+  border-radius: $stl__corners 0 0 $stl__corners;
 }
 
 .color-input div {
@@ -30,6 +30,7 @@
   justify-content: center;
   align-items: center;
   flex: 1 0 auto;
+  border-radius: 0 $stl__corners $stl__corners 0;
 }
 
 .color-input_checked div {
@@ -39,5 +40,5 @@
 }
 
 .color-input:not([class*="checked"]):hover div {
-  animation: hoverAnimation 0.4s infinite alternate;
+  border-color: $clr__darkgray;
 }

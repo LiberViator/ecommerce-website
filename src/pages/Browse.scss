@@ -32,7 +32,7 @@
   width: 100%;
   height: 40px;
   grid-area: search;
-  border-radius: 2px;
+  border-radius: $stl__corners;
   overflow: hidden;
 
   &:focus-within .browse__search__input {
@@ -43,12 +43,21 @@
     background-color: $clr__lightgreen;
   }
 
+  &:not(:focus-within):hover .browse__search__input {
+    border: 1px solid $clr__darkgray;
+  }
+
+  &:not(:focus-within):hover .browse__search__submit {
+    background-color: $clr__darkgray;
+  }
+
   .browse__search__input {
     all: unset;
     padding: 0 16px;
     border: 1px solid $clr__gray;
     background-color: $clr__white;
     flex: 1;
+    border-radius: $stl__corners 0 0 $stl__corners;
   }
 
   .browse__search__submit {
@@ -59,6 +68,7 @@
     background-color: $clr__gray;
     justify-content: center;
     align-items: center;
+    border-radius: 0 $stl__corners $stl__corners 0;
   }
 }
 
