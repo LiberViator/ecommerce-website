@@ -27,13 +27,10 @@ An e-commerce hiking website, that is made with React front-end framework to dem
 
 ## 🔩 Used technologies
 
-HTML – Markdown language
-<br>
-SCSS – CSS extension language
-<br>
-JavaScript – Programming language
-<br>
-React – Front-end JavaScript library
+- HTML – Markdown language
+- SCSS – CSS extension language
+- JavaScript – Programming language
+- React – Front-end JavaScript library
 
 ## ✈️ Run locally
 
