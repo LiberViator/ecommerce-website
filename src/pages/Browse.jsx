@@ -74,7 +74,7 @@ function BrowseSearch({ searchQuery, setSearchQuery }) {
     <section className="browse__search">
       <input
         type="search"
-        placeholder="Search.."
+        placeholder="Search"
         value={searchQuery}
         onChange={(e) => handleChange(e)}
         className="browse__search__input"
