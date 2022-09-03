@@ -1,6 +1,6 @@
 // Imports
 import { useContext, useEffect, useState, useCallback, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import useFormatPrice from "hooks/useFormatPrice";
 
 import {
@@ -19,15 +19,21 @@ import "./Browse.scss";
 
 // Main component
 export default function Browse() {
-  const [{ catalog, filteredProducts }, catalogDispatch] =
-    useContext(CatalogContext);
-  const [page, setPage] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [{ filteredProducts }, catalogDispatch] = useContext(CatalogContext);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [searchQuery, setSearchQuery] = useState(
+    searchParams?.get("search") || ""
+  );
 
   useEffect(() => {
     catalogGet(catalogDispatch);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    catalogFilter(catalogDispatch, searchQuery);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
 
   return (
     <>
@@ -70,9 +76,12 @@ function BrowseSearch({ searchQuery, setSearchQuery }) {
         onChange={(e) => handleChange(e)}
         className="browse__search__input"
       />
-      <button className="browse__search__submit" onClick={handleClick}>
+      <Link
+        className="browse__search__submit"
+        to={`/products?search=${searchQuery}`}
+      >
         <img src="assets/search.svg" alt="Search" />
-      </button>
+      </Link>
     </section>
   );
 }
@@ -93,7 +102,7 @@ function BrowseList({ searchQuery }) {
   const [{ catalog, filteredProducts }] = useContext(CatalogContext);
 
   const filter =
-    filteredProducts.length > 0 || searchQuery.length > 0
+    filteredProducts?.length > 0 || searchQuery?.length > 0
       ? filteredProducts.map((_catalogItem, index) => (
           <BrowseItem productData={_catalogItem} key={index} />
         ))
@@ -102,18 +111,6 @@ function BrowseList({ searchQuery }) {
         ));
 
   return <section className="browse__list">{filter}</section>;
-
-  // return (
-  //   <section className="browse__list">
-  //     {filteredProducts.length > 0 || searchQuery.length > 0
-  //       ? filteredProducts.map((_catalogItem, index) => (
-  //           <BrowseItem productData={_catalogItem} key={index} />
-  //         ))
-  //       : catalog.map((_catalogItem, index) => (
-  //           <BrowseItem productData={_catalogItem} key={index} />
-  //         ))}
-  //   </section>
-  // );
 }
 
 function BrowseItem({ productData }) {
