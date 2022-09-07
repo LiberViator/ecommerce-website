@@ -21,12 +21,11 @@ import "./Browse.scss";
 export default function Browse() {
   const [{ filteredProducts }, catalogDispatch] = useContext(CatalogContext);
   const [searchParams, setSearchParams] = useSearchParams();
+  const params = Object.fromEntries([...searchParams]);
 
   const [searchQuery, setSearchQuery] = useState(
     searchParams.get("search") || ""
   );
-
-  const params = Object.fromEntries([...searchParams]);
 
   useEffect(() => {
     catalogGet(catalogDispatch);

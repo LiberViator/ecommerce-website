@@ -43,11 +43,11 @@
     background-color: $clr__lightgreen;
   }
 
-  &:not(:focus-within):hover .browse__search__input {
+  &:not(:focus-within) .browse__search__input:hover {
     border: 1px solid $clr__darkgray;
   }
 
-  &:not(:focus-within):hover .browse__search__submit {
+  &:not(:focus-within) .browse__search__submit:hover {
     background-color: $clr__darkgray;
   }
 

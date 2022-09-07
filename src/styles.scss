@@ -4,9 +4,12 @@ $clr__lightgray: hsla(0, 0%, 96%, 1);
 $clr__gray: hsla(0, 0%, 88%, 1);
 $clr__lightgreen: hsla(112, 8%, 40%, 1);
 $clr__green: hsla(140, 12%, 24%, 1);
-$clr__darkgray: hsla(0, 0%, 72%, 1);
+$clr__darkgray: hsl(0, 0%, 80%);
 $clr__dirt: hsla(214, 9%, 16%, 1);
 $clr__error: hsla(2, 72%, 56%, 1);
+
+$txt__black: hsla(0, 0%, 0%, 1);
+$txt__gray: hsla(0, 0%, 0%, 1);
 
 $clr__hover: hsla(0, 0%, 0%, 0.16);
 $bdr__striped: 2px dashed $clr__gray;
