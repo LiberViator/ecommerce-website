@@ -1,15 +1,15 @@
 <h1 align="center"> E-Commerce Hiking Website </h1>
 <p align="center">An e-commerce hiking website, made with React.</p>
 
-## 🔗 Links
+## 🔗 Links
 
 [Live Demo][link_demo]
 
-## 📋 Overview
+## 📋 Overview
 
 An e-commerce hiking website, that is made with React front-end framework to demonstrate my coding skills and polish my knowledge in programming. When I started it, I could understand JavaScript on a basic level and used the React library for the first time.
 
-## 📸 Screenshots
+## 📸 Screenshots
 
 <p align="center">
   <img src="screenshots/browse.png" width="32%">
@@ -17,7 +17,7 @@ An e-commerce hiking website, that is made with React front-end framework to dem
   <img src="screenshots/cart.png" width="32%">
 </p>
 
-## 🔬 Features
+## 🔬 Features
 
 - Adding/Removing products to/from the cart
 - Choosing product's options (color, size)
@@ -25,28 +25,28 @@ An e-commerce hiking website, that is made with React front-end framework to dem
 - Searching product through the catalog
 - Responsive design
 
-## 🔩 Used technologies
+## 🔩 Used technologies
 
 - **HTML** – Markdown language
 - **SCSS** – CSS extension language
 - **JavaScript** – Programming language
 - **React** – Front-end JavaScript library
 
-## ✈️ Run locally
+## ✈️ Run locally
 
-### 1. Clone repository
+1. Clone repository
 
 `git clone https://github.com/LiberViator/ecommerce-website`
 
-### 2. Install dependencies
+2. Install dependencies
 
 `npm install` or `yarn install`
 
-### 3. Run
+3. Run
 
 `npm run start`
 
-## ⚖️ License
+## ⚖️ License
 
 Distributed under the MIT License. See [LICENSE.txt][link_license] for more information.
 
