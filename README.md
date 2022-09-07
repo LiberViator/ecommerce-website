@@ -34,15 +34,15 @@ An e-commerce hiking website, that is made with React front-end framework to dem
 
 ## ✈️ Run locally
 
-1. Clone repository
+1. **Clone repository**
 
 `git clone https://github.com/LiberViator/ecommerce-website`
 
-2. Install dependencies
+2. **Install dependencies**
 
 `npm install` or `yarn install`
 
-3. Run
+3. **Run**
 
 `npm run start`
 
