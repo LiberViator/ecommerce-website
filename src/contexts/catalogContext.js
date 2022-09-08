@@ -39,10 +39,10 @@ export function catalogGet(dispatch, productIds) {
   });
 }
 
-export function catalogFilter(dispatch, searchQuery) {
+export function catalogFilter(dispatch, searchQuery, category) {
   return dispatch({
     type: "FILTER",
-    value: { searchQuery: searchQuery },
+    value: { searchQuery: searchQuery, category: category },
   });
 }
 

@@ -1,6 +1,6 @@
 // Imports
-import { useContext, useEffect, useState, useCallback, useMemo } from "react";
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { useContext, useEffect, useState, useMemo } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import useFormatPrice from "hooks/useFormatPrice";
 
 import {
@@ -12,28 +12,28 @@ import {
 import Footer from "layout/Footer";
 import Header from "layout/Header";
 
-import Button from "components/Button";
-import QuantityInp from "components/QuantityInp";
-
 import "./Browse.scss";
 
 // Main component
 export default function Browse() {
   const [{ filteredProducts }, catalogDispatch] = useContext(CatalogContext);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const params = Object.fromEntries([...searchParams]);
+  const [searchParams, updateSearchParams] = useSearchParams();
 
-  const [searchQuery, setSearchQuery] = useState(
-    searchParams.get("search") || ""
+  const [titleInput, setTitleInput] = useState(searchParams.get("title") || "");
+  const [categoryInput, setCategoryInput] = useState(
+    searchParams.get("category") || ""
   );
+
+  const setSearchParams = (object) => {
+    const formatedParams = Object.fromEntries([...searchParams]);
+    updateSearchParams({ ...formatedParams, ...object });
+  };
 
   useEffect(() => {
     catalogGet(catalogDispatch);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
-    catalogFilter(catalogDispatch, searchQuery);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    catalogFilter(catalogDispatch, titleInput, categoryInput);
   }, [searchParams]);
 
   return (
@@ -42,13 +42,14 @@ export default function Browse() {
       <main className="browse">
         <div className="browse__content">
           <BrowseSearch
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
+            titleInput={titleInput}
+            setTitleInput={setTitleInput}
+            setSearchParams={setSearchParams}
           />
           <BrowseFilter />
           {useMemo(
             () => (
-              <BrowseList searchQuery={searchQuery} />
+              <BrowseList titleInput={titleInput} />
             ),
             [filteredProducts]
           )}
@@ -59,22 +60,17 @@ export default function Browse() {
   );
 }
 
-function BrowseSearch({ searchQuery, setSearchQuery }) {
-  const [{ catalog }] = useContext(CatalogContext);
-  const [searchParams, setSearchParams] = useSearchParams();
+function BrowseSearch({ titleInput, setTitleInput, setSearchParams }) {
+  const handleChange = (e) => setTitleInput(e.target.value);
 
-  const handleChange = (e) => setSearchQuery(e.target.value);
-
-  const handleClick = () => setSearchParams({ search: searchQuery });
-
-  if (!catalog) return undefined;
+  const handleClick = () => setSearchParams({ title: titleInput });
 
   return (
     <section className="browse__search">
       <input
         type="search"
         placeholder="Search"
-        value={searchQuery}
+        value={titleInput}
         onChange={(e) => handleChange(e)}
         className="browse__search__input"
       />
@@ -97,11 +93,11 @@ function BrowseFilter() {
   );
 }
 
-function BrowseList({ searchQuery }) {
+function BrowseList({ titleInput }) {
   const [{ catalog, filteredProducts }] = useContext(CatalogContext);
 
-  const filter =
-    filteredProducts?.length > 0 || searchQuery?.length > 0
+  const filteredItems =
+    filteredProducts?.length > 0 || titleInput?.length > 0
       ? filteredProducts.map((_catalogItem, index) => (
           <BrowseItem productData={_catalogItem} key={index} />
         ))
@@ -109,7 +105,7 @@ function BrowseList({ searchQuery }) {
           <BrowseItem productData={_catalogItem} key={index} />
         ));
 
-  return <section className="browse__list">{filter}</section>;
+  return <section className="browse__list">{filteredItems}</section>;
 }
 
 function BrowseItem({ productData }) {
